@@ -68,7 +68,7 @@ root@node01:~# gluster volume start vol_strip-replica
 ```
 >GlusterFS : Clients' Settings
 
-`GlusterFS Native
+-[]GlusterFS Native
 ```
 root@client:~# apt install glusterfs-client attr
 root@client:~# mkdir /glusterfs
