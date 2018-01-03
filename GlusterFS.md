@@ -31,6 +31,7 @@ root@node01:~# gluster peer probe node04
 ```
 >GlusterFS : Distributed Glusterfs Volume Setting
 ```
+# 4 Brick distributed
 root@node01:~# mkdir /glusterfs/distributed 
 root@node01:~# gluster volume create vol_distributed transport tcp \
 node01:/glusterfs/distributed \
@@ -41,8 +42,9 @@ root@node01:~# gluster volume start vol_distributed
 ```
 >GlusterFS : Replicated Glusterfs Volume Setting
 ```
+# 4 Brick replicated
 root@node01:~# mkdir /glusterfs/replica 
-root@node01:~# gluster volume create vol_replica replica 2 transport tcp \
+root@node01:~# gluster volume create vol_replica replica 4 transport tcp \
 node01:/glusterfs/replica \
 node02:/glusterfs/replica \
 node03:/glusterfs/replica \
@@ -51,6 +53,7 @@ root@node01:~# gluster volume start vol_replica
 ```
 >GlusterFS : Distributed + Replicated Glusterfs Volume
 ```
+# 2 Distributed volume, each have 2 brick replicated 
 root@node01:~# mkdir /glusterfs/dist-replica
 root@node01:~# gluster volume create vol_dist-replica replica 2 transport tcp \
 node01:/glusterfs/dist-replica \
@@ -62,8 +65,9 @@ root@node01:~# gluster volume start vol_dist-replica
 ```
 >GlusterFS : Striped Glusterfs Volume Setting
 ```
+# Strip a file to 4 brick
 root@node01:~# mkdir /glusterfs/striped 
-root@node01:~# gluster volume create vol_striped stripe 2 transport tcp \
+root@node01:~# gluster volume create vol_striped stripe 4 transport tcp \
 node01:/glusterfs/striped \
 node02:/glusterfs/striped \
 node03:/glusterfs/striped \
@@ -72,6 +76,7 @@ root@node01:~# gluster volume start vol_striped
 ```
 >GlusterFS : Distributed Striped Glusterfs Volume Setting
 ```
+# 2 Distributed volume, each have 2 brick striped 
 root@node01:~# mkdir /glusterfs/striped 
 root@node01:~# gluster volume create vol_striped stripe 2 transport tcp \
 node01:/glusterfs/striped \
