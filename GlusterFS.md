@@ -8,7 +8,7 @@ root@nodeX:~# apt-get -y install glusterfs-server
 root@nodeX:~# service glusterfs-server start
 root@nodeX:~# systemctl enable glusterfs-server 
 ```
->GlusterFS : Distributed Setting
+>GlusterFS : Distributed Glusterfs Volume Setting
 ```
 root@node01:~# mkdir /glusterfs/distributed 
 root@node01:~# gluster peer probe node02 
@@ -17,7 +17,7 @@ node01:/glusterfs/distributed \
 node02:/glusterfs/distributed 
 root@node01:~# gluster volume start vol_distributed 
 ```
->GlusterFS : Replication Setting
+>GlusterFS : Replicated Glusterfs Volume Setting
 ```
 root@node01:~# mkdir /glusterfs/replica 
 root@node01:~# gluster peer probe node02 
@@ -26,16 +26,7 @@ node01:/glusterfs/replica \
 node02:/glusterfs/replica 
 root@node01:~# gluster volume start vol_replica 
 ```
->GlusterFS : Striping Setting
-```
-root@node01:~# mkdir /glusterfs/striped 
-root@node01:~# gluster peer probe node02 
-root@node01:~# gluster volume create vol_striped stripe 2 transport tcp \
-node01:/glusterfs/striped \
-node02:/glusterfs/striped 
-root@node01:~# gluster volume start vol_striped 
-```
->GlusterFS : Distributed + Replication
+>GlusterFS : Distributed + Replicated Glusterfs Volume
 ```
 root@node01:~# mkdir /glusterfs/dist-replica
 
@@ -51,7 +42,28 @@ node04:/glusterfs/dist-replica
 
 root@node01:~# gluster volume start vol_dist-replica 
 ```
->GlusterFS : Striping + Replication
+>GlusterFS : Striped Glusterfs Volume Setting
+```
+root@node01:~# mkdir /glusterfs/striped 
+root@node01:~# gluster peer probe node02 
+root@node01:~# gluster volume create vol_striped stripe 2 transport tcp \
+node01:/glusterfs/striped \
+node02:/glusterfs/striped 
+root@node01:~# gluster volume start vol_striped 
+```
+>GlusterFS : Distributed Striped Glusterfs Volume Setting
+```
+root@node01:~# mkdir /glusterfs/striped 
+root@node01:~# gluster peer probe node02 
+root@node01:~# gluster volume create vol_striped stripe 2 transport tcp \
+node01:/glusterfs/striped \
+node02:/glusterfs/striped \
+node03:/glusterfs/striped \
+node04:/glusterfs/striped 
+root@node01:~# gluster volume start vol_striped 
+```
+
+>GlusterFS : Striping + Replication Glusterfs Volume Setting
 ```
 root@node01:~# mkdir /glusterfs/strip-replica 
 root@node01:~# gluster peer probe node02
