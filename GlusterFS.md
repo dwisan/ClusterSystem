@@ -5,7 +5,7 @@
   - [x] node03 (192.168.0.3)
   - [x] node04 (192.168.0.4)
   
-  ##### Add host define to /etc/hosts on all Nodes
+  ##### Add hosts to /etc/hosts on all Nodes
   ```
   192.168.0.1 node01
   192.168.0.2 node02
