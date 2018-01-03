@@ -1,8 +1,12 @@
 >Install GlusterFS Server on all Nodes in Cluster. 
 
 ```
-root@node01:~# apt-get -y install glusterfs-server
-root@node01:~# systemctl enable glusterfs-server 
+root@nodeX:~# apt-get install software-properties-common
+root@nodeX:~# add-apt-repository ppa:gluster/glusterfs-3.8
+root@nodeX:~# apt-get update
+root@nodeX:~# apt-get -y install glusterfs-server
+root@nodeX:~# service glusterfs-server start
+root@nodeX:~# systemctl enable glusterfs-server 
 ```
 >GlusterFS : Distributed Setting
 ```
