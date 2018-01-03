@@ -1,10 +1,4 @@
 > Networking Setting
-
-  - [x] node01 (192.168.0.1)
-  - [x] node02 (192.168.0.2)
-  - [x] node03 (192.168.0.3)
-  - [x] node04 (192.168.0.4)
-  
   ##### Add hosts to /etc/hosts on all Nodes
   ```
   192.168.0.1 node01
