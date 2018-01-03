@@ -1,4 +1,4 @@
-> Hardware And Networking Setting
+> Networking Setting
 
   |Server Node|IP Address|
   |---|---|
