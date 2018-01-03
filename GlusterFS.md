@@ -1,9 +1,9 @@
 > Networking Setting
 
-  - [x] Node01 (192.168.0.1)
-  - [x] Node02 (192.168.0.2)
-  - [x] Node03 (192.168.0.3)
-  - [x] Node04 (192.168.0.4)
+  - [x] node01 (192.168.0.1)
+  - [x] node02 (192.168.0.2)
+  - [x] node03 (192.168.0.3)
+  - [x] node04 (192.168.0.4)
   
 >Install GlusterFS Server on all Nodes in Cluster. 
 
