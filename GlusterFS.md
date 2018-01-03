@@ -91,11 +91,12 @@ root@client:~# mount -t glusterfs node01:/vol_strip-replica /glusterfs
 root@client:~# apt-get -y install nfs-common 
 root@client:~# systemctl enable rpcbind 
 root@client:~# service rpcbind start
-root@client:~# mount -t nfs -o mountvers=3 node01:/vol_strip-replica /glusterfs
+root@client:~# mount -t nfs -o vers=3,mountproto=tcp node01:/vol_strip-replica /glusterfs
 ```
 - [x] Automatically Mounting Volumes
 ```
 root@client:~# nano /etc/fstab
 
-node01:/cluster1_volume /glusterfs glusterfs defaults,_netdev 0 
+node01:/cluster1_volume /glusterfs glusterfs defaults,_netdev 0 0
+
 ```
