@@ -12,7 +12,7 @@
   192.168.0.3 node03
   192.168.0.4 node04
   ```
->Install GlusterFS Server on all Nodes in Cluster. 
+>Install GlusterFS Server on all Nodes. 
 
 ```
 root@nodeX:~# apt-get install software-properties-common
