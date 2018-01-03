@@ -22,7 +22,7 @@ root@nodeX:~# apt-get -y install glusterfs-server
 root@nodeX:~# service glusterfs-server start
 root@nodeX:~# systemctl enable glusterfs-server 
 ```
-> Probe Node to Cluster
+> Probe Nodes to Cluster
 ```
 root@node01:~# gluster peer probe node01
 root@node01:~# gluster peer probe node02
