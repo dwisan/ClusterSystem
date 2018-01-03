@@ -67,11 +67,14 @@ node04:/glusterfs/strip-replica
 root@node01:~# gluster volume start vol_strip-replica 
 ```
 >GlusterFS : Clients' Settings
+  > GlusterFS Native
 ```
 root@client:~# apt install glusterfs-client attr
 root@client:~# mkdir /glusterfs
 root@client:~# mount -t glusterfs node01:/vol_strip-replica /glusterfs
-OR
+```
+  > NFS mount
+```
 root@client:~# apt-get -y install nfs-common 
 root@client:~# systemctl enable rpcbind 
 root@client:~# service rpcbind start
