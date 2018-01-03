@@ -88,6 +88,7 @@ root@node01:~# gluster volume start vol_striped
 
 >GlusterFS : Striping + Replication Glusterfs Volume Setting
 ```
+# 2 Replicated volume, each have 2 brick striped
 root@node01:~# mkdir /glusterfs/strip-replica 
 root@node01:~# gluster volume create vol_strip-replica stripe 2 replica 2 transport tcp \
 node01:/glusterfs/strip-replica \
