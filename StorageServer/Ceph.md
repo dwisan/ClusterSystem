@@ -41,6 +41,8 @@ cephadm@host:~$ sudo apt-get -y install ceph-deploy ceph-common ceph-mds
 cephadm@host:~$ mkdir ceph
 cephadm@host:~$ cd ceph
 cephadm@host:~/ceph$ ceph-deploy new node01
+cephadm@host:~/ceph$ ceph-deploy new node02
+cephadm@host:~/ceph$ ceph-deploy new node03
 cephadm@host:~/ceph$ vi ./ceph.conf
 # add to the end
 osd pool default size = 2
