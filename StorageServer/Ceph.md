@@ -1,7 +1,9 @@
 >Add a user for Ceph admin on all Nodes.
 ```
   root@host:~# adduser cephadm
-  root@host:~# echo -e 'Defaults:cephadm !requiretty\n cephadm ALL = (root) NOPASSWD:ALL' | tee /etc/sudoers.d/ceph
+  root@host:~# nano /etc/sudoers.d/ceph
+    Defaults:cephadm !requiretty
+    cephadm ALL = (root) NOPASSWD:ALL
   root@host:~# chmod 440 /etc/sudoers.d/ceph 
 ```
 >Login as a Ceph admin user and configure Ceph. 
