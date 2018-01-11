@@ -39,7 +39,7 @@ root@node01:~# gluster peer probe node03
 root@node01:~# gluster peer probe node04
 ```
 >GlusterFS : Distributed Glusterfs Volume Setting
-* Summery of distributed Volume are mentioned below
+* Summary of distributed Volume are mentioned below
 - [x] Files are randomly distributed over the bricks in distributed volume
 - [x] There is no redundancy
 - [x] Data loss protection is provided by the underlying hardware (no protection from gluster )
@@ -60,6 +60,10 @@ node04:/glusterfs/distributed
 root@node01:~# gluster volume start vol_distributed 
 ```
 >GlusterFS : Replicated Glusterfs Volume Setting
+* Summary of Replicated Volume are mentioned below
+- [x] Useful where availability is the priority
+- [x] Useful where redundancy is the priority
+- [x] Number of bricks should be equal to number of replicas. 
 ```
 # 4 Brick replicated
 root@node01:~# mkdir /glusterfs/replica 
@@ -76,6 +80,9 @@ node04:/glusterfs/replica
 root@node01:~# gluster volume start vol_replica 
 ```
 >GlusterFS : Distributed + Replicated Glusterfs Volume
+* Summery of Distributed Replicated Volume
+- [x] Data is distributed across replicated sets
+- [x] Good redundancy and good scaling
 ```
 # 2 Distributed volume, each have 2 brick replicated 
 root@node01:~# mkdir /glusterfs/dist-replica
@@ -92,6 +99,11 @@ node04:/glusterfs/dist-replica
 root@node01:~# gluster volume start vol_dist-replica 
 ```
 >GlusterFS : Striped Glusterfs Volume Setting
+* Summery of Striped Replicated Volume
+- [x] Striped volume does not provide redundancy
+- [x] disaster in one brick can cause data loss
+- [x] number of stripe must be equal to number of bricks
+- [x] provides added performance if large number of clients are accessing the same volume
 ```
 # Strip a file to 4 brick
 root@node01:~# mkdir /glusterfs/striped
@@ -108,6 +120,10 @@ node04:/glusterfs/striped
 root@node01:~# gluster volume start vol_striped 
 ```
 >GlusterFS : Distributed Striped Glusterfs Volume Setting
+* Summery of Striped Replicated Volume
+- [x] It stripes files across multiple bricks
+- [x] Good for performance in accessing very large files
+- [x] Brick count must always be in multiple of stripe count
 ```
 # 2 Distributed volume, each have 2 brick striped 
 root@node01:~# mkdir /glusterfs/striped 
@@ -125,6 +141,7 @@ root@node01:~# gluster volume start vol_striped
 ```
 
 >GlusterFS : Distributed Replicated and Striped Glusterfs Volume Setting
+
 ```
 # 2 Replicated volume, each have 2 brick striped
 root@node01:~# mkdir /glusterfs/replica-strip
@@ -139,6 +156,22 @@ node03:/glusterfs/replica-strip \
 node04:/glusterfs/replica-strip 
 
 root@node01:~# gluster volume start vol_replica-strip
+```
+>Expanding a gluster volume
+```
+# add brick with associated of volume type
+gluster volume add-brick {volume} {server:/brick}
+gluster volume rebalance {volume} start
+gluster volume rebalance {volume} fix-layout start
+gluster volume rebalence {volume} migrate data start
+```
+>shrink a gluster volume
+```
+# remnove brick with associated of volume type
+gluster volume remove-brick {volume} {server:/brick}
+gluster volume rebalance {volume} start
+gluster volume rebalance {volume} fix-layout start
+gluster volume rebalence {volume} migrate data start
 ```
 >GlusterFS : Clients' Settings
 
