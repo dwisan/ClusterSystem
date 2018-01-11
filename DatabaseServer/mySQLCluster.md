@@ -7,9 +7,9 @@ To implement a MySQL Cluster, we need 3 different types of nodes:
 >Downloading and Installing MySQL Cluster
 ```bash
 apt-get install libaio1
-wget http://dev.mysql.com/get/Downloads/MySQL-Cluster-7.4/mysql-cluster-gpl-7.4.11-linux-glibc2.5-x86_64.tar.gz
-tar -zxvf mysql-cluster-gpl-7.4.11-linux-glibc2.5-x86_64.tar.gz
-mv mysql-cluster-gpl-7.4.11-linux-glibc2.5-x86_64 mysql/
+wget http://dev.mysql.com/get/Downloads/MySQL-Cluster-7.6/mysql-cluster-gpl-7.6.3-linux-glibc2.12-x86_64.tar.gz
+tar -zxvf mysql-cluster-gpl-7.6.3-linux-glibc2.12-x86_64.tar.gz
+mv mysql-cluster-gpl-7.6.3-linux-glibc2.12-x86_64 mysql/
 mv mysql /usr/local
 ```
 >Configure Management Node
@@ -100,7 +100,7 @@ hostname=172.18.111.107
 ```
 > Run management Node
 ```Shell
-/usr/local/mysql/bin/ndb_mgmd -f /var/lib/mysql-cluster/config.ini --initial
+/usr/local/mysql/bin/ndb_mgmd -f /usr/local/mysql/mysql-cluster/config.ini --initial
 ```
 > Show management Connection
 ```
