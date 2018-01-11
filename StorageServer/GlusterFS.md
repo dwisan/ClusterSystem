@@ -39,6 +39,11 @@ root@node01:~# gluster peer probe node03
 root@node01:~# gluster peer probe node04
 ```
 >GlusterFS : Distributed Glusterfs Volume Setting
+* Summery of distributed Volume are mentioned below
+- [x] Files are randomly distributed over the bricks in distributed volume
+- [x] There is no redundancy
+- [x] Data loss protection is provided by the underlying hardware (no protection from gluster )
+- [x] Best for scaling size of the volume
 ```
 # 4 Brick distributed
 root@node01:~# mkdir /glusterfs/distributed
