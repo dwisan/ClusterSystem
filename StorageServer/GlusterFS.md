@@ -1,4 +1,4 @@
-##### Installing Cluster GlusterFS
+### Installing Cluster GlusterFS
 > Networking Setting
   ##### Add hosts to /etc/hosts on all Nodes
   ```
