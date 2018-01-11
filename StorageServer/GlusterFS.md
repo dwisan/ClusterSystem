@@ -3,8 +3,14 @@
 of additional storage base on storage comsumption need.It has found applications including cloud computing,
 streaming media services and content delivery networks.
 
+Architecture
+  * The GlusterFS architecture aggregates computer, storage, I/O resources into global namespace. 
+  * Capacity is scaled by adding additional nodes or adding additional storage to each node.
+  * Performance is increased by deploying storage among more nodes.
+  * High availability is achieved by replacing data more way between nodes.
+  
 Terminology
- * Brick is th basic unit of storage, represented by an export directory on a server
+ * Brick is th basic unit of storage, represented by directory on server disk.
  * Volume is a logical collection of Brick.
 ```
 >Network Setting
