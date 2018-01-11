@@ -6,8 +6,6 @@ streaming media services and content delivery networks.
 Terminology
  * Brick is th basic unit of storage, represented by an export directory on a server
  * Volume is a logical collection of Brick.
- 
-
 ```
 >Network Setting
   ##### Add hosts to /etc/hosts on all Nodes
