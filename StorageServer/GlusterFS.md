@@ -1,6 +1,5 @@
 ```
-  Gluster is a distributed scalable network-Attached storage filesystem
-that allows rapid provisioning of additional storage base on storage comsumption need.
+  Gluster is a distributed scalable network-Attached storage filesystem that allows rapid provisioning of additional storage base on storage comsumption need.
 
 Terminology
  * Brick is th basic unit of storage, represented by an export directory on a server
