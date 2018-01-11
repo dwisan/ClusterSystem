@@ -1,10 +1,13 @@
 ```
-  Gluster is a distributed scalable network-Attached storage filesystem that allows rapid provisioning 
-  of additional storage base on storage comsumption need.
+  GlusterFS is a distributed scalable network-Attached storage filesystem that allows rapid provisioning 
+of additional storage base on storage comsumption need.It has found applications including cloud computing,
+streaming media services and content delivery networks.
 
 Terminology
  * Brick is th basic unit of storage, represented by an export directory on a server
  * Volume is a logical collection of Brick.
+ 
+
 ```
 >Network Setting
   ##### Add hosts to /etc/hosts on all Nodes
