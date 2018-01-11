@@ -1,4 +1,4 @@
-> การตั้งค่าระบบเครื่อข่าย สำหรับเครื่องคอมพิวเตอร์หรือเซิฟเวอร์
+>Network Setting
   ##### Add hosts to /etc/hosts on all Nodes
   ```
   192.168.0.1 node01
