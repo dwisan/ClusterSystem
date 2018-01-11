@@ -38,7 +38,7 @@ NoOfReplicas=3
 DataMemory=256M
 IndexMemory=256M
 LockPagesInMainMemory=1
-DataDir=DataDir=/usr/local/mysql/cluster-data
+DataDir=/usr/local/mysql/cluster-data
 
 MaxNoOfConcurrentOperations=1000
 MaxNoOfConcurrentTransactions=1024
