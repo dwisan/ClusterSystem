@@ -1,7 +1,4 @@
-### Manual Installation and Configuration Networking Software
-### Software Name: GlusterFS
-
-###Introduction:
+Introduction:
 	GlusterFS เป็นระบบ Distributed Storage ซึ่งเป็นการเอา File System จากเครื่องมากกว่า 2 เครื่องขึ้นไป มารวมกันโดยทำเป็น Cluster ที่มีการจัดเก็บข้อมูลโดยการกระจายและสามารถเข้าถึงได้หลาย Protocol (Gluster Native, NFS, CIFS) 
 
 > Networking Setting
