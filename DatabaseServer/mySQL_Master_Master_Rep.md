@@ -6,6 +6,29 @@
 apt-get install mysql-server mysql-client
 sudo nano /etc/mysql/my.cnf
 #
+[mysqld_safe]
+socket          = /var/run/mysqld/mysqld.sock
+nice            = 0
+
+[mysqld]
+user            = mysql
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+port            = 3306
+basedir         = /usr
+datadir         = /var/lib/mysql
+tmpdir          = /tmp
+lc-messages-dir = /usr/share/mysql
+skip-external-locking
+key_buffer_size         = 16M
+max_allowed_packet      = 16M
+thread_stack            = 192K
+thread_cache_size       = 8
+myisam-recover-options  = BACKUP
+query_cache_limit       = 1M
+query_cache_size        = 16M
+log_error = /var/log/mysql/error.log
+
 server_id           = 1
 bind-address        = 192.168.15.100
 log_bin             = /var/log/mysql/mysql-bin.log
@@ -35,6 +58,29 @@ apt-get install mysql-server mysql-client
 nano /etc/mysql/my.cnf
 
 #
+[mysqld_safe]
+socket          = /var/run/mysqld/mysqld.sock
+nice            = 0
+
+[mysqld]
+user            = mysql
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+port            = 3306
+basedir         = /usr
+datadir         = /var/lib/mysql
+tmpdir          = /tmp
+lc-messages-dir = /usr/share/mysql
+skip-external-locking
+key_buffer_size         = 16M
+max_allowed_packet      = 16M
+thread_stack            = 192K
+thread_cache_size       = 8
+myisam-recover-options  = BACKUP
+query_cache_limit       = 1M
+query_cache_size        = 16M
+log_error = /var/log/mysql/error.log
+
 server_id           = 2
 bind-address        = 192.168.15.101
 log_bin             = /var/log/mysql/mysql-bin.log
