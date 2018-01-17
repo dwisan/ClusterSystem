@@ -47,7 +47,6 @@ log_slave_updates   = 1
 auto-increment-increment = 2
 auto-increment-offset = 2
 #
-
 /etc/init.d/mysql start
 mysql_secure_installation
 mysql -u root -p
