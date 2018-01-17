@@ -24,8 +24,10 @@ auto-increment-offset = 1
 mysql_secure_installation
 
 mysql -u root -p
-
-mysql> GRANT REPLICATION SLAVE ON *.* TO 'replication'@'192.168.15.101' IDENTIFIED BY 'password';
+mysql> create user 'replication'@'192.168.15.101' identified by 'password';
+mysql> GRANT REPLICATION SLAVE ON *.* TO 'replication'@'192.168.15.101';
+mysql> FLUSH PRIVILEGES;
+mysql> show master status;
 ```
 > Install and Configure MySQL on Second Master Server
 ```
@@ -50,8 +52,11 @@ auto-increment-offset = 2
 mysql_secure_installation
 mysql -u root -p
 
-mysql> GRANT REPLICATION SLAVE ON *.* TO 'replication'@'192.168.15.100' IDENTIFIED BY 'password';
-
+mysql -u root -p
+mysql> create user 'replication'@'192.168.15.100' identified by 'password';
+mysql> GRANT REPLICATION SLAVE ON *.* TO 'replication'@'192.168.15.100';
+mysql> FLUSH PRIVILEGES;
+mysql> show master status;
 ```
 >Configure MySQL Master on Both Server
 .
@@ -60,7 +65,7 @@ mysql> GRANT REPLICATION SLAVE ON *.* TO 'replication'@'192.168.15.100' IDENTIFI
 mysql -u root -p
 mysql> SHOW MASTER STATUS;
 mysql> SLAVE STOP;
-mysql> CHANGE MASTER TO master_host='192.168.15.101', master_port=3306, master_user='replication', master_password='password', master_log_file='mysql-bin.000001', master_log_pos=276; 
+mysql> CHANGE MASTER TO master_host='192.168.15.101', master_port=3306, master_user='replication', master_password='password', master_log_file='mysql-bin.000002', master_log_pos=276; 
 mysql> SLAVE START;
 ```
 >Configure Second Server as Master
