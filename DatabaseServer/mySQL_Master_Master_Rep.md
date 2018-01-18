@@ -50,11 +50,6 @@ auto-increment-increment = 2
 auto-increment-offset = 1
 
 root@Server01:~# /etc/init.d/mysql restart
-root@Server01:~# mysql -u root -p
-mysql> create user 'replication'@'192.168.15.101' identified by 'password';
-mysql> GRANT REPLICATION SLAVE ON *.* TO 'replication'@'192.168.15.101';
-mysql> FLUSH PRIVILEGES;
-mysql> show master status;
 ```
 > On Second Server (Server02)
 ```
@@ -97,13 +92,22 @@ auto-increment-increment = 2
 auto-increment-offset = 2
 
 root@Server02:~# /etc/init.d/mysql start
+```
+>Configure Server01 as Master (Replicate data to Server02)
+```
+root@Server01:~# mysql -u root -p
+mysql> create user 'replication'@'192.168.15.101' identified by 'password';
+mysql> GRANT REPLICATION SLAVE ON *.* TO 'replication'@'192.168.15.101';
+mysql> FLUSH PRIVILEGES;
+```
+>Configure Server02 as Master (Replicate data to Server01)
+```
 root@Server02:~# mysql -u root -p
 mysql> create user 'replication'@'192.168.15.100' identified by 'password';
 mysql> GRANT REPLICATION SLAVE ON *.* TO 'replication'@'192.168.15.100';
 mysql> FLUSH PRIVILEGES;
-mysql> show master status;
 ```
->Configure Server01 as Slave , Server02 as Master
+>Configure Server01 as Slave
 ```
 root@Server02:~# mysql -u root -p
 mysql> SHOW MASTER STATUS;
@@ -113,7 +117,7 @@ mysql> STOP SLAVE;
 mysql> CHANGE MASTER TO master_host='192.168.15.101', master_port=3306, master_user='replication', master_password='password', master_log_file='mysql-bin.000002', master_log_pos=276; 
 mysql> START SLAVE;
 ```
->Configure Server02 as Slave , Server01 as Master
+>Configure Server02 as Slave
 ```
 root@Server01:~# mysql -u root -p
 mysql> SHOW MASTER STATUS;
