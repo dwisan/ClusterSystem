@@ -1,6 +1,6 @@
 ```
 เอกสารเรื่อง: การทำ mySQL data Replication รูปแบบ MASTER-MASTER
-          (mySQL Data Replication on MASTER-MASTER Mode)
+          (mySQL Data Replication with MASTER-MASTER Mode)
 ```
 
 > ความต้องการของระบบ (Requirements)
