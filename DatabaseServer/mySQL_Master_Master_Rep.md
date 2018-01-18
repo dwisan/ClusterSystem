@@ -6,12 +6,13 @@
 > ความต้องการของระบบ (Requirements)
 - [x] Server01 : Static IP address 192.168.15.100
 - [x] Server02 : Static IP address 192.168.15.101
+- [x] OS : Ubuntu 16.04 LTS
 
 > On First Server (Server01)
 ```
 root@Server01:~# apt-get install mysql-server mysql-client
 
-root@Server01:~# sudo nano /etc/mysql/my.cnf
+root@Server01:~# sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
 
 [mysqld_safe]
 socket          = /var/run/mysqld/mysqld.sock
@@ -58,7 +59,7 @@ mysql> show master status;
 > On Second Server (Server02)
 ```
 root@Server02:~# apt-get install mysql-server mysql-client
-root@Server02:~# nano /etc/mysql/my.cnf
+root@Server02:~# nano /etc/mysql/mysql.conf.d/mysqld.cnf
 
 [mysqld_safe]
 socket          = /var/run/mysqld/mysqld.sock
