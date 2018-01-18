@@ -2,10 +2,12 @@
   เอกสารเรื่อง : การทำ mySQL data Replication รูปแบบ MASTER-MASTER
              (mySQL Data Replication on MASTER-MASTER Mode)
 ```
+
 > ความต้องการของระบบ (Requirements)
 - [x] Server01 : Static IP address 192.168.15.100
 - [x] Server02 : Static IP address 192.168.15.101
-> Install and Configure MySQL on First Master Server
+
+> On First Master Server (Server01)
 ```
 apt-get install mysql-server mysql-client
 sudo nano /etc/mysql/my.cnf
