@@ -107,7 +107,7 @@ mysql> create user 'replication'@'192.168.15.100' identified by 'password';
 mysql> GRANT REPLICATION SLAVE ON *.* TO 'replication'@'192.168.15.100';
 mysql> FLUSH PRIVILEGES;
 ```
->Configure Server01 as Slave
+>Configure Server01 as Slave (Replicate data from Server02)
 ```
 root@Server02:~# mysql -u root -p
 mysql> SHOW MASTER STATUS;
@@ -117,7 +117,7 @@ mysql> STOP SLAVE;
 mysql> CHANGE MASTER TO master_host='192.168.15.101', master_port=3306, master_user='replication', master_password='password', master_log_file='mysql-bin.000002', master_log_pos=276; 
 mysql> START SLAVE;
 ```
->Configure Server02 as Slave
+>Configure Server02 as Slave (Replicate data from Server01)
 ```
 root@Server01:~# mysql -u root -p
 mysql> SHOW MASTER STATUS;
