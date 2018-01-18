@@ -1,6 +1,6 @@
 > Requirements
-- [x] Static IP address 192.168.15.100
-- [x] Static IP address 192.168.15.101
+- [x] Static IP address 192.168.15.100 (For Read & Write)
+- [x] Static IP address 192.168.15.101 (For Read & Write)
 > Install and Configure MySQL on First Master Server
 ```
 apt-get install mysql-server mysql-client
