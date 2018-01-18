@@ -1,9 +1,9 @@
 ```
-  mySQL data Replication in MASTER to MASTER mode.
+  เอกสารเรื่อง : การทำ mySQL data Replication รูปแบบ MASTER-MASTER
 ```
 > Requirements
-- [x] Static IP address 192.168.15.100 (For Read & Write)
-- [x] Static IP address 192.168.15.101 (For Read & Write)
+- [x] Static IP address 192.168.15.100
+- [x] Static IP address 192.168.15.101
 > Install and Configure MySQL on First Master Server
 ```
 apt-get install mysql-server mysql-client
