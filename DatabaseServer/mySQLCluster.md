@@ -91,7 +91,7 @@ id=4 (not connected, accepting connect from 172.18.111.103)
 id=5 (not connected, accepting connect from 172.18.111.104)
 
 [ndb_mgmd(MGM)] 1 node(s)
-id=1    @172.18.111.101  (mysql-5.6.38 ndb-7.4.17)
+id=1    @172.18.111.100  (mysql-5.6.38 ndb-7.4.17)
 
 [mysqld(API)]   4 node(s)
 id=6 (not connected, accepting connect from 172.18.111.101)
