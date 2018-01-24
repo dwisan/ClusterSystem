@@ -5,7 +5,7 @@ To implement a MySQL Cluster, we need 3 different types of nodes:
 - [x] SQL Node -- MySQL Server interfaces for connecting to all nodes
 
 >Step # 1 <br />
-Downloading and Installing MySQL Cluster Software 
+Downloading and Installing MySQL Cluster Software <br />
 On Management Node, Data Node, SQL Node
 ```bash
 apt-get install libaio1
