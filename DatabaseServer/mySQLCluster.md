@@ -4,6 +4,12 @@ To implement a MySQL Cluster, we need 3 different types of nodes:
 - [x] Data Node -- used to store the data they provide automatic sharding and can handle replication
 - [x] SQL Node -- MySQL Server interfaces for connecting to all nodes
 
+> Example Implementation
+  - [x] 1 x Management Node
+  - [x] 4 x Data Node
+  - [x] 4 x SQL Node
+  - [x] Data Node and SQL Node, they running on same machine.
+  
 >Step # 1 <br />
 Downloading and Installing MySQL Cluster Software to "/usr/local/mysql" <br />
 On Management Node, Data Node, SQL Node 
@@ -13,17 +19,17 @@ wget http://dev.mysql.com/get/Downloads/MySQL-Cluster-7.6/mysql-cluster-gpl-7.6.
 tar -zxvf mysql-cluster-gpl-7.6.3-linux-glibc2.12-x86_64.tar.gz
 mv mysql-cluster-gpl-7.6.3-linux-glibc2.12-x86_64 /usr/local/mysql
 ```
->Configure Management Node
+>Step # 2 <br />
+Configure Management Node
 ```
 cd /usr/local/mysql
 cp bin/ndb_mgm* /usr/local/bin/
 chmod +x /usr/local/bin/ndb_mgm*
 mkdir -p /usr/local/mysql/mysql-cluster/
+```
+>Create config.ini
+```
 nano /usr/local/mysql/mysql-cluster/config.ini
-
-[TCP DEFAULT]
-SendBufferMemory=2M
-ReceiveBufferMemory=2M
 
 [NDB_MGMD DEFAULT]
 PortNumber=1186
@@ -32,47 +38,10 @@ DataDir=/usr/local/mysql/mysql-cluster/
 [ndb_mgmd]
 NodeId=1
 hostname=172.18.111.101
-LogDestination=FILE:filename=ndb_1_cluster.log,maxsize=10000000,maxfiles=6
 
 [ndbd default]
-NoOfReplicas=3
-DataMemory=256M
-IndexMemory=256M
-LockPagesInMainMemory=1
+NoOfReplicas=4
 DataDir=/usr/local/mysql/cluster-data
-
-MaxNoOfConcurrentOperations=1000
-MaxNoOfConcurrentTransactions=1024
-
-StringMemory=25
-MaxNoOfTables=1024
-MaxNoOfOrderedIndexes=256
-MaxNoOfUniqueHashIndexes=64
-MaxNoOfAttributes=2560
-MaxNoOfTriggers=2560
-
-FragmentLogFileSize=16M
-InitFragmentLogFiles=FULL
-NoOfFragmentLogFiles=5
-RedoBuffer=8M
-
-TimeBetweenGlobalCheckpoints=1000
-DiskCheckpointSpeedInRestart=20M
-DiskCheckpointSpeed=4M
-TimeBetweenLocalCheckpoints=20
-CompressedLCP=1
-
-HeartbeatIntervalDbDb=15000
-HeartbeatIntervalDbApi=15000
-
-BackupMaxWriteSize=1M
-BackupDataBufferSize=12M
-BackupLogBufferSize=8M
-BackupMemory=20M
-CompressedBackup=1
-
-SharedGlobalMemory=10M
-DiskPageBufferMemory=32M
 
 [ndbd]
 NodeId=2
@@ -96,6 +65,14 @@ hostname=172.18.111.106
    
 [mysqld]
 NodeId=7
+hostname=172.18.111.107
+
+[mysqld]
+NodeId=8
+hostname=172.18.111.106
+   
+[mysqld]
+NodeId=9
 hostname=172.18.111.107
 
 ```
