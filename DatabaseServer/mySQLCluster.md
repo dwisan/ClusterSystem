@@ -4,8 +4,9 @@ To implement a MySQL Cluster, we need 3 different types of nodes:
 - [x] Data Node -- used to store the data they provide automatic sharding and can handle replication
 - [x] SQL Node -- MySQL Server interfaces for connecting to all nodes
 
->Downloading and Installing MySQL Cluster <br />
-In Nodes: Management Node, Data Node, SQL Node
+>Step # 1 <br />
+Downloading and Installing MySQL Cluster Software 
+On Management Node, Data Node, SQL Node
 ```bash
 apt-get install libaio1
 wget http://dev.mysql.com/get/Downloads/MySQL-Cluster-7.6/mysql-cluster-gpl-7.6.3-linux-glibc2.12-x86_64.tar.gz
