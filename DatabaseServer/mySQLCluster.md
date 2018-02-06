@@ -8,7 +8,7 @@ To implement a MySQL Cluster, need 3 different types of nodes:
   - [x] 1 x Management Node
   - [x] 4 x Data Node
   - [x] 4 x SQL Node
-  ** Data Node and SQL Node, they are running on same machine.
+  <br /> ** Data Node and SQL Node, they are running on same machine.
   
 >Step # 1.0 <br />
 Downloading and Installing MySQL Cluster Software to "/usr/local/mysql" <br />
