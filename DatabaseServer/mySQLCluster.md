@@ -19,14 +19,14 @@ bash# tar -zxvf mysql-cluster-gpl-7.6.3-linux-glibc2.12-x86_64.tar.gz
 bash# mv mysql-cluster-gpl-7.6.3-linux-glibc2.12-x86_64 /usr/local/mysql
 ```
 >Step # 2.0 <br />
-Configure Management Node
+Configure Management Node (2 node)
 ```
 bash# cd /usr/local/mysql
 bash# cp bin/ndb_mgm* /usr/local/bin/
 bash# chmod +x /usr/local/bin/ndb_mgm*
 bash# mkdir -p /usr/local/mysql/mysql-cluster/
 ```
->Step # 2.1 Create config.ini
+>Step # 2.1 Create config.ini (2 node)
 ```
 bash# nano /usr/local/mysql/mysql-cluster/config.ini
 
@@ -79,12 +79,12 @@ NodeId=24
 hostname=10.10.0.24
 
 ```
-> Step # 2.2 Run management Node
+> Step # 2.2 Run management Node (2 node)
 ```Shell
 After change configuation file must be Initialize First:
 bash# /usr/local/mysql/bin/ndb_mgmd -f /usr/local/mysql/mysql-cluster/config.ini --initial
 
-After run:
+Other:
 bash# /usr/local/mysql/bin/ndb_mgmd -f /usr/local/mysql/mysql-cluster/config.ini
 ```
 > Step # 2.3 Show management Connection
@@ -100,6 +100,7 @@ id=14 (not connected, accepting connect from 10.10.0.14)
 [ndb_mgmd(MGM)] 1 node(s)
 id=1    @10.10.0.1  (mysql-5.6.38 ndb-7.4.17)
 id=2    @10.10.0.2  (mysql-5.6.38 ndb-7.4.17)
+
 [mysqld(API)]   4 node(s)
 id=21 (not connected, accepting connect from 10.10.0.21)
 id=22 (not connected, accepting connect from 10.10.0.22)
@@ -108,7 +109,7 @@ id=24 (not connected, accepting connect from 10.10.0.24)
 
 ```
 >Step # 3.0 <br />
-Configure Data Node
+Configure Data Node (4 node)
 ```
 bash# mkdir /usr/local/mysql/cluster-data
 bash# groupadd mysql
@@ -116,19 +117,23 @@ bash# useradd mysql -s /sbin/nologin -g mysql
 bash# chown -R root:root /usr/local/mysql
 bash# chown -R mysql:mysql /usr/local/mysql/cluster-data
 ```
->Step # 3.1 Create /etc/my.cnf
+>Step # 3.1 Create /etc/my.cnf (4 node)
 ```
 bash# nano /etc/my.cnf
 
 [mysql_cluster]
-ndb-connectstring=172.18.111.101
+ndb-connectstring=10.10.0.1,10.10.0.2
 ```
->Step # 3.2 Run data node
+>Step # 3.2 Run data node (4 node)
 ```
+Firt Initialize:
 bash# /usr/local/mysql/bin/ndbd --initial
+
+Other:
+bash# /usr/local/mysql/bin/ndbd
 ```
 > Step # 4.0 <br />
-Configure SQL Node
+Configure SQL Node (4 node)
 ```
 bash# mkdir /usr/local/mysql/data
 bash# groupadd mysql
@@ -136,24 +141,21 @@ bash# useradd mysql -s /sbin/nologin -g mysql
 bash# chown -R root:root /usr/local/mysql
 bash# chown -R mysql:mysql /usr/local/mysql/data
 ```
->Step # 4.1 Create /etc/my.cnf
+>Step # 4.1 Create /etc/my.cnf (4 node)
 ```
 bash# nano /etc/my.cnf
 
 [mysqld]
 ndbcluster
-ndb-connectstring=172.18.111.100
+ndb-connectstring=10.10.0.1,10.10.0.2
 default_storage_engine=ndbcluster
 
-[mysql_cluster]
-ndb-connectstring=172.18.111.101
-
 ```
->Step # 4.2 initialize database for mysql Service
+>Step # 4.2 initialize database for mysql Service (4 node)
 ```
 /usr/local/mysql/bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data
 ```
->Step # 4.3 Start Mysql Service and set root passward
+>Step # 4.3 Start Mysql Service and set root passward (4 node)
 ```
 /usr/local/mysql/support-files/mysql.server start
 /usr/local/mysql/bin/mysqladmin -u root -p password 1qa2ws3ed
@@ -164,17 +166,18 @@ ndb-connectstring=172.18.111.101
 bash# ndb_mgm -e show
 
 [ndbd(NDB)]     4 node(s)
-id=2    @172.18.111.101  (mysql-5.6.38 ndb-7.4.17, Nodegroup: 0, *)
-id=3    @172.18.111.102  (mysql-5.6.38 ndb-7.4.17, Nodegroup: 0)
-id=4    @172.18.111.103  (mysql-5.6.38 ndb-7.4.17, Nodegroup: 0)
-id=5    @172.18.111.104  (mysql-5.6.38 ndb-7.4.17, Nodegroup: 0)
+id=11    @10.10.0.11  (mysql-5.7.18 ndb-7.6.3, Nodegroup: 0, *)
+id=12    @10.10.0.12  (mysql-5.7.18 ndb-7.6.3, Nodegroup: 0)
+id=13    @10.10.0.13  (mysql-5.7.18 ndb-7.6.3, Nodegroup: 0)
+id=14    @10.10.0.14  (mysql-5.7.18 ndb-7.6.3, Nodegroup: 0)
 
 [ndb_mgmd(MGM)] 1 node(s)
-id=1    @172.18.111.100  (mysql-5.6.38 ndb-7.4.17)
+id=1    @10.10.0.1  (mysql-5.7.18 ndb-7.6.3)
+id=2    @10.10.0.2  (mysql-5.7.18 ndb-7.6.3)
 
 [mysqld(API)]   4 node(s)
-id=6    @172.18.111.101  (mysql-5.6.38 ndb-7.4.17)
-id=7    @172.18.111.102  (mysql-5.6.38 ndb-7.4.17)
-id=8    @172.18.111.103  (mysql-5.6.38 ndb-7.4.17)
-id=9    @172.18.111.104  (mysql-5.6.38 ndb-7.4.17)
+id=21    @10.10.0.21  (mysql-5.7.18 ndb-7.6.3)
+id=22    @10.10.0.22  (mysql-5.7.18 ndb-7.6.3)
+id=23    @10.10.0.23  (mysql-5.7.18 ndb-7.6.3)
+id=24    @10.10.0.24  (mysql-5.7.18 ndb-7.6.3)
 ```
