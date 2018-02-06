@@ -5,10 +5,9 @@ To implement a MySQL Cluster, need 3 different types of nodes:
 - [x] SQL Node -- MySQL Server interfaces for connecting to all nodes
 
 > Implementation example
-  - [x] 1 x Management Node
+  - [x] 2 x Management Node
   - [x] 4 x Data Node
   - [x] 4 x SQL Node
-  <br /> ** Data Node and SQL Node, they are running on same machine.
   
 >Step # 1.0 <br />
 Downloading and Installing MySQL Cluster Software to "/usr/local/mysql" <br />
@@ -37,43 +36,47 @@ DataDir=/usr/local/mysql/mysql-cluster/
 
 [ndb_mgmd]
 NodeId=1
-hostname=172.18.111.100
+hostname=10.10.0.1
+
+[ndb_mgmd]
+NodeId=2
+hostname=10.10.0.2
 
 [ndbd default]
 NoOfReplicas=4
 DataDir=/usr/local/mysql/cluster-data
 
 [ndbd]
-NodeId=2
-hostname=172.18.111.101
+NodeId=11
+hostname=10.10.0.11
    
 [ndbd]
-NodeId=3
-hostname=172.18.111.102
+NodeId=12
+hostname=10.10.0.12
    
 [ndbd]
-NodeId=4
-hostname=172.18.111.103
+NodeId=13
+hostname=10.10.0.13
 
 [ndbd]
-NodeId=5
-hostname=172.18.111.104
+NodeId=14
+hostname=10.10.0.14
    
 [mysqld]
-NodeId=6
-hostname=172.18.111.101
+NodeId=21
+hostname=10.10.0.21
    
 [mysqld]
-NodeId=7
-hostname=172.18.111.102
+NodeId=22
+hostname=10.10.0.22
 
 [mysqld]
-NodeId=8
-hostname=172.18.111.103
+NodeId=23
+hostname=10.10.0.23
    
 [mysqld]
-NodeId=9
-hostname=172.18.111.104
+NodeId=24
+hostname=10.10.0.24
 
 ```
 > Step # 2.2 Run management Node
