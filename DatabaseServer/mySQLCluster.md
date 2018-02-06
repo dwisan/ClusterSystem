@@ -81,26 +81,30 @@ hostname=10.10.0.24
 ```
 > Step # 2.2 Run management Node
 ```Shell
+After change configuation file must be Initialize First:
 bash# /usr/local/mysql/bin/ndb_mgmd -f /usr/local/mysql/mysql-cluster/config.ini --initial
+
+After run:
+bash# /usr/local/mysql/bin/ndb_mgmd -f /usr/local/mysql/mysql-cluster/config.ini
 ```
 > Step # 2.3 Show management Connection
 ```
 bash# ndb_mgm -e show
 
 [ndbd(NDB)]     4 node(s)
-id=2 (not connected, accepting connect from 172.18.111.101)
-id=3 (not connected, accepting connect from 172.18.111.102)
-id=4 (not connected, accepting connect from 172.18.111.103)
-id=5 (not connected, accepting connect from 172.18.111.104)
+id=11 (not connected, accepting connect from 10.10.0.11)
+id=12 (not connected, accepting connect from 10.10.0.12)
+id=13 (not connected, accepting connect from 10.10.0.13)
+id=14 (not connected, accepting connect from 10.10.0.14)
 
 [ndb_mgmd(MGM)] 1 node(s)
-id=1    @172.18.111.100  (mysql-5.6.38 ndb-7.4.17)
-
+id=1    @10.10.0.1  (mysql-5.6.38 ndb-7.4.17)
+id=2    @10.10.0.2  (mysql-5.6.38 ndb-7.4.17)
 [mysqld(API)]   4 node(s)
-id=6 (not connected, accepting connect from 172.18.111.101)
-id=7 (not connected, accepting connect from 172.18.111.102)
-id=8 (not connected, accepting connect from 172.18.111.103)
-id=9 (not connected, accepting connect from 172.18.111.104)
+id=21 (not connected, accepting connect from 10.10.0.21)
+id=22 (not connected, accepting connect from 10.10.0.22)
+id=23 (not connected, accepting connect from 10.10.0.23)
+id=24 (not connected, accepting connect from 10.10.0.24)
 
 ```
 >Step # 3.0 <br />
