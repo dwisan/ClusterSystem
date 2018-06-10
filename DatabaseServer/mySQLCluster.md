@@ -6,7 +6,7 @@ To implement a MySQL Cluster, need 3 different types of nodes:
 
 > Implementation example
   - [x] 2 x Management Node
-  - [x] 4 x Data Node
+  - [x] 6 x Data Node
   - [x] 4 x SQL Node
   
 >Step # 1.0 <br />
@@ -36,47 +36,65 @@ DataDir=/usr/local/mysql/mysql-cluster/
 
 [ndb_mgmd]
 NodeId=1
-hostname=10.10.0.1
+hostname=172.18.111.221
 
 [ndb_mgmd]
 NodeId=2
-hostname=10.10.0.2
+hostname=172.18.111.222
 
 [ndbd default]
-NoOfReplicas=4
+NoOfReplicas=2
 DataDir=/usr/local/mysql/cluster-data
+BackupDataDir=/usr/local/mysql/cluster-data/BACKUP
+
+DataMemory=1500M
+MaxNoOfConcurrentOperations=200000
+MaxNoOfLocalOperations=220000
+
+MaxNoOfTables=1024
+MaxNoOfAttributes=50000
+MaxNoOfOrderedIndexes=10000
+LcpScanProgressTimeout=300
 
 [ndbd]
 NodeId=11
-hostname=10.10.0.11
+hostname=172.18.111.223
    
 [ndbd]
 NodeId=12
-hostname=10.10.0.12
+hostname=172.18.111.224
    
 [ndbd]
 NodeId=13
-hostname=10.10.0.13
+hostname=172.18.111.225
 
 [ndbd]
 NodeId=14
-hostname=10.10.0.14
-   
+hostname=172.18.111.226
+
+[ndbd]
+NodeId=15
+hostname=172.18.111.227
+
+[ndbd]
+NodeId=16
+hostname=172.18.111.228
+
 [mysqld]
 NodeId=21
-hostname=10.10.0.21
+hostname=172.18.111.229
    
 [mysqld]
 NodeId=22
-hostname=10.10.0.22
+hostname=172.18.111.230
 
 [mysqld]
 NodeId=23
-hostname=10.10.0.23
+hostname=172.18.111.231
    
 [mysqld]
 NodeId=24
-hostname=10.10.0.24
+hostname=172.18.111.232
 
 ```
 > Step # 2.2 Run management Node (2 node)
@@ -112,6 +130,7 @@ id=24 (not connected, accepting connect from 10.10.0.24)
 Configure Data Node (4 node)
 ```
 bash# mkdir /usr/local/mysql/cluster-data
+bash# mkdir /usr/local/mysql/cluster-data/BACKUP
 bash# groupadd mysql
 bash# useradd mysql -s /sbin/nologin -g mysql
 bash# chown -R root:root /usr/local/mysql
@@ -150,10 +169,10 @@ ndbcluster
 ndb-connectstring=10.10.0.1,10.10.0.2
 default_storage_engine=ndbcluster
 max_connections = 20000
-#slow_query_log = 1
-#slow_query_log_file=/var/log/log-slow-queries.log
-#log_queries_not_using_indexes
-#long_query_time = 10
+slow_query_log = 1
+slow_query_log_file=/var/log/log-slow-queries.log
+log_queries_not_using_indexes
+long_query_time = 10
 ```
 >Step # 4.2 initialize database for mysql Service (4 node)
 ```
@@ -169,19 +188,21 @@ max_connections = 20000
 ```
 bash# ndb_mgm -e show
 
-[ndbd(NDB)]     4 node(s)
-id=11    @10.10.0.11  (mysql-5.7.18 ndb-7.6.3, Nodegroup: 0, *)
-id=12    @10.10.0.12  (mysql-5.7.18 ndb-7.6.3, Nodegroup: 0)
-id=13    @10.10.0.13  (mysql-5.7.18 ndb-7.6.3, Nodegroup: 0)
-id=14    @10.10.0.14  (mysql-5.7.18 ndb-7.6.3, Nodegroup: 0)
+[ndbd(NDB)]     6 node(s)
+id=11   @172.18.111.223  (mysql-5.7.22 ndb-7.6.6, Nodegroup: 0, *)
+id=12   @172.18.111.224  (mysql-5.7.22 ndb-7.6.6, Nodegroup: 0)
+id=13   @172.18.111.225  (mysql-5.7.22 ndb-7.6.6, Nodegroup: 1)
+id=14   @172.18.111.226  (mysql-5.7.22 ndb-7.6.6, Nodegroup: 1)
+id=15   @172.18.111.227  (mysql-5.7.22 ndb-7.6.6, Nodegroup: 2)
+id=16   @172.18.111.228  (mysql-5.7.22 ndb-7.6.6, Nodegroup: 2)
 
-[ndb_mgmd(MGM)] 1 node(s)
-id=1    @10.10.0.1  (mysql-5.7.18 ndb-7.6.3)
-id=2    @10.10.0.2  (mysql-5.7.18 ndb-7.6.3)
+[ndb_mgmd(MGM)] 2 node(s)
+id=1    @172.18.111.221  (mysql-5.7.22 ndb-7.6.6)
+id=2    @172.18.111.222  (mysql-5.7.22 ndb-7.6.6)
 
 [mysqld(API)]   4 node(s)
-id=21    @10.10.0.21  (mysql-5.7.18 ndb-7.6.3)
-id=22    @10.10.0.22  (mysql-5.7.18 ndb-7.6.3)
-id=23    @10.10.0.23  (mysql-5.7.18 ndb-7.6.3)
-id=24    @10.10.0.24  (mysql-5.7.18 ndb-7.6.3)
+id=21   @172.18.111.229  (mysql-5.7.22 ndb-7.6.6)
+id=22   @172.18.111.230  (mysql-5.7.22 ndb-7.6.6)
+id=23   @172.18.111.231  (mysql-5.7.22 ndb-7.6.6)
+id=24   @172.18.111.232  (mysql-5.7.22 ndb-7.6.6)
 ```
