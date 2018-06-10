@@ -149,7 +149,11 @@ bash# nano /etc/my.cnf
 ndbcluster
 ndb-connectstring=10.10.0.1,10.10.0.2
 default_storage_engine=ndbcluster
-
+max_connections = 20000
+#slow_query_log = 1
+#slow_query_log_file=/var/log/log-slow-queries.log
+#log_queries_not_using_indexes
+#long_query_time = 10
 ```
 >Step # 4.2 initialize database for mysql Service (4 node)
 ```
