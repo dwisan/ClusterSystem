@@ -109,25 +109,27 @@ bash# /usr/local/mysql/bin/ndb_mgmd -f /usr/local/mysql/mysql-cluster/config.ini
 ```
 bash# ndb_mgm -e show
 
-[ndbd(NDB)]     4 node(s)
-id=11 (not connected, accepting connect from 10.10.0.11)
-id=12 (not connected, accepting connect from 10.10.0.12)
-id=13 (not connected, accepting connect from 10.10.0.13)
-id=14 (not connected, accepting connect from 10.10.0.14)
+[ndbd(NDB)]     6 node(s)
+id=11 (not connected, accepting connect from 172.18.111.223)
+id=12 (not connected, accepting connect from 172.18.111.224)
+id=13 (not connected, accepting connect from 172.18.111.225)
+id=14 (not connected, accepting connect from 172.18.111.226)
+id=15 (not connected, accepting connect from 172.18.111.227)
+id=16 (not connected, accepting connect from 172.18.111.228)
 
 [ndb_mgmd(MGM)] 1 node(s)
-id=1    @10.10.0.1  (mysql-5.6.38 ndb-7.4.17)
-id=2    @10.10.0.2  (mysql-5.6.38 ndb-7.4.17)
+id=1    @172.18.111.221 (mysql-5.6.38 ndb-7.4.17)
+id=2    @172.18.111.222  (mysql-5.6.38 ndb-7.4.17)
 
 [mysqld(API)]   4 node(s)
-id=21 (not connected, accepting connect from 10.10.0.21)
-id=22 (not connected, accepting connect from 10.10.0.22)
-id=23 (not connected, accepting connect from 10.10.0.23)
-id=24 (not connected, accepting connect from 10.10.0.24)
+id=21 (not connected, accepting connect from 172.18.111.229)
+id=22 (not connected, accepting connect from 172.18.111.230)
+id=23 (not connected, accepting connect from 172.18.111.231)
+id=24 (not connected, accepting connect from 172.18.111.232)
 
 ```
 >Step # 3.0 <br />
-Configure Data Node (4 node)
+Configure Data Node (6 node)
 ```
 bash# mkdir /usr/local/mysql/cluster-data
 bash# mkdir /usr/local/mysql/cluster-data/BACKUP
@@ -167,7 +169,7 @@ bash# nano /etc/my.cnf
 
 [mysqld]
 ndbcluster
-ndb-connectstring=10.10.0.1,10.10.0.2
+ndb-connectstring=172.18.111.221,172.18.111.222
 default_storage_engine=ndbcluster
 max_connections = 20000
 slow_query_log = 1
