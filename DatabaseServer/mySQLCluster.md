@@ -99,10 +99,10 @@ hostname=172.18.111.232
 ```
 > Step # 2.2 Run management Node (2 node)
 ```Shell
-After change configuation file must be Initialize First:
+First Starting: After change configuation file must be Initialize First
 bash# /usr/local/mysql/bin/ndb_mgmd -f /usr/local/mysql/mysql-cluster/config.ini --initial
 
-Other:
+Next Starting:
 bash# /usr/local/mysql/bin/ndb_mgmd -f /usr/local/mysql/mysql-cluster/config.ini
 ```
 > Step # 2.3 Show management Connection
@@ -147,10 +147,10 @@ ndb-connectstring=172.18.111.221,172.18.111.222
 ```
 >Step # 3.2 Run data node (4 node)
 ```
-Firt Initialize:
+Firt Starting: Start with Initialize
 bash# /usr/local/mysql/bin/ndbd --initial
 
-Other:
+Next Starting:
 bash# /usr/local/mysql/bin/ndbd
 ```
 > Step # 4.0 <br />
