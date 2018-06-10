@@ -159,6 +159,7 @@ bash# groupadd mysql
 bash# useradd mysql -s /sbin/nologin -g mysql
 bash# chown -R root:root /usr/local/mysql
 bash# chown -R mysql:mysql /usr/local/mysql/data
+bash# touch /var/log/log-slow-queries.log
 ```
 >Step # 4.1 Create /etc/my.cnf (4 node)
 ```
