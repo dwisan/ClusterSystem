@@ -14,9 +14,9 @@ Downloading and Installing MySQL Cluster Software to "/usr/local/mysql" <br />
 On Management Node, Data Node, SQL Node *
 ```bash
 bash# apt-get install libaio1
-bash# wget http://dev.mysql.com/get/Downloads/MySQL-Cluster-7.6/mysql-cluster-gpl-7.6.3-linux-glibc2.12-x86_64.tar.gz
-bash# tar -zxvf mysql-cluster-gpl-7.6.3-linux-glibc2.12-x86_64.tar.gz
-bash# mv mysql-cluster-gpl-7.6.3-linux-glibc2.12-x86_64 /usr/local/mysql
+bash# wget http://dev.mysql.com/get/Downloads/MySQL-Cluster-7.6/mysql-cluster-gpl-7.6.6-linux-glibc2.12-x86_64.tar.gz
+bash# tar -zxvf mysql-cluster-gpl-7.6.6-linux-glibc2.12-x86_64.tar.gz
+bash# mv mysql-cluster-gpl-7.6.6-linux-glibc2.12-x86_64 /usr/local/mysql
 ```
 >Step # 2.0 <br />
 Configure Management Node (2 node)
