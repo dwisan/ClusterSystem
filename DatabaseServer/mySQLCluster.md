@@ -118,8 +118,8 @@ id=15 (not connected, accepting connect from 172.18.111.227)
 id=16 (not connected, accepting connect from 172.18.111.228)
 
 [ndb_mgmd(MGM)] 1 node(s)
-id=1    @172.18.111.221 (mysql-5.6.38 ndb-7.4.17)
-id=2    @172.18.111.222  (mysql-5.6.38 ndb-7.4.17)
+id=1    @172.18.111.221 (mysql-5.7.22 ndb-7.6.6)
+id=2    @172.18.111.222 (mysql-5.7.22 ndb-7.6.6)
 
 [mysqld(API)]   4 node(s)
 id=21 (not connected, accepting connect from 172.18.111.229)
@@ -143,7 +143,7 @@ bash# chown -R mysql:mysql /usr/local/mysql/cluster-data
 bash# nano /etc/my.cnf
 
 [mysql_cluster]
-ndb-connectstring=10.10.0.1,10.10.0.2
+ndb-connectstring=172.18.111.221,172.18.111.222
 ```
 >Step # 3.2 Run data node (4 node)
 ```
