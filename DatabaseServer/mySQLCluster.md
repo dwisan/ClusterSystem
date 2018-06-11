@@ -209,3 +209,57 @@ id=22   @172.18.111.230  (mysql-5.7.22 ndb-7.6.6)
 id=23   @172.18.111.231  (mysql-5.7.22 ndb-7.6.6)
 id=24   @172.18.111.232  (mysql-5.7.22 ndb-7.6.6)
 ```
+> BenchMask With sysbench
+- [x] Preparing Data
+```
+# sysbench --test=oltp --oltp-table-size=1000000 --db-driver=mysql --mysql-socket=/tmp/mysql.sock --mysql-db=dbtest --mysql-user=root --mysql-password=1qa2ws3ed prepare
+```
+- [x] Runing Test
+```
+# sysbench --test=oltp --oltp-table-size=1000000 --db-driver=mysql --mysql-socket=/tmp/mysql.sock --mysql-db=dbtest --mysql-user=root --mysql-password=1qa2ws3ed --max-time=60 --oltp-read-only=on --max-requests=0 --num-threads=4 run
+```
+- [x] The Result
+```
+OLTP test statistics:
+    queries performed:
+        read:                            2474822
+        write:                           0
+        other:                           353546
+        total:                           2828368
+    transactions:                        176773 (2946.16 per sec.)
+    deadlocks:                           0      (0.00 per sec.)
+    read/write requests:                 2474822 (41246.17 per sec.)
+    other operations:                    353546 (5892.31 per sec.)
+
+Test execution summary:
+    total time:                          60.0013s
+    total number of events:              176773
+    total time taken by event execution: 239.5257
+    per-request statistics:
+         min:                                  0.82ms
+         avg:                                  1.35ms
+         max:                                  4.39ms
+         approx.  95 percentile:               1.78ms
+
+Threads fairness:
+    events (avg/stddev):           44193.2500/378.27
+    execution time (avg/stddev):   59.8814/0.00
+```
+> Using HAProxy to Load Banlancer
+```
+# nano /etc/haproxy/haproxy.cfg
+
+frontend mariadb
+        bind 0.0.0.0:3306
+        mode tcp
+        default_backend mariadb_galera
+
+backend mariadb_galera
+        balance leastconn
+        mode tcp
+        option tcpka
+        server mariadb1 172.18.111.229:3306 check weight 1
+        server mariadb2 172.18.111.230:3306 check weight 1
+        server mariadb3 172.18.111.231:3306 check weight 1
+        server mariadb4 172.18.111.232:3306 check weight 1
+```
