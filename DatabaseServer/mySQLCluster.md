@@ -222,28 +222,28 @@ id=24   @172.18.111.232  (mysql-5.7.22 ndb-7.6.6)
 ```
 OLTP test statistics:
     queries performed:
-        read:                            2474822
+        read:                            122822
         write:                           0
-        other:                           353546
-        total:                           2828368
-    transactions:                        176773 (2946.16 per sec.)
+        other:                           17546
+        total:                           140368
+    transactions:                        8773   (146.18 per sec.)
     deadlocks:                           0      (0.00 per sec.)
-    read/write requests:                 2474822 (41246.17 per sec.)
-    other operations:                    353546 (5892.31 per sec.)
+    read/write requests:                 122822 (2046.51 per sec.)
+    other operations:                    17546  (292.36 per sec.)
 
 Test execution summary:
-    total time:                          60.0013s
-    total number of events:              176773
-    total time taken by event execution: 239.5257
+    total time:                          60.0154s
+    total number of events:              8773
+    total time taken by event execution: 239.9738
     per-request statistics:
-         min:                                  0.82ms
-         avg:                                  1.35ms
-         max:                                  4.39ms
-         approx.  95 percentile:               1.78ms
+         min:                                 19.04ms
+         avg:                                 27.35ms
+         max:                                 38.57ms
+         approx.  95 percentile:              30.66ms
 
 Threads fairness:
-    events (avg/stddev):           44193.2500/378.27
-    execution time (avg/stddev):   59.8814/0.00
+    events (avg/stddev):           2193.2500/2.68
+    execution time (avg/stddev):   59.9934/0.00
 ```
 > Using HAProxy to Load Banlancer
 ```
