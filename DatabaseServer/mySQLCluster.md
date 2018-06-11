@@ -212,11 +212,11 @@ id=24   @172.18.111.232  (mysql-5.7.22 ndb-7.6.6)
 > BenchMask With sysbench
 - [x] Preparing Data
 ```
-# sysbench --test=oltp --oltp-table-size=1000000 --db-driver=mysql --mysql-port=3306 --mysql-socket=/tmp/mysql.sock --mysql-table-engine=ndbcluster --mysql-db=dbtest --mysql-user=root --mysql-password=1qa2ws3ed prepare
+# sysbench --test=oltp --oltp-table-size=1000000 --db-driver=mysql --mysql-port=3306 --mysql-socket=/tmp/mysql.sock --mysql-table-engine=ndbcluster --mysql-ssl=no --mysql-db=dbtest --mysql-user=root --mysql-password=1qa2ws3ed prepare
 ```
 - [x] Runing Test
 ```
-# sysbench --test=oltp --oltp-table-size=1000000 --db-driver=mysql --mysql-port=3306 --mysql-socket=/tmp/mysql.sock --mysql-ssl=no --mysql-db=dbtest --mysql-user=root --mysql-password=1qa2ws3ed --max-time=60 --oltp-read-only=on --max-requests=0 --num-threads=4 run
+# sysbench --test=oltp --oltp-table-size=1000000 --db-driver=mysql --mysql-port=3306 --mysql-socket=/tmp/mysql.sock --mysql-table-engine=ndbcluster --mysql-ssl=no --mysql-db=dbtest --mysql-user=root --mysql-password=1qa2ws3ed --max-time=60 --oltp-read-only=on --max-requests=0 --num-threads=4 run
 ```
 - [x] The Result
 ```
