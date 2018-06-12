@@ -215,6 +215,7 @@ slow_query_log = 1
 slow_query_log_file=/var/log/log-slow-queries.log
 log_queries_not_using_indexes
 long_query_time = 10
+open_files_limit = 100000
 ```
 >Step # 4.2 initialize database for mysql Service (4 node)
 ```
