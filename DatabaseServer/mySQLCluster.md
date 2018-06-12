@@ -43,18 +43,57 @@ NodeId=2
 hostname=172.18.111.222
 
 [ndbd default]
+
 NoOfReplicas=2
+# Using 2 replicas is recommended to guarantee availability of data; 
+# using only 1 replica does not provide any redundancy, which means 
+# that the failure of a single data node causes the entire cluster to 
+# shut down. We do not recommend using more than 2 replicas, since 2 is 
+# sufficient to provide high availability, and we do not currently test 
+# with greater values for this parameter.
+
 DataDir=/usr/local/mysql/cluster-data
 BackupDataDir=/usr/local/mysql/cluster-data/BACKUP
 
+LockPagesInMainMemory=1
+# On Linux and Solaris systems, setting this parameter locks data node
+# processes into memory. Doing so prevents them from swapping to disk,
+# which can severely degrade cluster performance.
+
 DataMemory=1500M
+IndexMemory=384M
+
 MaxNoOfConcurrentOperations=200000
 MaxNoOfLocalOperations=220000
 
 MaxNoOfTables=1024
+MaxNofOfOrderedIndexes=256
 MaxNoOfAttributes=50000
 MaxNoOfOrderedIndexes=10000
 LcpScanProgressTimeout=300
+
+SchedulerSpinTimer=400
+SchedulerExecutionTimer=100
+RealTimeScheduler=1
+# Setting these parameters allows you to take advantage of real-time scheduling
+# of NDBCLUSTER threads to get higher throughput.
+
+TimeBetweenGlobalCheckpoints=1000
+TimeBetweenEpochs=200
+DiskCheckpointSpeed=10M
+DiskCheckpointSpeedInRestart=100M
+RedoBuffer=32M
+
+# CompressedLCP=1
+# CompressedBackup=1
+# Enabling CompressedLCP and CompressedBackup causes, respectively, local
+# checkpoint files and backup files to be compressed, which can result in a space
+# savings of up to 50% over noncompressed LCPs and backups.
+
+LockExecuteThreadToCPU=1
+LockMaintThreadsToCPU=0
+# On systems with multiple CPUs, these parameters can be used to lock NDBCLUSTER
+# threads to specific CPUs
 
 [ndbd]
 NodeId=11
