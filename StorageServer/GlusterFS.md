@@ -25,11 +25,22 @@ Terminology
 
 ```
 root@nodeX:~# apt-get install software-properties-common
-root@nodeX:~# add-apt-repository ppa:gluster/glusterfs-3.8
+
+#In Ubuntu 16.04 LTS
+root@nodeX:~# add-apt-repository ppa:gluster/glusterfs-3.13
+#In Ubuntu 18.04 LTS
+root@nodeX:~# add-apt-repository ppa:gluster/glusterfs-4.1
+
 root@nodeX:~# apt-get update
 root@nodeX:~# apt-get -y install glusterfs-server
+
+#In Ubuntu 16.04 LTS
 root@nodeX:~# service glusterfs-server start
-root@nodeX:~# systemctl enable glusterfs-server 
+root@nodeX:~# systemctl enable glusterfs-server
+
+#In Ubuntu 18.04 LTS
+root@nodeX:~# service glusterd start
+root@nodeX:~# systemctl enable glusterd
 ```
 > Probe Nodes to Cluster
 ```
