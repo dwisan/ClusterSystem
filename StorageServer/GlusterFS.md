@@ -58,7 +58,7 @@ root@node01:~# gluster peer probe node04
 - [x] Data loss protection is provided by the underlying hardware (no protection from gluster )
 - [x] Best for scaling size of the volume
 
-![alt tag](http://url/to/img.png)
+![ScreenShot](https://cloud.githubusercontent.com/assets/10970993/7412364/ac0a300c-ef5f-11e4-8599-e7d06de1165c.png)
 ```
 # Create brick Directory for distributed volume
 root@node01:~# mkdir /glusterfs/distributed
