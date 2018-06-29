@@ -16,10 +16,18 @@ Terminology
 >Network Setting
   ##### Add hosts to /etc/hosts on all Nodes
   ```
-  192.168.0.1 node01
-  192.168.0.2 node02
-  192.168.0.3 node03
-  192.168.0.4 node04
+  172.18.111.301 node01
+  172.18.111.302 node02
+  172.18.111.303 node03
+  172.18.111.304 node04
+  172.18.111.305 node05
+  172.18.111.306 node06
+  172.18.111.307 node07
+  172.18.111.308 node08
+  172.18.111.309 node09
+  172.18.111.310 node10
+  172.18.111.311 node11
+  172.18.111.312 node12
   ```
 >Install GlusterFS Server on all Nodes. 
 
