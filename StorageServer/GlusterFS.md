@@ -81,6 +81,8 @@ root@node01:~# gluster volume start vol_distributed
 - [x] Useful where availability is the priority
 - [x] Useful where redundancy is the priority
 - [x] Number of bricks should be equal to number of replicas. 
+
+![ScreenShot](https://cloud.githubusercontent.com/assets/10970993/7412379/d75272a6-ef5f-11e4-869a-c355e8505747.png)
 ```
 # Create brick Directory for Replicated volume
 root@node01:~# mkdir /glusterfs/replica 
@@ -102,6 +104,8 @@ root@node01:~# gluster volume start vol_replica
 * Summery of Distributed Replicated Volume
 - [x] Data is distributed across replicated sets
 - [x] Good redundancy and good scaling
+
+![ScreenShot](https://cloud.githubusercontent.com/assets/10970993/7412402/23a17eae-ef60-11e4-8813-a40a2384c5c2.png)
 ```
 # Create brick Directory for Distributed + Replicated volume
 root@node01:~# mkdir /glusterfs/dist-replica
@@ -126,6 +130,8 @@ root@node01:~# gluster volume start vol_dist-replica
 - [x] disaster in one brick can cause data loss
 - [x] number of stripe must be equal to number of bricks
 - [x] provides added performance if large number of clients are accessing the same volume
+
+![ScreenShot](https://cloud.githubusercontent.com/assets/10970993/7412387/f411fa56-ef5f-11e4-8e78-a0896a47625a.png)
 ```
 # Create brick Directory for Strip 
 root@node01:~# mkdir /glusterfs/striped
@@ -148,6 +154,8 @@ root@node01:~# gluster volume start vol_striped
 - [x] It stripes files across multiple bricks
 - [x] Good for performance in accessing very large files
 - [x] Brick count must always be in multiple of stripe count
+
+![ScreenShot](https://cloud.githubusercontent.com/assets/10970993/7412394/0ce267d2-ef60-11e4-9959-43465a2a25f7.png)
 ```
 # 2 Distributed volume, each have 2 brick striped 
 root@node01:~# mkdir /glusterfs/striped 
@@ -165,6 +173,8 @@ root@node01:~# gluster volume start vol_striped
 ```
 
 >GlusterFS : Distributed Replicated and Striped Glusterfs Volume Setting
+
+![ScreenShot]()
 
 ```
 # 2 Replicated volume, each have 2 brick striped
