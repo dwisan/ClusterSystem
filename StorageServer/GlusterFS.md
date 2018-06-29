@@ -14,28 +14,22 @@ Terminology
  * Volume is a logical collection of Brick.
 ```
 >Network Setting
-  ##### Add hosts to /etc/hosts on all Nodes
+  ##### add hosts to /etc/hosts with all Nodes
   ```
   172.18.111.301 node01
   172.18.111.302 node02
   172.18.111.303 node03
   172.18.111.304 node04
-  172.18.111.305 node05
-  172.18.111.306 node06
-  172.18.111.307 node07
-  172.18.111.308 node08
-  172.18.111.309 node09
-  172.18.111.310 node10
-  172.18.111.311 node11
-  172.18.111.312 node12
   ```
->Install GlusterFS Server on all Nodes. 
+>Install GlusterFS Server
 
 ```
+
 root@nodeX:~# apt-get install software-properties-common
 
 #In Ubuntu 16.04 LTS
 root@nodeX:~# add-apt-repository ppa:gluster/glusterfs-3.13
+
 #In Ubuntu 18.04 LTS
 root@nodeX:~# add-apt-repository ppa:gluster/glusterfs-4.1
 
@@ -50,7 +44,7 @@ root@nodeX:~# systemctl enable glusterfs-server
 root@nodeX:~# service glusterd start
 root@nodeX:~# systemctl enable glusterd
 ```
-> Probe Nodes to Cluster
+> Probe Nodes to Cluster, 
 ```
 root@node01:~# gluster peer probe node01
 root@node01:~# gluster peer probe node02
@@ -63,19 +57,23 @@ root@node01:~# gluster peer probe node04
 - [x] There is no redundancy
 - [x] Data loss protection is provided by the underlying hardware (no protection from gluster )
 - [x] Best for scaling size of the volume
+
+![alt tag](http://url/to/img.png)
 ```
-# 4 Brick distributed
+# Create brick Directory for distributed volume
 root@node01:~# mkdir /glusterfs/distributed
 root@node02:~# mkdir /glusterfs/distributed
 root@node03:~# mkdir /glusterfs/distributed
 root@node04:~# mkdir /glusterfs/distributed
 
+# Create distributed volume 
 root@node01:~# gluster volume create vol_distributed transport tcp \
 node01:/glusterfs/distributed \
 node02:/glusterfs/distributed \
 node03:/glusterfs/distributed \
-node04:/glusterfs/distributed 
+node04:/glusterfs/distributed force
 
+# Start Volume
 root@node01:~# gluster volume start vol_distributed 
 ```
 >GlusterFS : Replicated Glusterfs Volume Setting
@@ -84,18 +82,20 @@ root@node01:~# gluster volume start vol_distributed
 - [x] Useful where redundancy is the priority
 - [x] Number of bricks should be equal to number of replicas. 
 ```
-# 4 Brick replicated
+# Create brick Directory for Replicated volume
 root@node01:~# mkdir /glusterfs/replica 
 root@node02:~# mkdir /glusterfs/replica 
 root@node03:~# mkdir /glusterfs/replica 
 root@node04:~# mkdir /glusterfs/replica 
 
+# Create Replicated volume 
 root@node01:~# gluster volume create vol_replica replica 4 transport tcp \
 node01:/glusterfs/replica \
 node02:/glusterfs/replica \
 node03:/glusterfs/replica \
-node04:/glusterfs/replica 
+node04:/glusterfs/replica force
 
+# Start volume
 root@node01:~# gluster volume start vol_replica 
 ```
 >GlusterFS : Distributed + Replicated Glusterfs Volume
@@ -103,18 +103,21 @@ root@node01:~# gluster volume start vol_replica
 - [x] Data is distributed across replicated sets
 - [x] Good redundancy and good scaling
 ```
-# 2 Distributed volume, each have 2 brick replicated 
+# Create brick Directory for Distributed + Replicated volume
 root@node01:~# mkdir /glusterfs/dist-replica
 root@node02:~# mkdir /glusterfs/dist-replica
 root@node03:~# mkdir /glusterfs/dist-replica
 root@node04:~# mkdir /glusterfs/dist-replica
 
+# Create Distributed + Replicated volume 
+# [2 bricks in a Replicated group and Distributed belong to Replicated groups]
 root@node01:~# gluster volume create vol_dist-replica replica 2 transport tcp \
 node01:/glusterfs/dist-replica \
 node02:/glusterfs/dist-replica \
 node03:/glusterfs/dist-replica \
-node04:/glusterfs/dist-replica 
+node04:/glusterfs/dist-replica force
 
+# Start volume
 root@node01:~# gluster volume start vol_dist-replica 
 ```
 >GlusterFS : Striped Glusterfs Volume Setting
@@ -124,18 +127,20 @@ root@node01:~# gluster volume start vol_dist-replica
 - [x] number of stripe must be equal to number of bricks
 - [x] provides added performance if large number of clients are accessing the same volume
 ```
-# Strip a file to 4 brick
+# Create brick Directory for Strip 
 root@node01:~# mkdir /glusterfs/striped
 root@node02:~# mkdir /glusterfs/striped 
 root@node03:~# mkdir /glusterfs/striped 
 root@node04:~# mkdir /glusterfs/striped 
 
+# Create volume for Strip a file to 4 brick
 root@node01:~# gluster volume create vol_striped stripe 4 transport tcp \
 node01:/glusterfs/striped \
 node02:/glusterfs/striped \
 node03:/glusterfs/striped \
-node04:/glusterfs/striped 
+node04:/glusterfs/striped force
 
+#Start Volume
 root@node01:~# gluster volume start vol_striped 
 ```
 >GlusterFS : Distributed Striped Glusterfs Volume Setting
