@@ -101,7 +101,7 @@ node04:/glusterfs/replica force
 root@node01:~# gluster volume start vol_replica 
 ```
 >GlusterFS : Distributed + Replicated Glusterfs Volume
-* Summery of Distributed Replicated Volume
+* Summary of Distributed Replicated Volume
 - [x] Data is distributed across replicated sets
 - [x] Good redundancy and good scaling
 
@@ -125,7 +125,7 @@ node04:/glusterfs/dist-replica force
 root@node01:~# gluster volume start vol_dist-replica 
 ```
 >GlusterFS : Striped Glusterfs Volume Setting
-* Summery of Striped Replicated Volume
+* Summary of Striped Replicated Volume
 - [x] Striped volume does not provide redundancy
 - [x] disaster in one brick can cause data loss
 - [x] number of stripe must be equal to number of bricks
@@ -150,7 +150,7 @@ node04:/glusterfs/striped force
 root@node01:~# gluster volume start vol_striped 
 ```
 >GlusterFS : Distributed Striped Glusterfs Volume Setting
-* Summery of Striped Replicated Volume
+* Summary of Striped Replicated Volume
 - [x] It stripes files across multiple bricks
 - [x] Good for performance in accessing very large files
 - [x] Brick count must always be in multiple of stripe count
