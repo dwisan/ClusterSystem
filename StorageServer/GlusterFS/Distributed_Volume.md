@@ -153,7 +153,7 @@ root@node01:~# gluster volume rebalance vol_distributed fix-layout start
 ```
 root@client:~# apt install glusterfs-client attr
 root@client:~# mkdir /glusterfs
-root@client:~# mount -t glusterfs node01:/vol_strip-replica /glusterfs
+root@client:~# mount -t glusterfs node01:/vol_distributed /glusterfs
 ```
 - [x] NFS mount
 ```
