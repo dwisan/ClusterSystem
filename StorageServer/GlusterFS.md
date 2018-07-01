@@ -305,7 +305,46 @@ node03:/glusterfs/replica \
 node04:/glusterfs/replica force
 
 # Start volume
-root@node01:~# gluster volume start vol_replica 
+root@node01:~# gluster volume start vol_replica
+
+# Checking volume info
+root@node01:~# gluster volume info vol_replica
+
+Volume Name: vol_replica
+Type: Replicate
+Volume ID: 47c18f5b-dc69-4e7d-8beb-5494decf025c
+Status: Started
+Snapshot Count: 0
+Number of Bricks: 1 x 4 = 4
+Transport-type: tcp
+Bricks:
+Brick1: node01:/glusterfs/replica
+Brick2: node02:/glusterfs/replica
+Brick3: node03:/glusterfs/replica
+Brick4: node04:/glusterfs/replica
+Options Reconfigured:
+transport.address-family: inet
+nfs.disable: on
+performance.client-io-threads: off
+
+# Checking volume status
+root@node01:~# gluster volume status vol_replica
+
+Status of volume: vol_replica
+Gluster process                             TCP Port  RDMA Port  Online  Pid
+------------------------------------------------------------------------------
+Brick node01:/glusterfs/replica             49153     0          Y       8065 
+Brick node02:/glusterfs/replica             49153     0          Y       7950 
+Brick node03:/glusterfs/replica             49153     0          Y       7890 
+Brick node04:/glusterfs/replica             49153     0          Y       7876 
+Self-heal Daemon on localhost               N/A       N/A        Y       8088 
+Self-heal Daemon on node02                  N/A       N/A        Y       7974 
+Self-heal Daemon on node03                  N/A       N/A        Y       7914 
+Self-heal Daemon on node04                  N/A       N/A        Y       7900 
+ 
+Task Status of Volume vol_replica
+------------------------------------------------------------------------------
+There are no active volume tasks
 ```
 >GlusterFS : Distributed + Replicated Glusterfs Volume
 * Summary of Distributed Replicated Volume
@@ -329,7 +368,46 @@ node03:/glusterfs/dist-replica \
 node04:/glusterfs/dist-replica force
 
 # Start volume
-root@node01:~# gluster volume start vol_dist-replica 
+root@node01:~# gluster volume start vol_dist-replica
+
+# Checking volume info
+root@node01:~# gluster volume info vol_dist-replica
+
+Volume Name: vol_dist-replica
+Type: Distributed-Replicate
+Volume ID: 6d732794-2cc8-4b04-8f97-4d7d48afe2d7
+Status: Started
+Snapshot Count: 0
+Number of Bricks: 2 x 2 = 4
+Transport-type: tcp
+Bricks:
+Brick1: node01:/glusterfs/dist-replica
+Brick2: node02:/glusterfs/dist-replica
+Brick3: node03:/glusterfs/dist-replica
+Brick4: node04:/glusterfs/dist-replica
+Options Reconfigured:
+transport.address-family: inet
+nfs.disable: on
+performance.client-io-threads: off
+
+# Checking volume status
+root@node01:~# gluster volume status vol_dist-replica
+
+Status of volume: vol_dist-replica
+Gluster process                             TCP Port  RDMA Port  Online  Pid
+------------------------------------------------------------------------------
+Brick node01:/glusterfs/dist-replica        49154     0          Y       8196 
+Brick node02:/glusterfs/dist-replica        49154     0          Y       8056 
+Brick node03:/glusterfs/dist-replica        49154     0          Y       7995 
+Brick node04:/glusterfs/dist-replica        49154     0          Y       7984 
+Self-heal Daemon on localhost               N/A       N/A        Y       8219 
+Self-heal Daemon on node03                  N/A       N/A        Y       8018 
+Self-heal Daemon on node02                  N/A       N/A        Y       8079 
+Self-heal Daemon on node04                  N/A       N/A        Y       8007 
+ 
+Task Status of Volume vol_dist-replica
+------------------------------------------------------------------------------
+There are no active volume tasks
 ```
 >GlusterFS : Striped Glusterfs Volume Setting
 * Summary of Striped Replicated Volume
@@ -355,6 +433,41 @@ node04:/glusterfs/striped force
 
 #Start Volume
 root@node01:~# gluster volume start vol_striped 
+
+
+# Checking volume info
+root@node01:~# gluster volume info vol_striped 
+
+Volume Name: vol_striped
+Type: Stripe
+Volume ID: 44c507d2-0501-4a46-a85b-931947b6059e
+Status: Started
+Snapshot Count: 0
+Number of Bricks: 1 x 4 = 4
+Transport-type: tcp
+Bricks:
+Brick1: node01:/glusterfs/striped
+Brick2: node02:/glusterfs/striped
+Brick3: node03:/glusterfs/striped
+Brick4: node04:/glusterfs/striped
+Options Reconfigured:
+transport.address-family: inet
+nfs.disable: on
+
+# Checking volume status
+root@node01:~# gluster volume status vol_striped
+
+Status of volume: vol_striped
+Gluster process                             TCP Port  RDMA Port  Online  Pid
+------------------------------------------------------------------------------
+Brick node01:/glusterfs/striped             49155     0          Y       8387 
+Brick node02:/glusterfs/striped             49155     0          Y       8220 
+Brick node03:/glusterfs/striped             49155     0          Y       8156 
+Brick node04:/glusterfs/striped             49155     0          Y       8147 
+ 
+Task Status of Volume vol_striped
+------------------------------------------------------------------------------
+There are no active volume tasks
 ```
 >GlusterFS : Distributed Striped Glusterfs Volume Setting
 * Summary of Striped Replicated Volume
@@ -365,18 +478,52 @@ root@node01:~# gluster volume start vol_striped
 ![ScreenShot](https://cloud.githubusercontent.com/assets/10970993/7412394/0ce267d2-ef60-11e4-9959-43465a2a25f7.png)
 ```
 # 2 Distributed volume, each have 2 brick striped 
-root@node01:~# mkdir -p /glusterfs/striped 
-root@node02:~# mkdir -p /glusterfs/striped
-root@node03:~# mkdir -p /glusterfs/striped
-root@node04:~# mkdir -p /glusterfs/striped
+root@node01:~# mkdir -p /glusterfs/diststriped 
+root@node02:~# mkdir -p /glusterfs/diststriped 
+root@node03:~# mkdir -p /glusterfs/diststriped 
+root@node04:~# mkdir -p /glusterfs/diststriped 
 
-root@node01:~# gluster volume create vol_striped stripe 2 transport tcp \
-node01:/glusterfs/striped \
-node02:/glusterfs/striped \
-node03:/glusterfs/striped \
-node04:/glusterfs/striped 
+root@node01:~# gluster volume create vol_diststriped stripe 2 transport tcp \
+node01:/glusterfs/diststriped  \
+node02:/glusterfs/diststriped  \
+node03:/glusterfs/diststriped  \
+node04:/glusterfs/diststriped force 
 
-root@node01:~# gluster volume start vol_striped 
+root@node01:~# gluster volume start vol_diststriped 
+
+# Checking volume info
+root@node01:~# gluster volume info vol_diststriped 
+
+Volume Name: vol_diststriped
+Type: Distributed-Stripe
+Volume ID: d7cc9f2b-3feb-45a6-92e0-87fb89ffd86e
+Status: Started
+Snapshot Count: 0
+Number of Bricks: 2 x 2 = 4
+Transport-type: tcp
+Bricks:
+Brick1: node01:/glusterfs/diststriped
+Brick2: node02:/glusterfs/diststriped
+Brick3: node03:/glusterfs/diststriped
+Brick4: node04:/glusterfs/diststriped
+Options Reconfigured:
+transport.address-family: inet
+nfs.disable: on
+
+# Checking volume status
+root@node01:~# gluster volume status vol_diststriped
+
+Status of volume: vol_diststriped
+Gluster process                             TCP Port  RDMA Port  Online  Pid
+------------------------------------------------------------------------------
+Brick node01:/glusterfs/diststriped         49156     0          Y       8484 
+Brick node02:/glusterfs/diststriped         49156     0          Y       8295 
+Brick node03:/glusterfs/diststriped         49156     0          Y       8231 
+Brick node04:/glusterfs/diststriped         49156     0          Y       8221 
+ 
+Task Status of Volume vol_diststriped
+------------------------------------------------------------------------------
+There are no active volume tasks
 ```
 
 >GlusterFS : Distributed Replicated and Striped Glusterfs Volume Setting
@@ -394,9 +541,48 @@ root@node01:~# gluster volume create vol_replica-strip replica 2 strip 2 transpo
 node01:/glusterfs/replica-strip \
 node02:/glusterfs/replica-strip \
 node03:/glusterfs/replica-strip \
-node04:/glusterfs/replica-strip 
+node04:/glusterfs/replica-strip force
 
 root@node01:~# gluster volume start vol_replica-strip
+
+# Checking volume info
+root@node01:~# gluster volume info vol_replica-strip
+
+Volume Name: vol_replica-strip
+Type: Striped-Replicate
+Volume ID: 0a3458bc-a345-42a0-b57a-4c34a93cd4af
+Status: Started
+Snapshot Count: 0
+Number of Bricks: 1 x 2 x 2 = 4
+Transport-type: tcp
+Bricks:
+Brick1: node01:/glusterfs/replica-strip
+Brick2: node02:/glusterfs/replica-strip
+Brick3: node03:/glusterfs/replica-strip
+Brick4: node04:/glusterfs/replica-strip
+Options Reconfigured:
+transport.address-family: inet
+nfs.disable: on
+performance.client-io-threads: off
+
+# Checking volume status
+root@node01:~# gluster volume status vol_replica-strip
+
+Status of volume: vol_replica-strip
+Gluster process                             TCP Port  RDMA Port  Online  Pid
+------------------------------------------------------------------------------
+Brick node01:/glusterfs/replica-strip       49157     0          Y       8588 
+Brick node02:/glusterfs/replica-strip       49157     0          Y       8378 
+Brick node03:/glusterfs/replica-strip       49157     0          Y       8315 
+Brick node04:/glusterfs/replica-strip       49157     0          Y       8305 
+Self-heal Daemon on localhost               N/A       N/A        Y       8614 
+Self-heal Daemon on node03                  N/A       N/A        Y       8339 
+Self-heal Daemon on node04                  N/A       N/A        Y       8329 
+Self-heal Daemon on node02                  N/A       N/A        Y       8402 
+ 
+Task Status of Volume vol_replica-strip
+------------------------------------------------------------------------------
+There are no active volume tasks
 ```
 >Expanding a gluster volume
 ```
