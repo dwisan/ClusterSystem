@@ -127,6 +127,9 @@ transport.address-family: inet
 nfs.disable: on
 
 root@node01:~# gluster volume rebalance vol_distributed start
+root@node01:~# gluster volume rebalance vol_distributed status
+
+waiting status to completed
 root@node01:~# gluster volume rebalance vol_distributed fix-layout start
 ```
 >shrink a gluster volume
