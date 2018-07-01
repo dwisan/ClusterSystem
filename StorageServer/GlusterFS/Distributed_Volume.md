@@ -56,3 +56,19 @@ Task Status of Volume vol_distributed
 ------------------------------------------------------------------------------
 There are no active volume tasks
 ```
+>Expanding a gluster volume
+```
+# add brick with associated of volume type
+gluster volume add-brick {volume} {server:/brick}
+gluster volume rebalance {volume} start
+gluster volume rebalance {volume} fix-layout start
+gluster volume rebalence {volume} migrate data start
+```
+>shrink a gluster volume
+```
+# remnove brick with associated of volume type
+gluster volume remove-brick {volume} {server:/brick}
+gluster volume rebalance {volume} start
+gluster volume rebalance {volume} fix-layout start
+gluster volume rebalence {volume} migrate data start
+```
