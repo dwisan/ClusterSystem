@@ -235,10 +235,10 @@ e2e55fba-fc46-4ed1-9655-b1b1a0b3e439    localhost       Connected
 ![ScreenShot](https://cloud.githubusercontent.com/assets/10970993/7412364/ac0a300c-ef5f-11e4-8599-e7d06de1165c.png)
 ```
 # Create brick Directory for distributed volume
-root@node01:~# mkdir /glusterfs/distributed
-root@node02:~# mkdir /glusterfs/distributed
-root@node03:~# mkdir /glusterfs/distributed
-root@node04:~# mkdir /glusterfs/distributed
+root@node01:~# mkdir -p /glusterfs/distributed
+root@node02:~# mkdir -p /glusterfs/distributed
+root@node03:~# mkdir -p /glusterfs/distributed
+root@node04:~# mkdir -p /glusterfs/distributed
 
 # Create distributed volume 
 root@node01:~# gluster volume create vol_distributed transport tcp \
@@ -259,10 +259,10 @@ root@node01:~# gluster volume start vol_distributed
 ![ScreenShot](https://cloud.githubusercontent.com/assets/10970993/7412379/d75272a6-ef5f-11e4-869a-c355e8505747.png)
 ```
 # Create brick Directory for Replicated volume
-root@node01:~# mkdir /glusterfs/replica 
-root@node02:~# mkdir /glusterfs/replica 
-root@node03:~# mkdir /glusterfs/replica 
-root@node04:~# mkdir /glusterfs/replica 
+root@node01:~# mkdir -p /glusterfs/replica 
+root@node02:~# mkdir -p /glusterfs/replica 
+root@node03:~# mkdir -p /glusterfs/replica 
+root@node04:~# mkdir -p /glusterfs/replica 
 
 # Create Replicated volume 
 root@node01:~# gluster volume create vol_replica replica 4 transport tcp \
@@ -282,10 +282,10 @@ root@node01:~# gluster volume start vol_replica
 ![ScreenShot](https://cloud.githubusercontent.com/assets/10970993/7412402/23a17eae-ef60-11e4-8813-a40a2384c5c2.png)
 ```
 # Create brick Directory for Distributed + Replicated volume
-root@node01:~# mkdir /glusterfs/dist-replica
-root@node02:~# mkdir /glusterfs/dist-replica
-root@node03:~# mkdir /glusterfs/dist-replica
-root@node04:~# mkdir /glusterfs/dist-replica
+root@node01:~# mkdir -p /glusterfs/dist-replica
+root@node02:~# mkdir -p /glusterfs/dist-replica
+root@node03:~# mkdir -p /glusterfs/dist-replica
+root@node04:~# mkdir -p /glusterfs/dist-replica
 
 # Create Distributed + Replicated volume 
 # [2 bricks in a Replicated group and Distributed belong to Replicated groups]
@@ -308,10 +308,10 @@ root@node01:~# gluster volume start vol_dist-replica
 ![ScreenShot](https://cloud.githubusercontent.com/assets/10970993/7412387/f411fa56-ef5f-11e4-8e78-a0896a47625a.png)
 ```
 # Create brick Directory for Strip 
-root@node01:~# mkdir /glusterfs/striped
-root@node02:~# mkdir /glusterfs/striped 
-root@node03:~# mkdir /glusterfs/striped 
-root@node04:~# mkdir /glusterfs/striped 
+root@node01:~# mkdir -p /glusterfs/striped
+root@node02:~# mkdir -p /glusterfs/striped 
+root@node03:~# mkdir -p /glusterfs/striped 
+root@node04:~# mkdir -p /glusterfs/striped 
 
 # Create volume for Strip a file to 4 brick
 root@node01:~# gluster volume create vol_striped stripe 4 transport tcp \
@@ -332,10 +332,10 @@ root@node01:~# gluster volume start vol_striped
 ![ScreenShot](https://cloud.githubusercontent.com/assets/10970993/7412394/0ce267d2-ef60-11e4-9959-43465a2a25f7.png)
 ```
 # 2 Distributed volume, each have 2 brick striped 
-root@node01:~# mkdir /glusterfs/striped 
-root@node02:~# mkdir /glusterfs/striped
-root@node03:~# mkdir /glusterfs/striped
-root@node04:~# mkdir /glusterfs/striped
+root@node01:~# mkdir -p /glusterfs/striped 
+root@node02:~# mkdir -p /glusterfs/striped
+root@node03:~# mkdir -p /glusterfs/striped
+root@node04:~# mkdir -p /glusterfs/striped
 
 root@node01:~# gluster volume create vol_striped stripe 2 transport tcp \
 node01:/glusterfs/striped \
@@ -352,10 +352,10 @@ root@node01:~# gluster volume start vol_striped
 
 ```
 # 2 Replicated volume, each have 2 brick striped
-root@node01:~# mkdir /glusterfs/replica-strip
-root@node02:~# mkdir /glusterfs/replica-strip 
-root@node03:~# mkdir /glusterfs/replica-strip 
-root@node04:~# mkdir /glusterfs/replica-strip
+root@node01:~# mkdir -p /glusterfs/replica-strip
+root@node02:~# mkdir -p /glusterfs/replica-strip 
+root@node03:~# mkdir -p /glusterfs/replica-strip 
+root@node04:~# mkdir -p /glusterfs/replica-strip
 
 root@node01:~# gluster volume create vol_replica-strip replica 2 strip 2 transport tcp \
 node01:/glusterfs/replica-strip \
