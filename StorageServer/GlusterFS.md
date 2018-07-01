@@ -13,8 +13,154 @@ Terminology
  * Brick is th basic unit of storage, represented by directory on server disk.
  * Volume is a logical collection of Brick.
 ```
+>การตั้งค่าระบบเครือข่ายของแต่ละโหนดที่ใช้งาน
+```
+root@node01:~# nano /etc/hostname
+node01
+root@node02:~# nano /etc/hostname
+node02
+root@node03:~# nano /etc/hostname
+node03
+root@node04:~# nano /etc/hostname
+node04
+
+#
+#In Ubuntu 16.04 LTS
+#
+
+* * * Node01 * * *
+root@node01:~# nano /etc/network/interface
+
+auto enp2s0 
+iface enp2s0 inet static
+        address 172.18.111.101
+        netmask 255.255.255.0
+        network 172.18.111.0
+        gateway 172.18.111.1
+        dns-nameservers 172.18.111.2,172.18.111.3
+
+root@node01:~# reboot
+
+* * * Node02 * * *
+root@node02:~# nano /etc/network/interface
+
+auto enp2s0 
+iface enp2s0 inet static
+        address 172.18.111.102
+        netmask 255.255.255.0
+        network 172.18.111.0
+        gateway 172.18.111.1
+        dns-nameservers 172.18.111.2,172.18.111.3
+
+root@node02:~# reboot
+
+* * * Node03 * * *
+root@node03:~# nano /etc/network/interface
+
+auto enp2s0 
+iface enp2s0 inet static
+        address 172.18.111.103
+        netmask 255.255.255.0
+        network 172.18.111.0
+        gateway 172.18.111.1
+        dns-nameservers 172.18.111.2,172.18.111.3
+
+root@node03:~# reboot
+
+* * * Node04 * * *
+root@node04:~# nano /etc/network/interface
+
+auto enp2s0 
+iface enp2s0 inet static
+        address 172.18.111.104
+        netmask 255.255.255.0
+        network 172.18.111.0
+        gateway 172.18.111.1
+        dns-nameservers 172.18.111.2,172.18.111.3
+
+root@node04:~# reboot
+
+#
+#In Ubuntu 18.04 LTS
+#
+
+* * * Node01 * * *
+root@node01:~# nano /etc/netplan/01-netcfg.yaml
+
+network:
+ version: 2
+ renderer: networkd
+ ethernets:
+  enp2s0:
+    dhcp4: no
+    dhcp6: no
+    addresses: [172.18.111.101/24]
+    gateway4: 172.18.111.1
+    nameservers:
+      addresses: [172.18.111.2,172.18.111.3]
+
+root@node01:~# netplan apply
+
+* * * Node02 * * *
+root@node01:~# nano /etc/netplan/01-netcfg.yaml
+
+network:
+ version: 2
+ renderer: networkd
+ ethernets:
+  enp2s0:
+    dhcp4: no
+    dhcp6: no
+    addresses: [172.18.111.102/24]
+    gateway4: 172.18.111.1
+    nameservers:
+      addresses: [172.18.111.2,172.18.111.3]
+
+root@node02:~# netplan apply
+
+* * * Node03 * * *
+root@node03:~# nano /etc/netplan/01-netcfg.yaml
+
+network:
+ version: 2
+ renderer: networkd
+ ethernets:
+  enp2s0:
+    dhcp4: no
+    dhcp6: no
+    addresses: [172.18.111.103/24]
+    gateway4: 172.18.111.1
+    nameservers:
+      addresses: [172.18.111.2,172.18.111.3]
+
+root@node03:~# netplan apply
+
+* * * Node04 * * *
+root@node04:~# nano /etc/netplan/01-netcfg.yaml
+
+network:
+ version: 2
+ renderer: networkd
+ ethernets:
+  enp2s0:
+    dhcp4: no
+    dhcp6: no
+    addresses: [172.18.111.104/24]
+    gateway4: 172.18.111.1
+    nameservers:
+      addresses: [172.18.111.2,172.18.111.3]
+
+root@node01:~# netplan apply
+
+```
+>อัพเดทระบบปฏิบัติการและซอฟต์แวร์บนโหนดทุกโหนด
+ ```
+ #apt update && apt upgrade -y
+ ```
 >ระบุโหนด ทุกโหนดที่ใช้งาน ลงใน /etc/hosts 
   ```
+  127.0.0.1       localhost
+  127.0.1.1       nodeXX
   172.18.111.101 node01
   172.18.111.102 node02
   172.18.111.103 node03
@@ -23,7 +169,6 @@ Terminology
 >ติดตั้งซอฟต์แวร์ Gluster Server บนทุกโหนดที่ใช้งาน
 
 ```
-
 root@nodeX:~# apt-get install software-properties-common
 
 #In Ubuntu 16.04 LTS
