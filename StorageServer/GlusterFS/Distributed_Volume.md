@@ -57,13 +57,37 @@ Task Status of Volume vol_distributed
 There are no active volume tasks
 ```
 >Expanding a gluster volume
-- [x] Preparing for new hosts 
+- [x] Preparing for new hosts
 ```
-# add brick with associated of volume type
-gluster volume add-brick {volume} {server:/brick}
-gluster volume rebalance {volume} start
-gluster volume rebalance {volume} fix-layout start
-gluster volume rebalence {volume} migrate data start
+root@node05:~# nano /etc/hostname
+node05
+
+root@node05:~# nano /etc/hosts
+
+127.0.0.1       localhost
+127.0.1.1       node05
+
+172.18.111.101  node01
+172.18.111.102  node02
+172.18.111.103  node03
+172.18.111.104  node04
+172.18.111.105  node05
+
+root@node01-root@node04~# nano /etc/hosts
+....
+172.18.111.105  node05
+
+```
+- [x] Probe new Node
+```
+root@node01:~# gluster probe  node05
+```
+- [x] add brick with associated of volume type
+```
+root@node01:~# gluster volume add-brick {volume} {server:/brick}
+root@node01:~# gluster volume rebalance {volume} start
+root@node01:~# gluster volume rebalance {volume} fix-layout start
+root@node01:~# gluster volume rebalence {volume} migrate data start
 ```
 >shrink a gluster volume
 ```
