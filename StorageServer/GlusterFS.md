@@ -191,9 +191,39 @@ root@nodeX:~# systemctl enable glusterd
 > Probe Nodes to Cluster, 
 ```
 root@node01:~# gluster peer probe node01
+peer probe: success. Probe on localhost not needed
 root@node01:~# gluster peer probe node02
+peer probe: success.
 root@node01:~# gluster peer probe node03
+peer probe: success.
 root@node01:~# gluster peer probe node04
+peer probe: success.
+```
+>Checking peer status
+```
+root@node01:~# gluster peer status
+
+Hostname: node02
+Uuid: 3cdaacc7-cbdb-4209-8ff2-cafe6e4536e3
+State: Peer in Cluster (Connected)
+
+Hostname: node03
+Uuid: e30be633-376f-45e3-8eea-ab88acec98a4
+State: Peer in Cluster (Connected)
+
+Hostname: node04
+Uuid: ea1d45e3-bd82-4ec4-b6fa-830640b8170b
+State: Peer in Cluster (Connected)
+```
+>Checking pool list
+```
+root@node01:~# gluster pool list
+UUID                                    Hostname        State
+3cdaacc7-cbdb-4209-8ff2-cafe6e4536e3    node02          Connected 
+e30be633-376f-45e3-8eea-ab88acec98a4    node03          Connected 
+ea1d45e3-bd82-4ec4-b6fa-830640b8170b    node04          Connected 
+e2e55fba-fc46-4ed1-9655-b1b1a0b3e439    localhost       Connected 
+
 ```
 >GlusterFS : Distributed Glusterfs Volume Setting
 * Summary of distributed Volume are mentioned below
