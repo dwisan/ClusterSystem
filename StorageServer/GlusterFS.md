@@ -21,7 +21,7 @@ Terminology
   172.18.111.103 node03
   172.18.111.104 node04
   ```
->Install GlusterFS Server
+>Installing GlusterFS Server (All Nodes)
 
 ```
 
