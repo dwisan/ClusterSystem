@@ -77,3 +77,26 @@ gluster volume rebalance {volume} start
 gluster volume rebalance {volume} fix-layout start
 gluster volume rebalence {volume} migrate data start
 ```
+
+>GlusterFS : Clients' Settings
+
+- [x] GlusterFS Native
+```
+root@client:~# apt install glusterfs-client attr
+root@client:~# mkdir /glusterfs
+root@client:~# mount -t glusterfs node01:/vol_strip-replica /glusterfs
+```
+- [x] NFS mount
+```
+root@client:~# apt-get -y install nfs-common 
+root@client:~# systemctl enable rpcbind 
+root@client:~# service rpcbind start
+root@client:~# mount -t nfs -o vers=3,mountproto=tcp node01:/vol_strip-replica /glusterfs
+```
+- [x] Automatically Mounting Volumes
+```
+root@client:~# nano /etc/fstab
+
+node01:/cluster1_volume /glusterfs glusterfs defaults,_netdev 0 0
+
+```
