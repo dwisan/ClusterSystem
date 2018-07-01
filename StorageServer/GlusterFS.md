@@ -13,8 +13,7 @@ Terminology
  * Brick is th basic unit of storage, represented by directory on server disk.
  * Volume is a logical collection of Brick.
 ```
->การตั้งค่าเครือข่าย
-  ##### ระบุโหนด ทุกโหนดที่ใช้งานลงใน /etc/hosts 
+>ระบุโหนด ทุกโหนดที่ใช้งาน ลงใน /etc/hosts 
   ```
   172.18.111.101 node01
   172.18.111.102 node02
