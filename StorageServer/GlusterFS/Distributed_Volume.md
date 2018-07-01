@@ -57,6 +57,7 @@ Task Status of Volume vol_distributed
 There are no active volume tasks
 ```
 >Expanding a gluster volume
+- [x] Preparing for new hosts 
 ```
 # add brick with associated of volume type
 gluster volume add-brick {volume} {server:/brick}
