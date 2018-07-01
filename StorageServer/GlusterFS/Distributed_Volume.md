@@ -129,23 +129,23 @@ nfs.disable: on
 root@node01:~# gluster volume rebalance vol_distributed start
 root@node01:~# gluster volume rebalance vol_distributed status
 
-Node         Rebalanced-files   size       scanned      failures       skipped             status       run time in h:m:s
----------      -----------   -----------   -----------   -----------   -----------      ------------     --------------
-localhost         13624         7.3GB         34080             0             0          in progress        0:47:08
-node02            11370         6.1GB         30745             0             0          in progress        0:47:08
-node03            11968         6.5GB         31167             0             0          in progress        0:47:08
-node04             9478         5.0GB         30649             0             0          in progress        0:47:08
-node05                1       344.3KB          1117             0             1          in progress        0:47:08
+Node       Rebalanced-files   size  scanned  failures   skipped    status    run time in h:m:s
+---------    -----------   -------- -------- --------   -------  ----------   -------------
+localhost      13624         7.3GB    34080      0        0     in progress     0:47:08
+node02         11370         6.1GB    30745      0        0     in progress     0:47:08
+node03         11968         6.5GB    31167      0        0     in progress     0:47:08
+node04          9478         5.0GB    30649      0        0     in progress     0:47:08
+node05             1       344.3KB     1117      0        1     in progress     0:47:08
                                   
 waiting status to completed
 
-Node         Rebalanced-files    size       scanned      failures       skipped               status     run time in h:m:s
----------      -----------   -----------   -----------   -----------   -----------         ------------     --------------
-localhost         16468         8.8GB         41356             0             0            completed        0:53:47
-node02            12609         6.7GB         33734             0             0            completed        0:51:19
-node03            13218         7.1GB         34225             0             0            completed        0:51:15
-node04            10295         5.4GB         33632             0             0            completed        0:51:05
-node05                1       344.3KB          1160             0             1            completed        0:51:04
+Node       Rebalanced-files   size   scanned  failures   skipped   status     run time in h:m:s
+---------    -----------   --------- -------- --------   -------- ---------     --------------
+localhost     16468         8.8GB     41356      0         0       completed        0:53:47
+node02        12609         6.7GB     33734      0         0       completed        0:51:19
+node03        13218         7.1GB     34225      0         0       completed        0:51:15
+node04        10295         5.4GB     33632      0         0       completed        0:51:05
+node05            1       344.3KB      1160      0         1       completed        0:51:04
 
 root@node01:~# gluster volume rebalance vol_distributed fix-layout start
 root@node01:~# gluster volume rebalance vol_distributed status
