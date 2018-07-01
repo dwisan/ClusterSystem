@@ -132,11 +132,21 @@ root@node01:~# gluster volume rebalance vol_distributed fix-layout start
 >shrink a gluster volume
 ```
 # remnove brick with associated of volume type
-root@node01:~# gluster volume remove-brick vol_distributed node05:/glusterfs/distributed force
+root@node01:~# gluster volume remove-brick vol_distributed node05:/glusterfs/distributed start
+root@node01:~# gluster volume remove-brick vol_distributed node05:/glusterfs/distributed commit
 root@node01:~# gluster volume rebalance vol_distributed start
 root@node01:~# gluster volume rebalance vol_distributed fix-layout start
 ```
+>Replace faulty brick
+- [x] Replacing a brick in a pure distribute volume
 
+```
+
+```
+- [x] Replacing bricks in Replicate/Distributed Replicate volumes
+```
+
+```
 >GlusterFS : Clients' Settings
 
 - [x] GlusterFS Native
