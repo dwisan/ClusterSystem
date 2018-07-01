@@ -78,25 +78,63 @@ root@node01-root@node04~# nano /etc/hosts
 172.18.111.105  node05
 
 ```
+- [x] Installing Gluster Server Software
+```
+  Read in Preparing.md
+```
+- [x] Create brick 
+```
+root@node05:~# mkdir -p /glusterfs/distributed
+```
 - [x] Probe new Node
 ```
 root@node01:~# gluster peer probe node05
 peer probe: success.
 ```
+- [x] Checking new Node in Pool list
+```
+root@node01:~# gluster pool list
+
+UUID                                    Hostname        State
+3cdaacc7-cbdb-4209-8ff2-cafe6e4536e3    node02          Connected 
+e30be633-376f-45e3-8eea-ab88acec98a4    node03          Connected 
+ea1d45e3-bd82-4ec4-b6fa-830640b8170b    node04          Connected 
+661ff4cb-de70-4dd6-8aa3-792842d24a5b    node05          Connected <---
+e2e55fba-fc46-4ed1-9655-b1b1a0b3e439    localhost       Connected 
+```
 - [x] add brick with associated of volume type
 ```
-root@node01:~# gluster volume add-brick vol_distributed node01:/glusterfs/distributed
-root@node01:~# gluster volume rebalance {volume} start
-root@node01:~# gluster volume rebalance {volume} fix-layout start
-root@node01:~# gluster volume rebalence {volume} migrate data start
+root@node01:~# gluster volume add-brick vol_distributed node05:/glusterfs/distributed force
+volume add-brick: success
+
+root@node01:~# gluster volume info vol_distributed
+
+Volume Name: vol_distributed
+Type: Distribute
+Volume ID: 36dd55c6-9929-4bdf-97c0-11f4ef14616c
+Status: Started
+Snapshot Count: 0
+Number of Bricks: 5
+Transport-type: tcp
+Bricks:
+Brick1: node01:/glusterfs/distributed
+Brick2: node02:/glusterfs/distributed
+Brick3: node03:/glusterfs/distributed
+Brick4: node04:/glusterfs/distributed
+Brick5: node05:/glusterfs/distributed <---
+Options Reconfigured:
+transport.address-family: inet
+nfs.disable: on
+
+root@node01:~# gluster volume rebalance vol_distributed start
+root@node01:~# gluster volume rebalance vol_distributed fix-layout start
 ```
 >shrink a gluster volume
 ```
 # remnove brick with associated of volume type
-gluster volume remove-brick {volume} {server:/brick}
-gluster volume rebalance {volume} start
-gluster volume rebalance {volume} fix-layout start
-gluster volume rebalence {volume} migrate data start
+root@node01:~# gluster volume remove-brick vol_distributed node05:/glusterfs/distributed force
+root@node01:~# gluster volume rebalance vol_distributed start
+root@node01:~# gluster volume rebalance vol_distributed fix-layout start
 ```
 
 >GlusterFS : Clients' Settings
