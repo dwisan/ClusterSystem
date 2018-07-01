@@ -85,7 +85,7 @@ peer probe: success.
 ```
 - [x] add brick with associated of volume type
 ```
-root@node01:~# gluster volume add-brick {volume} {server:/brick}
+root@node01:~# gluster volume add-brick vol_distributed node01:/glusterfs/distributed
 root@node01:~# gluster volume rebalance {volume} start
 root@node01:~# gluster volume rebalance {volume} fix-layout start
 root@node01:~# gluster volume rebalence {volume} migrate data start
