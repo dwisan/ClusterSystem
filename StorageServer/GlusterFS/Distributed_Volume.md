@@ -80,7 +80,8 @@ root@node01-root@node04~# nano /etc/hosts
 ```
 - [x] Probe new Node
 ```
-root@node01:~# gluster probe  node05
+root@node01:~# gluster peer probe node05
+peer probe: success.
 ```
 - [x] add brick with associated of volume type
 ```
