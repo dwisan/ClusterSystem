@@ -14,14 +14,14 @@ Terminology
  * Volume is a logical collection of Brick.
 ```
 >การตั้งค่าเครือข่าย
-  ##### add hosts to /etc/hosts with all Nodes
+  ##### ระบุโหนด ทุกโหนดที่ใช้งานลงใน /etc/hosts 
   ```
   172.18.111.101 node01
   172.18.111.102 node02
   172.18.111.103 node03
   172.18.111.104 node04
   ```
->Installing GlusterFS Server (All Nodes)
+>ติดตั้งซอฟต์แวร์ Gluster Server บนทุกโหนดที่ใช้งาน
 
 ```
 
