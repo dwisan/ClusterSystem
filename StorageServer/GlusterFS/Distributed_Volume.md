@@ -176,12 +176,64 @@ Node         Rebalanced-files    size       scanned      failures       skipped 
 
 waiting for completed status
 
+Node            Rebalanced-files    size     scanned    failures    skipped    status      run time in h:m:s
+-----             -----------    ---------  ---------- ---------- ----------- -----------   --------------
+172.18.111.105       60842        29.8GB      60982        0           0       completed        1:47:09
+
 root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.105:/glusterfs/distributed commit
+root@172-18-111-101:~# gluster peer status
 
+Number of Peers: 3
 
+Hostname: 172.18.111.103
+Uuid: f0905a5b-257d-4459-86e5-5cd5083a28a9
+State: Peer in Cluster (Connected)
+
+Hostname: 172.18.111.104
+Uuid: a96f98f9-0b35-4276-bb89-db8e51dbcacc
+State: Peer in Cluster (Connected)
+
+Hostname: 172.18.111.102
+Uuid: ffe86122-6f35-4a8e-b7a1-c9f8be25df07
+State: Peer in Cluster (Connected)
+
+root@172-18-111-101:~# gluster pool list
+
+UUID                                    Hostname        State
+f0905a5b-257d-4459-86e5-5cd5083a28a9    172.18.111.103  Connected 
+a96f98f9-0b35-4276-bb89-db8e51dbcacc    172.18.111.104  Connected 
+ffe86122-6f35-4a8e-b7a1-c9f8be25df07    172.18.111.102  Connected 
+d67693f6-6dfb-43e3-9f25-10d34c65412b    localhost       Connected 
 
 root@172-18-111-101:~# gluster volume rebalance vol_distributed start
+root@172-18-111-101:~# gluster volume rebalance vol_distributed status
+
+Node Rebalanced-files       size       scanned      failures       skipped       status     run time in h:m:s
+---------      --------- ----------- -----------   -----------   -----------  ------------     --------------
+localhost        1243       470.3MB     5248           0            54          in progress        0:05:15
+172.18.111.103   1393       456.1MB     5480           0           229          in progress        0:05:15
+172.18.111.104    916       422.0MB     5630           0             0          in progress        0:05:15
+172.18.111.102   1198       519.1MB     4757  
+
+waiting for status show completed
+
+Node      Rebalanced-files   size   scanned   failures    skipped      status     run time in h:m:s
+-----      -----------       ------ --------  -------   -----------  ----------    --------------
+localhost         20389     10.1GB   79278       1           575       completed     1:53:18
+172.18.111.103    19364      9.1GB   75054       1          1790       completed     1:53:25
+172.18.111.104    17723      8.9GB   89660       0             0       completed     1:53:18
+172.18.111.102    21785     10.7GB   80266       0          1506       completed     1:53:19
+
 root@172-18-111-101:~# gluster volume rebalance vol_distributed fix-layout start
+root@172-18-111-101:~# gluster volume rebalance vol_distributed status
+
+Node                  status                run time in h:m:s
+---------           -----------                ------------
+localhost           fix-layout in progress        0:0:19
+172.18.111.103      fix-layout in progress        0:0:19
+172.18.111.104      fix-layout in progress        0:0:19
+172.18.111.102      fix-layout in progress        0:0:19
+
 ```
 >Replace faulty brick
 - [x] Replacing a brick in a pure distribute volume
