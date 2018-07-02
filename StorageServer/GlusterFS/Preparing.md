@@ -179,7 +179,30 @@ root@nodeX:~# add-apt-repository ppa:gluster/glusterfs-4.1
 
 root@nodeX:~# apt-get update
 root@nodeX:~# apt-get -y install glusterfs-server
+```
+> edit binding adddress
+```
+root@nodeX:~# nano /etc/glusterfs/glusterd.vol
 
+volume management
+    type mgmt/glusterd
+    option working-directory /var/lib/glusterd
+    option transport-type socket,rdma
+    option transport.socket.bind-address 172.18.111.xxx <------ 
+    option transport.socket.keepalive-time 10
+    option transport.socket.keepalive-interval 2
+    option transport.socket.read-fail-log off
+    option ping-timeout 0
+    option event-threads 1
+#   option lock-timer 180
+#   option transport.address-family inet6
+#   option base-port 49152
+#   option max-port  65535
+end-volume
+
+```
+> start and enable start up
+```
 #In Ubuntu 16.04 LTS
 root@nodeX:~# service glusterfs-server start
 root@nodeX:~# systemctl enable glusterfs-server
