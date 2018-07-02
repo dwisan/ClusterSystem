@@ -17,13 +17,27 @@ Terminology
 ```
 root@node01:~# nano /etc/hostname
 172.18.111.101
+root@node01:~# nano /etc/hosts
+127.0.0.1       localhost
+127.0.1.1       172-18-111-101
+
 root@node02:~# nano /etc/hostname
 172.18.111.102
+root@node02:~# nano /etc/hostname
+127.0.0.1       localhost
+127.0.1.1       172-18-111-102
+
 root@node03:~# nano /etc/hostname
 172.18.111.103
+root@node03:~# nano /etc/hostname
+127.0.0.1       localhost
+127.0.1.1       172-18-111-103
+
 root@node04:~# nano /etc/hostname
 172.18.111.104
-
+root@node04:~# nano /etc/hostname
+127.0.0.1       localhost
+127.0.1.1       172-18-111-104
 #
 #In Ubuntu 16.04 LTS
 #
