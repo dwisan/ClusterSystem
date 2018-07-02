@@ -26,7 +26,7 @@ root@172-18-111-101:~# gluster volume start vol_distributed
 # Checking volume info
 root@172-18-111-101:~# gluster volume info vol_distributed
 
-*Volume Name: vol_distributed
+Volume Name: vol_distributed
 Type: Distribute
 Volume ID: 36dd55c6-9929-4bdf-97c0-11f4ef14616c
 Status: Started
@@ -40,7 +40,7 @@ Brick3: 172.18.111.103:/glusterfs/distributed
 Brick4: 172.18.111.104:/glusterfs/distributed
 Options Reconfigured:
 transport.address-family: inet
-nfs.disable: on*
+nfs.disable: on
 
 # Checking volume status
 root@172-18-111-101:~# gluster volume status vol_distributed
