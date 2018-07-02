@@ -157,15 +157,6 @@ root@node01:~# netplan apply
  ```
  #apt update && apt upgrade -y
  ```
->ระบุโหนด ทุกโหนดที่ใช้งาน ลงใน /etc/hosts 
-  ```
-  127.0.0.1       localhost
-  127.0.1.1       nodeXX
-  172.18.111.101 node01
-  172.18.111.102 node02
-  172.18.111.103 node03
-  172.18.111.104 node04
-  ```
 >ติดตั้งซอฟต์แวร์ Gluster Server บนทุกโหนดที่ใช้งาน
 
 ```
@@ -213,28 +204,28 @@ root@nodeX:~# systemctl enable glusterd
 ```
 > Probe Nodes to Cluster, 
 ```
-root@node01:~# gluster peer probe node01
+root@node01:~# gluster peer probe 172.18.111.101
 peer probe: success. Probe on localhost not needed
-root@node01:~# gluster peer probe node02
+root@node01:~# gluster peer probe 172.18.111.102
 peer probe: success.
-root@node01:~# gluster peer probe node03
+root@node01:~# gluster peer probe 172.18.111.103
 peer probe: success.
-root@node01:~# gluster peer probe node04
+root@node01:~# gluster peer probe 172.18.111.104
 peer probe: success.
 ```
 >Checking peer status
 ```
 root@node01:~# gluster peer status
 
-Hostname: node02
+Hostname: 172.18.111.102
 Uuid: 3cdaacc7-cbdb-4209-8ff2-cafe6e4536e3
 State: Peer in Cluster (Connected)
 
-Hostname: node03
+Hostname: 172.18.111.103
 Uuid: e30be633-376f-45e3-8eea-ab88acec98a4
 State: Peer in Cluster (Connected)
 
-Hostname: node04
+Hostname: 172.18.111.104
 Uuid: ea1d45e3-bd82-4ec4-b6fa-830640b8170b
 State: Peer in Cluster (Connected)
 ```
@@ -242,9 +233,9 @@ State: Peer in Cluster (Connected)
 ```
 root@node01:~# gluster pool list
 UUID                                    Hostname        State
-3cdaacc7-cbdb-4209-8ff2-cafe6e4536e3    node02          Connected 
-e30be633-376f-45e3-8eea-ab88acec98a4    node03          Connected 
-ea1d45e3-bd82-4ec4-b6fa-830640b8170b    node04          Connected 
+3cdaacc7-cbdb-4209-8ff2-cafe6e4536e3    172.18.111.102  Connected 
+e30be633-376f-45e3-8eea-ab88acec98a4    172.18.111.103  Connected 
+ea1d45e3-bd82-4ec4-b6fa-830640b8170b    172.18.111.104  Connected 
 e2e55fba-fc46-4ed1-9655-b1b1a0b3e439    localhost       Connected 
 
 ```
