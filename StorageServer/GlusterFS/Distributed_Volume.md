@@ -245,14 +245,9 @@ localhost                          fix-layout completed        0:5:0
 172.18.111.105                     fix-layout completed        0:4:59
 ```
 >Replace faulty brick
-- [x] Replacing a brick in a pure distribute volume
-
-```
-
-```
-- [x] Replacing bricks in Replicate/Distributed Replicate volumes
-```
-
+```Shell
+To replace a brick on a distribute only volume,
+add the new brick and then remove the brick you want to replace
 ```
 >GlusterFS : Clients' Settings
 
