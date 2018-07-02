@@ -161,7 +161,25 @@ localhost                          fix-layout completed        0:5:0
 ```Shell
 # remnove brick with associated of volume type
 root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.105:/glusterfs/distributed start
+
+Running remove-brick with cluster.force-migration enabled can result in data corruption. 
+It is safer to disable this option so that files that receive writes during migration are not migrated.
+Files that are not migrated can then be manually copied after the remove-brick commit operation.
+Do you want to continue with your current cluster.force-migration settings? (y/n) y
+volume remove-brick start: success
+
+root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.105:/glusterfs/distributed status
+
+Node         Rebalanced-files    size       scanned      failures       skipped     status     run time in h:m:s
+----            -----------     --------   -----------   ----------   -----------   ------        --------------
+172.18.111.105      106        11.5MB         379            0             0      in progress        0:00:07
+
+waiting for completed status
+
 root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.105:/glusterfs/distributed commit
+
+
+
 root@172-18-111-101:~# gluster volume rebalance vol_distributed start
 root@172-18-111-101:~# gluster volume rebalance vol_distributed fix-layout start
 ```
