@@ -160,8 +160,8 @@ localhost                          fix-layout completed        0:5:0
 >shrink a gluster volume
 ```Shell
 # remnove brick with associated of volume type
-root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172-18-111-105:/glusterfs/distributed start
-root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172-18-111-105:/glusterfs/distributed commit
+root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.105:/glusterfs/distributed start
+root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.105:/glusterfs/distributed commit
 root@172-18-111-101:~# gluster volume rebalance vol_distributed start
 root@172-18-111-101:~# gluster volume rebalance vol_distributed fix-layout start
 ```
