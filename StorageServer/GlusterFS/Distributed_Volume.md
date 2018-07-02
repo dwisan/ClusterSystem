@@ -14,7 +14,7 @@ root@172-18-111-103:~# mkdir -p /glusterfs/distributed
 root@172-18-111-104:~# mkdir -p /glusterfs/distributed
 
 # Create distributed volume 
-root@node01:~# gluster volume create vol_distributed transport tcp \
+root@172-18-111-101:~# gluster volume create vol_distributed transport tcp \
 172-18-111-101:/glusterfs/distributed \
 172-18-111-102:/glusterfs/distributed \
 172-18-111-103:/glusterfs/distributed \
