@@ -234,6 +234,15 @@ localhost           fix-layout in progress        0:0:19
 172.18.111.104      fix-layout in progress        0:0:19
 172.18.111.102      fix-layout in progress        0:0:19
 
+waiting for completed status
+
+Node                                    status              run time in h:m:s
+---------                            -----------            ------------
+localhost                          fix-layout completed        0:5:0
+172.18.111.102                     fix-layout completed        0:5:0
+172.18.111.103                     fix-layout completed        0:5:0
+172.18.111.104                     fix-layout completed        0:5:0
+172.18.111.105                     fix-layout completed        0:4:59
 ```
 >Replace faulty brick
 - [x] Replacing a brick in a pure distribute volume
