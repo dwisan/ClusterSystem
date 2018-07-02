@@ -16,20 +16,20 @@ Terminology
 >การตั้งค่าระบบเครือข่ายของแต่ละโหนดที่ใช้งาน
 ```
 root@node01:~# nano /etc/hostname
-node01
+172.18.111.101
 root@node02:~# nano /etc/hostname
-node02
+172.18.111.102
 root@node03:~# nano /etc/hostname
-node03
+172.18.111.103
 root@node04:~# nano /etc/hostname
-node04
+172.18.111.104
 
 #
 #In Ubuntu 16.04 LTS
 #
 
-* * * Node01 * * *
-root@node01:~# nano /etc/network/interface
+* * * 172.18.111.101 * * *
+root@172-18-111-101:~# nano /etc/network/interface
 
 auto enp2s0 
 iface enp2s0 inet static
@@ -39,10 +39,10 @@ iface enp2s0 inet static
         gateway 172.18.111.1
         dns-nameservers 172.18.111.2,172.18.111.3
 
-root@node01:~# reboot
+root@172-18-111-101:~# reboot
 
-* * * Node02 * * *
-root@node02:~# nano /etc/network/interface
+* * * 172.18.111.102 * * *
+root@172-18-111-102:~# nano /etc/network/interface
 
 auto enp2s0 
 iface enp2s0 inet static
@@ -52,10 +52,10 @@ iface enp2s0 inet static
         gateway 172.18.111.1
         dns-nameservers 172.18.111.2,172.18.111.3
 
-root@node02:~# reboot
+root@172-18-111-102:~# reboot
 
-* * * Node03 * * *
-root@node03:~# nano /etc/network/interface
+* * * 172.18.111.103 * * *
+root@172-18-111-103:~# nano /etc/network/interface
 
 auto enp2s0 
 iface enp2s0 inet static
@@ -65,10 +65,10 @@ iface enp2s0 inet static
         gateway 172.18.111.1
         dns-nameservers 172.18.111.2,172.18.111.3
 
-root@node03:~# reboot
+root@172-18-111-103:~# reboot
 
-* * * Node04 * * *
-root@node04:~# nano /etc/network/interface
+* * * 172.18.111.104 * * *
+root@172-18-111-104:~# nano /etc/network/interface
 
 auto enp2s0 
 iface enp2s0 inet static
@@ -78,14 +78,14 @@ iface enp2s0 inet static
         gateway 172.18.111.1
         dns-nameservers 172.18.111.2,172.18.111.3
 
-root@node04:~# reboot
+root@172-18-111-104:~# reboot
 
 #
 #In Ubuntu 18.04 LTS
 #
 
-* * * Node01 * * *
-root@node01:~# nano /etc/netplan/01-netcfg.yaml
+* * * 172-18-111-101 * * *
+root@172-18-111-101:~# nano /etc/netplan/01-netcfg.yaml
 
 network:
  version: 2
@@ -99,10 +99,10 @@ network:
     nameservers:
       addresses: [172.18.111.2,172.18.111.3]
 
-root@node01:~# netplan apply
+root@172-18-111-101:~# netplan apply
 
-* * * Node02 * * *
-root@node01:~# nano /etc/netplan/01-netcfg.yaml
+* * * 172-18-111-102 * * *
+root@172-18-111-102:~# nano /etc/netplan/01-netcfg.yaml
 
 network:
  version: 2
@@ -116,10 +116,10 @@ network:
     nameservers:
       addresses: [172.18.111.2,172.18.111.3]
 
-root@node02:~# netplan apply
+root@172-18-111-102:~# netplan apply
 
-* * * Node03 * * *
-root@node03:~# nano /etc/netplan/01-netcfg.yaml
+* * * 172-18-111-103 * * *
+root@172-18-111-103:~# nano /etc/netplan/01-netcfg.yaml
 
 network:
  version: 2
@@ -133,10 +133,10 @@ network:
     nameservers:
       addresses: [172.18.111.2,172.18.111.3]
 
-root@node03:~# netplan apply
+root@172-18-111-103:~# netplan apply
 
-* * * Node04 * * *
-root@node04:~# nano /etc/netplan/01-netcfg.yaml
+* * * 172-18-111-104 * * *
+root@172-18-111-104:~# nano /etc/netplan/01-netcfg.yaml
 
 network:
  version: 2
@@ -150,7 +150,7 @@ network:
     nameservers:
       addresses: [172.18.111.2,172.18.111.3]
 
-root@node01:~# netplan apply
+root@172-18-111-104:~# netplan apply
 
 ```
 >อัพเดทระบบปฏิบัติการและซอฟต์แวร์บนโหนดทุกโหนด
@@ -160,20 +160,20 @@ root@node01:~# netplan apply
 >ติดตั้งซอฟต์แวร์ Gluster Server บนทุกโหนดที่ใช้งาน
 
 ```
-root@nodeX:~# apt-get install software-properties-common
+root@172-18-111-xxx:~# apt-get install software-properties-common
 
 #In Ubuntu 16.04 LTS
-root@nodeX:~# add-apt-repository ppa:gluster/glusterfs-3.13
+root@172-18-111-xxx:~# add-apt-repository ppa:gluster/glusterfs-3.13
 
 #In Ubuntu 18.04 LTS
-root@nodeX:~# add-apt-repository ppa:gluster/glusterfs-4.1
+root@172-18-111-xxx:~# add-apt-repository ppa:gluster/glusterfs-4.1
 
-root@nodeX:~# apt-get update
-root@nodeX:~# apt-get -y install glusterfs-server
+root@172-18-111-xxx:~# apt-get update
+root@172-18-111-xxx:~# apt-get -y install glusterfs-server
 ```
 > edit binding adddress
 ```
-root@nodeX:~# nano /etc/glusterfs/glusterd.vol
+root@172-18-111-xxx:~# nano /etc/glusterfs/glusterd.vol
 
 volume management
     type mgmt/glusterd
@@ -195,27 +195,27 @@ end-volume
 > start and enable start up
 ```
 #In Ubuntu 16.04 LTS
-root@nodeX:~# service glusterfs-server start
-root@nodeX:~# systemctl enable glusterfs-server
+root@172-18-111-xxx:~# service glusterfs-server start
+root@172-18-111-xxx:~# systemctl enable glusterfs-server
 
 #In Ubuntu 18.04 LTS
-root@nodeX:~# service glusterd start
-root@nodeX:~# systemctl enable glusterd
+root@172-18-111-xxx:~# service glusterd start
+root@172-18-111-xxx:~# systemctl enable glusterd
 ```
 > Probe Nodes to Cluster, 
 ```
-root@node01:~# gluster peer probe 172.18.111.101
+root@172.18.111.101:~# gluster peer probe 172.18.111.101
 peer probe: success. Probe on localhost not needed
-root@node01:~# gluster peer probe 172.18.111.102
+root@172.18.111.101:~# gluster peer probe 172.18.111.102
 peer probe: success.
-root@node01:~# gluster peer probe 172.18.111.103
+root@172.18.111.101:~# gluster peer probe 172.18.111.103
 peer probe: success.
-root@node01:~# gluster peer probe 172.18.111.104
+root@172.18.111.101:~# gluster peer probe 172.18.111.104
 peer probe: success.
 ```
 >Checking peer status
 ```
-root@node01:~# gluster peer status
+root@172.18.111.101:~# gluster peer status
 
 Hostname: 172.18.111.102
 Uuid: 3cdaacc7-cbdb-4209-8ff2-cafe6e4536e3
@@ -231,7 +231,7 @@ State: Peer in Cluster (Connected)
 ```
 >Checking pool list
 ```
-root@node01:~# gluster pool list
+root@172.18.111.101:~# gluster pool list
 UUID                                    Hostname        State
 3cdaacc7-cbdb-4209-8ff2-cafe6e4536e3    172.18.111.102  Connected 
 e30be633-376f-45e3-8eea-ab88acec98a4    172.18.111.103  Connected 
