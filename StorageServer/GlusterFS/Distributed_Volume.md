@@ -58,7 +58,7 @@ There are no active volume tasks
 ```
 >Expanding a gluster volume
 - [x] Preparing for new hosts
-```
+```Shell
 root@172-18-111-105:~# nano /etc/hostname
 172-18-111-105
 root@172-18-111-105:~# nano /etc/hosts
@@ -71,16 +71,16 @@ root@172-18-111-105:~# nano /etc/hosts
   Read in Preparing.md
 ```
 - [x] Create brick 
-```
+```Shell
 root@172-18-111-105:~# mkdir -p /glusterfs/distributed
 ```
 - [x] Probe new Node
-```
+```Shell
 root@172-18-111-101:~# gluster peer probe 172.18.111.105
 peer probe: success.
 ```
 - [x] Checking new Node in Pool list
-```
+```Shell
 root@172-18-111-101:~# gluster pool list
 
 UUID                                    Hostname        State
@@ -91,7 +91,7 @@ ea1d45e3-bd82-4ec4-b6fa-830640b8170b    172.18.111.104  Connected
 e2e55fba-fc46-4ed1-9655-b1b1a0b3e439    localhost       Connected 
 ```
 - [x] add brick with associated of volume type
-```
+```Shell
 root@172-18-111-101:~# gluster volume add-brick vol_distributed 172.18.111.105:/glusterfs/distributed force
 volume add-brick: success
 
@@ -158,7 +158,7 @@ localhost                          fix-layout completed        0:5:0
 ```
 
 >shrink a gluster volume
-```
+```Shell
 # remnove brick with associated of volume type
 root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172-18-111-105:/glusterfs/distributed start
 root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172-18-111-105:/glusterfs/distributed commit
@@ -178,22 +178,21 @@ root@172-18-111-101:~# gluster volume rebalance vol_distributed fix-layout start
 >GlusterFS : Clients' Settings
 
 - [x] GlusterFS Native
-```
+```Shell
 root@client:~# apt install glusterfs-client attr
 root@client:~# mkdir /glusterfs
 root@client:~# mount -t glusterfs node01:/vol_distributed /glusterfs
 ```
 - [x] NFS mount
-```
+```Shell
 root@client:~# apt-get -y install nfs-common 
 root@client:~# systemctl enable rpcbind 
 root@client:~# service rpcbind start
 root@client:~# mount -t nfs -o vers=3,mountproto=tcp node01:/vol_strip-replica /glusterfs
 ```
 - [x] Automatically Mounting Volumes
-```
+```Shell
 root@client:~# nano /etc/fstab
-
 node01:/cluster1_volume /glusterfs glusterfs defaults,_netdev 0 0
 
 ```
