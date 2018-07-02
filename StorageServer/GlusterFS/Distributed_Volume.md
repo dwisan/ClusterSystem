@@ -15,10 +15,10 @@ root@172-18-111-104:~# mkdir -p /glusterfs/distributed
 
 # Create distributed volume 
 root@172-18-111-101:~# gluster volume create vol_distributed transport tcp \
-172-18-111-101:/glusterfs/distributed \
-172-18-111-102:/glusterfs/distributed \
-172-18-111-103:/glusterfs/distributed \
-172-18-111-104:/glusterfs/distributed force
+172.18.111.101:/glusterfs/distributed \
+172.18.111.102:/glusterfs/distributed \
+172.18.111.103:/glusterfs/distributed \
+172.18.111.104:/glusterfs/distributed force
 
 # Start Volume
 root@172-18-111-101:~# gluster volume start vol_distributed
@@ -34,10 +34,10 @@ Snapshot Count: 0
 Number of Bricks: 4
 Transport-type: tcp
 Bricks:
-Brick1: 172-18-111-101:/glusterfs/distributed
-Brick2: 172-18-111-102:/glusterfs/distributed
-Brick3: 172-18-111-103:/glusterfs/distributed
-Brick4: 172-18-111-104:/glusterfs/distributed
+Brick1: 172.18.111.101:/glusterfs/distributed
+Brick2: 172.18.111.102:/glusterfs/distributed
+Brick3: 172.18.111.103:/glusterfs/distributed
+Brick4: 172.18.111.104:/glusterfs/distributed
 Options Reconfigured:
 transport.address-family: inet
 nfs.disable: on
@@ -47,10 +47,10 @@ root@172-18-111-101:~# gluster volume status vol_distributed
 Status of volume: vol_distributed
 Gluster process                                    TCP Port  RDMA Port  Online  Pid
 ------------------------------------------------------------------------------
-Brick 172-18-111-101:/glusterfs/distributed         49152     0          Y       7907 
-Brick 172-18-111-102:/glusterfs/distributed         49152     0          Y       7781 
-Brick 172-18-111-103:/glusterfs/distributed         49152     0          Y       7762 
-Brick 172-18-111-104:/glusterfs/distributed         49152     0          Y       7748 
+Brick 172.18.111.101:/glusterfs/distributed         49152     0          Y       7907 
+Brick 172.18.111.102:/glusterfs/distributed         49152     0          Y       7781 
+Brick 172.18.111.103:/glusterfs/distributed         49152     0          Y       7762 
+Brick 172.18.111.104:/glusterfs/distributed         49152     0          Y       7748 
  
 Task Status of Volume vol_distributed
 ------------------------------------------------------------------------------
@@ -76,7 +76,7 @@ root@172-18-111-105:~# mkdir -p /glusterfs/distributed
 ```
 - [x] Probe new Node
 ```
-root@172-18-111-101:~# gluster peer probe node05
+root@172-18-111-101:~# gluster peer probe 172.18.111.105
 peer probe: success.
 ```
 - [x] Checking new Node in Pool list
@@ -84,10 +84,10 @@ peer probe: success.
 root@172-18-111-101:~# gluster pool list
 
 UUID                                    Hostname        State
-3cdaacc7-cbdb-4209-8ff2-cafe6e4536e3    172-18-111-102  Connected 
-e30be633-376f-45e3-8eea-ab88acec98a4    172-18-111-103  Connected 
-ea1d45e3-bd82-4ec4-b6fa-830640b8170b    172-18-111-104  Connected 
-661ff4cb-de70-4dd6-8aa3-792842d24a5b    172-18-111-105  Connected <---
+3cdaacc7-cbdb-4209-8ff2-cafe6e4536e3    172.18.111.102  Connected 
+e30be633-376f-45e3-8eea-ab88acec98a4    172.18.111.103  Connected 
+ea1d45e3-bd82-4ec4-b6fa-830640b8170b    172.18.111.104  Connected 
+661ff4cb-de70-4dd6-8aa3-792842d24a5b    172.18.111.105  Connected <---
 e2e55fba-fc46-4ed1-9655-b1b1a0b3e439    localhost       Connected 
 ```
 - [x] add brick with associated of volume type
