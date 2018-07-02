@@ -6,7 +6,7 @@
 - [x] Best for scaling size of the volume
 
 ![ScreenShot](https://cloud.githubusercontent.com/assets/10970993/7412364/ac0a300c-ef5f-11e4-8599-e7d06de1165c.png)
-```
+```Shell
 # Create brick Directory for distributed volume
 root@172-18-111-101:~# mkdir -p /glusterfs/distributed
 root@172-18-111-102:~# mkdir -p /glusterfs/distributed
