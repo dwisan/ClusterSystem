@@ -311,4 +311,6 @@ Test execution summary:
 Threads fairness:
     events (avg/stddev):           10600.0000/0.00
     execution time (avg/stddev):   109.9779/0.00
+    
+root@client:~# sysbench --test=fileio --file-total-size=150G cleanup
 ```
