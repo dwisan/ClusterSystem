@@ -51,41 +51,123 @@ Task Status of Volume vol_replica
 There are no active volume tasks
 ```
 >Expanding a gluster volume
+- [x] Preparing for new hosts
+```Shell
+root@172-18-111-105:~# nano /etc/hostname
+172-18-111-105
+root@172-18-111-105:~# nano /etc/hosts
+127.0.0.1       localhost
+127.0.1.1       172-18-111-105
+
 ```
-# add brick with associated of volume type
-gluster volume add-brick {volume} {server:/brick}
-gluster volume rebalance {volume} start
-gluster volume rebalance {volume} fix-layout start
-gluster volume rebalence {volume} migrate data start
+- [x] Installing Gluster Server Software
 ```
->shrink a gluster volume
+  Read in Preparing.md
 ```
-# remnove brick with associated of volume type
-gluster volume remove-brick {volume} {server:/brick}
-gluster volume rebalance {volume} start
-gluster volume rebalance {volume} fix-layout start
-gluster volume rebalence {volume} migrate data start
+- [x] Create brick 
+```Shell
+root@172-18-111-105:~# mkdir -p /glusterfs/distributed
+```
+- [x] Probe new Node
+```Shell
+root@172-18-111-101:~# gluster peer probe 172.18.111.105
+peer probe: success.
+```
+- [x] Checking new Node in Pool list
+```Shell
+root@172-18-111-101:~# gluster pool list
+
+```
+- [x] add brick with associated of volume type
+```Shell
+root@172-18-111-101:~# gluster volume add-brick vol_distributed 172.18.111.105:/glusterfs/distributed force
+volume add-brick: success
+
+root@172-18-111-101:~# gluster volume info vol_distributed
+
+V
+root@172-18-111-101:~# gluster volume rebalance vol_distributed start
+root@172-18-111-101:~# gluster volume rebalance vol_distributed status
+                                  
+waiting status to completed
+
+
+root@172-18-111-101:~# gluster volume rebalance vol_distributed fix-layout start
+root@172-18-111-101:~# gluster volume rebalance vol_distributed status
+
+waiting status to completed
+
 ```
 
+>shrink a gluster volume
+```Shell
+# remnove brick with associated of volume type
+root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.105:/glusterfs/distributed start
+
+root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.105:/glusterfs/distributed status
+
+
+waiting for completed status
+
+
+root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.105:/glusterfs/distributed commit
+root@172-18-111-101:~# gluster peer detach 172.18.111.105
+root@172-18-111-101:~# gluster peer status
+
+
+root@172-18-111-101:~# gluster pool list
+
+
+root@172-18-111-101:~# gluster volume rebalance vol_distributed start
+root@172-18-111-101:~# gluster volume rebalance vol_distributed status
+
+
+waiting for status show completed
+
+
+root@172-18-111-101:~# gluster volume rebalance vol_distributed fix-layout start
+root@172-18-111-101:~# gluster volume rebalance vol_distributed status
+
+
+waiting for completed status
+
+
+```
+>Replace faulty brick
+```Shell
+root@172-18-111-101:~# gluster peer probe 172.18.111.105
+root@172-18-111-101:~# gluster volume add-brick vol_distributed 172.18.111.105:/glusterfs/distributed force
+root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.104:/glusterfs/distributed start
+root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.104:/glusterfs/distributed commit
+root@172-18-111-101:~# gluster peer detach 172.18.111.104
+```
 >GlusterFS : Clients' Settings
 
 - [x] GlusterFS Native
-```
+```Shell
 root@client:~# apt install glusterfs-client attr
 root@client:~# mkdir /glusterfs
-root@client:~# mount -t glusterfs node01:/vol_strip-replica /glusterfs
+root@client:~# mount -t glusterfs -o acl 172.18.111.101:/vol_distributed /glusterfs
 ```
 - [x] NFS mount
-```
+```Shell
 root@client:~# apt-get -y install nfs-common 
 root@client:~# systemctl enable rpcbind 
 root@client:~# service rpcbind start
-root@client:~# mount -t nfs -o vers=3,mountproto=tcp node01:/vol_strip-replica /glusterfs
+root@client:~# mount -t nfs -o vers=3,mountproto=tcp 172.18.111.101:/vol_distributed /glusterfs
 ```
 - [x] Automatically Mounting Volumes
-```
+```Shell
 root@client:~# nano /etc/fstab
+172.18.111.101:/vol_distributed /glusterfs glusterfs defaults,_netdev 0 0
 
-node01:/cluster1_volume /glusterfs glusterfs defaults,_netdev 0 0
+```
+- [x] Test io
+```
+root@client:~# sysbench --test=fileio --file-total-size=150G prepare
+root@client:~# sysbench --test=fileio --file-total-size=150G --file-test-mode=rndrw \
+--init-rng=on --max-time=300 --max-requests=0 run
+   
+root@client:~# sysbench --test=fileio --file-total-size=150G cleanup
 
 ```
