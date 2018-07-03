@@ -51,7 +51,7 @@ Task Status of Volume vol_replica
 There are no active volume tasks
 ```
 >Expanding a gluster volume
-- [x] Preparing for new hosts
+- [x] Preparing for new hosts (multiple of replicate size)
 ```Shell
 root@172-18-111-105:~# nano /etc/hostname
 172-18-111-105
