@@ -91,7 +91,6 @@ d45d0ec3-1da6-4a24-9374-0eb3356b8e2a    172.18.111.103  Connected
 - [x] add brick with associated of volume type
 ```Shell
 root@172-18-111-101:~# gluster volume add-brick vol_replica replica 3 172.18.111.103:/glusterfs/replica force
-
 root@172-18-111-101:~# gluster volume info vol_replica
 
 Volume Name: vol_replica
