@@ -274,3 +274,41 @@ root@client:~# nano /etc/fstab
 172.18.111.101:/vol_distributed /glusterfs glusterfs defaults,_netdev 0 0
 
 ```
+- [x] Test io
+```
+root@client:~# sysbench --test=fileio --file-total-size=150G prepare
+root@client:~# sysbench --test=fileio --file-total-size=150G --file-test-mode=rndrw \
+--init-rng=on --max-time=300 --max-requests=0 run
+
+Extra file open flags: 0
+128 files, 1.1719Gb each
+150Gb total file size
+Block size 16Kb
+Number of random requests for random IO: 0
+Read/Write ratio for combined random IO test: 1.50
+Periodic FSYNC enabled, calling fsync() each 100 requests.
+Calling fsync() at the end of test, Enabled.
+Using synchronous I/O mode
+Doing random r/w test
+Threads started!
+Time limit exceeded, exiting...
+Done.
+
+Operations performed:  6360 Read, 4240 Write, 13557 Other = 24157 Total
+Read 99.375Mb  Written 66.25Mb  Total transferred 165.62Mb  (565.31Kb/sec)
+   35.33 Requests/sec executed
+
+Test execution summary:
+    total time:                          300.0112s
+    total number of events:              10600
+    total time taken by event execution: 109.9779
+    per-request statistics:
+         min:                                  0.01ms
+         avg:                                 10.38ms
+         max:                                213.80ms
+         approx.  95 percentile:              28.54ms
+
+Threads fairness:
+    events (avg/stddev):           10600.0000/0.00
+    execution time (avg/stddev):   109.9779/0.00
+```
