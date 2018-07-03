@@ -247,6 +247,8 @@ localhost                          fix-layout completed        0:5:0
 ```
 >Replace faulty brick
 ```Shell
+root@172-18-111-101:~# gluster peer probe 172.18.111.105
+root@172-18-111-101:~# gluster volume add-brick vol_distributed 172.18.111.105:/glusterfs/distributed force
 root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.104:/glusterfs/distributed start
 root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.104:/glusterfs/distributed commit
 root@172-18-111-101:~# gluster peer detach 172.18.111.104
