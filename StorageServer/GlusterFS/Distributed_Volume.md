@@ -181,6 +181,7 @@ Node            Rebalanced-files    size     scanned    failures    skipped    s
 172.18.111.105       60842        29.8GB      60982        0           0       completed        1:47:09
 
 root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.105:/glusterfs/distributed commit
+root@172-18-111-101:~# gluster peer detach 172.18.111.105
 root@172-18-111-101:~# gluster peer status
 
 Number of Peers: 3
