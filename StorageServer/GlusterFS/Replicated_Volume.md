@@ -12,8 +12,8 @@ root@172-18-111-101:~# mkdir -p /glusterfs/replica
 
 # Create Replicated volume 
 root@172-18-111-101:~# gluster volume create vol_replica replica 2 transport tcp \
-172-18-111-101:/glusterfs/replica \
-172-18-111-102:/glusterfs/replica force
+172.18.111.101:/glusterfs/replica \
+172.18.111.102:/glusterfs/replica force
 
 # Start volume
 root@172-18-111-101:~# gluster volume start vol_replica
@@ -21,9 +21,34 @@ root@172-18-111-101:~# gluster volume start vol_replica
 # Checking volume info
 root@172-18-111-101:~# gluster volume info vol_replica
 
+Volume Name: vol_replica
+Type: Replicate
+Volume ID: 640fe8cc-8ac2-4e8c-b67d-af1cd83dc788
+Status: Started
+Snapshot Count: 0
+Number of Bricks: 1 x 2 = 2
+Transport-type: tcp
+Bricks:
+Brick1: 172.18.111.101:/glusterfs/replica
+Brick2: 172.18.111.102:/glusterfs/replica
+Options Reconfigured:
+transport.address-family: inet
+nfs.disable: on
+performance.client-io-threads: off
+
 # Checking volume status
 root@172-18-111-101:~# gluster volume status vol_replica
 
+Gluster process                             TCP Port  RDMA Port  Online  Pid
+------------------------------------------------------------------------------
+Brick 172.18.111.101:/glusterfs/replica     49152     0          Y       18955
+Brick 172.18.111.102:/glusterfs/replica     49152     0          Y       18936
+Self-heal Daemon on localhost               N/A       N/A        Y       18978
+Self-heal Daemon on 172.18.111.102          N/A       N/A        Y       18959
+ 
+Task Status of Volume vol_replica
+------------------------------------------------------------------------------
+There are no active volume tasks
 ```
 >Expanding a gluster volume
 ```
