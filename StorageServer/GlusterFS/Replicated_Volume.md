@@ -109,6 +109,24 @@ transport.address-family: inet
 nfs.disable: off
 performance.client-io-threads: off
 
+# Checking volume status
+root@172-18-111-101:~# gluster volume status vol_replica
+
+Gluster process                             TCP Port  RDMA Port  Online  Pid
+------------------------------------------------------------------------------
+Brick 172.18.111.101:/glusterfs/replica     49152     0          Y       18955
+Brick 172.18.111.102:/glusterfs/replica     49152     0          Y       18936
+Brick 172.18.111.103:/glusterfs/replica     49152     0          Y       7687 
+NFS Server on localhost                     2049      0          Y       20348
+Self-heal Daemon on localhost               N/A       N/A        Y       20357
+NFS Server on 172.18.111.103                2049      0          Y       7859 
+Self-heal Daemon on 172.18.111.103          N/A       N/A        Y       7868 
+NFS Server on 172.18.111.102                2049      0          Y       20157
+Self-heal Daemon on 172.18.111.102          N/A       N/A        Y       20166
+ 
+Task Status of Volume vol_replica
+------------------------------------------------------------------------------
+There are no active volume tasks
 ```
 >shrink a gluster volume
 ```Shell
