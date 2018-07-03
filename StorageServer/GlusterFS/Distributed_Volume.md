@@ -247,8 +247,9 @@ localhost                          fix-layout completed        0:5:0
 ```
 >Replace faulty brick
 ```Shell
-To replace a brick on a distribute only volume,
-add the new brick and then remove the brick you want to replace
+root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.104:/glusterfs/distributed start
+root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.104:/glusterfs/distributed commit
+root@172-18-111-101:~# gluster peer detach 172.18.111.104
 ```
 >GlusterFS : Clients' Settings
 
@@ -256,18 +257,18 @@ add the new brick and then remove the brick you want to replace
 ```Shell
 root@client:~# apt install glusterfs-client attr
 root@client:~# mkdir /glusterfs
-root@client:~# mount -t glusterfs node01:/vol_distributed /glusterfs
+root@client:~# mount -t glusterfs -o acl 172.18.111.101:/vol_distributed /glusterfs
 ```
 - [x] NFS mount
 ```Shell
 root@client:~# apt-get -y install nfs-common 
 root@client:~# systemctl enable rpcbind 
 root@client:~# service rpcbind start
-root@client:~# mount -t nfs -o vers=3,mountproto=tcp node01:/vol_strip-replica /glusterfs
+root@client:~# mount -t nfs -o vers=3,mountproto=tcp 172.18.111.101:/vol_distributed /glusterfs
 ```
 - [x] Automatically Mounting Volumes
 ```Shell
 root@client:~# nano /etc/fstab
-node01:/cluster1_volume /glusterfs glusterfs defaults,_netdev 0 0
+172.18.111.101:/vol_distributed /glusterfs glusterfs defaults,_netdev 0 0
 
 ```
