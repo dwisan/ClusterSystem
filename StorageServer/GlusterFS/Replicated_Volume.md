@@ -53,12 +53,17 @@ There are no active volume tasks
 >Expanding a gluster volume
 - [x] Preparing for new hosts (multiple of replicate size)
 ```Shell
-root@172-18-111-105:~# nano /etc/hostname
-172-18-111-105
-root@172-18-111-105:~# nano /etc/hosts
+root@172-18-111-103:~# nano /etc/hostname
+172-18-111-103
+root@172-18-111-103:~# nano /etc/hosts
 127.0.0.1       localhost
-127.0.1.1       172-18-111-105
+127.0.1.1       172-18-111-103
 
+root@172-18-111-104:~# nano /etc/hostname
+172-18-111-104
+root@172-18-111-104:~# nano /etc/hosts
+127.0.0.1       localhost
+127.0.1.1       172-18-111-104
 ```
 - [x] Installing Gluster Server Software
 ```
@@ -66,39 +71,46 @@ root@172-18-111-105:~# nano /etc/hosts
 ```
 - [x] Create brick 
 ```Shell
-root@172-18-111-105:~# mkdir -p /glusterfs/distributed
+root@172-18-111-103:~# mkdir -p /glusterfs/replica
 ```
 - [x] Probe new Node
 ```Shell
-root@172-18-111-101:~# gluster peer probe 172.18.111.105
+root@172-18-111-101:~# gluster peer probe 172.18.111.103
 peer probe: success.
+
 ```
 - [x] Checking new Node in Pool list
 ```Shell
 root@172-18-111-101:~# gluster pool list
 
+UUID                                    Hostname        State
+0b6ceb46-39ce-43e2-b45a-d1de25976086    172.18.111.102  Connected 
+d45d0ec3-1da6-4a24-9374-0eb3356b8e2a    172.18.111.103  Connected 
+890dac95-35cd-4a4b-9a69-041d1ccc06f4    localhost       Connected 
 ```
 - [x] add brick with associated of volume type
 ```Shell
-root@172-18-111-101:~# gluster volume add-brick vol_distributed 172.18.111.105:/glusterfs/distributed force
-volume add-brick: success
+root@172-18-111-101:~# gluster volume add-brick vol_replica replica 3 172.18.111.103:/glusterfs/replica force
 
-root@172-18-111-101:~# gluster volume info vol_distributed
+root@172-18-111-101:~# gluster volume info vol_replica
 
-V
-root@172-18-111-101:~# gluster volume rebalance vol_distributed start
-root@172-18-111-101:~# gluster volume rebalance vol_distributed status
-                                  
-waiting status to completed
-
-
-root@172-18-111-101:~# gluster volume rebalance vol_distributed fix-layout start
-root@172-18-111-101:~# gluster volume rebalance vol_distributed status
-
-waiting status to completed
+Volume Name: vol_replica
+Type: Replicate
+Volume ID: 640fe8cc-8ac2-4e8c-b67d-af1cd83dc788
+Status: Started
+Snapshot Count: 0
+Number of Bricks: 1 x 3 = 3
+Transport-type: tcp
+Bricks:
+Brick1: 172.18.111.101:/glusterfs/replica
+Brick2: 172.18.111.102:/glusterfs/replica
+Brick3: 172.18.111.103:/glusterfs/replica
+Options Reconfigured:
+transport.address-family: inet
+nfs.disable: off
+performance.client-io-threads: off
 
 ```
-
 >shrink a gluster volume
 ```Shell
 # remnove brick with associated of volume type
