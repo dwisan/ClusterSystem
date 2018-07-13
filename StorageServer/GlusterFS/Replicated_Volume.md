@@ -188,7 +188,7 @@ root@client:~# mount -t nfs -o vers=3,mountproto=tcp 172.18.111.101:/vol_distrib
 - [x] Automatically Mounting Volumes
 ```Shell
 root@client:~# nano /etc/fstab
-172.18.111.101:/vol_distributed /glusterfs glusterfs defaults,_netdev 0 0
+172.18.111.101:/vol_distributed /glusterfs glusterfs defaults,_netdev,acl 0 0
 
 ```
 - [x] Test io
