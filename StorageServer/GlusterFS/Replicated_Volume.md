@@ -131,15 +131,15 @@ There are no active volume tasks
 >shrink a gluster volume
 ```Shell
 # remnove brick with associated of volume type
-root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.105:/glusterfs/distributed start
+root@172-18-111-101:~# gluster volume remove-brick vol_replica 172.18.111.105:/glusterfs/replica start
 
-root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.105:/glusterfs/distributed status
+root@172-18-111-101:~# gluster volume remove-brick vol_replica 172.18.111.105:/glusterfs/replica status
 
 
 waiting for completed status
 
 
-root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.105:/glusterfs/distributed commit
+root@172-18-111-101:~# gluster volume remove-brick vol_replica 172.18.111.105:/glusterfs/replica commit
 root@172-18-111-101:~# gluster peer detach 172.18.111.105
 root@172-18-111-101:~# gluster peer status
 
@@ -147,15 +147,15 @@ root@172-18-111-101:~# gluster peer status
 root@172-18-111-101:~# gluster pool list
 
 
-root@172-18-111-101:~# gluster volume rebalance vol_distributed start
-root@172-18-111-101:~# gluster volume rebalance vol_distributed status
+root@172-18-111-101:~# gluster volume rebalance vol_replica start
+root@172-18-111-101:~# gluster volume rebalance vol_replica status
 
 
 waiting for status show completed
 
 
-root@172-18-111-101:~# gluster volume rebalance vol_distributed fix-layout start
-root@172-18-111-101:~# gluster volume rebalance vol_distributed status
+root@172-18-111-101:~# gluster volume rebalance vol_replica fix-layout start
+root@172-18-111-101:~# gluster volume rebalance vol_replica status
 
 
 waiting for completed status
@@ -165,9 +165,9 @@ waiting for completed status
 >Replace faulty brick
 ```Shell
 root@172-18-111-101:~# gluster peer probe 172.18.111.105
-root@172-18-111-101:~# gluster volume add-brick vol_distributed 172.18.111.105:/glusterfs/distributed force
-root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.104:/glusterfs/distributed start
-root@172-18-111-101:~# gluster volume remove-brick vol_distributed 172.18.111.104:/glusterfs/distributed commit
+root@172-18-111-101:~# gluster volume add-brick vol_replica 172.18.111.105:/glusterfs/replica force
+root@172-18-111-101:~# gluster volume remove-brick vol_replica 172.18.111.104:/glusterfs/replica start
+root@172-18-111-101:~# gluster volume remove-brick vol_replica 172.18.111.104:/glusterfs/replica commit
 root@172-18-111-101:~# gluster peer detach 172.18.111.104
 ```
 >GlusterFS : Clients' Settings
@@ -176,19 +176,19 @@ root@172-18-111-101:~# gluster peer detach 172.18.111.104
 ```Shell
 root@client:~# apt install glusterfs-client attr
 root@client:~# mkdir /glusterfs
-root@client:~# mount -t glusterfs -o acl 172.18.111.101:/vol_distributed /glusterfs
+root@client:~# mount -t glusterfs -o acl 172.18.111.101:/vol_replica /glusterfs
 ```
 - [x] NFS mount
 ```Shell
 root@client:~# apt-get -y install nfs-common 
 root@client:~# systemctl enable rpcbind 
 root@client:~# service rpcbind start
-root@client:~# mount -t nfs -o vers=3,mountproto=tcp 172.18.111.101:/vol_distributed /glusterfs
+root@client:~# mount -t nfs -o vers=3,mountproto=tcp 172.18.111.101:/vol_replica /glusterfs
 ```
 - [x] Automatically Mounting Volumes
 ```Shell
 root@client:~# nano /etc/fstab
-172.18.111.101:/vol_distributed /glusterfs glusterfs defaults,_netdev,acl 0 0
+172.18.111.101:/vol_replica /glusterfs glusterfs defaults,_netdev,acl 0 0
 
 ```
 - [x] Test io
