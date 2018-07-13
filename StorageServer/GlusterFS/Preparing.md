@@ -177,7 +177,7 @@ root@172-18-111-104:~# netplan apply
 root@172-18-111-xxx:~# apt-get install software-properties-common
 
 #In Ubuntu 16.04 LTS
-root@172-18-111-xxx:~# add-apt-repository ppa:gluster/glusterfs-3.13
+root@172-18-111-xxx:~# add-apt-repository ppa:gluster/glusterfs-4.1
 
 #In Ubuntu 18.04 LTS
 root@172-18-111-xxx:~# add-apt-repository ppa:gluster/glusterfs-4.1
@@ -208,11 +208,6 @@ end-volume
 ```
 > start and enable start up
 ```
-#In Ubuntu 16.04 LTS
-root@172-18-111-xxx:~# service glusterfs-server start
-root@172-18-111-xxx:~# systemctl enable glusterfs-server
-
-#In Ubuntu 18.04 LTS
 root@172-18-111-xxx:~# service glusterd start
 root@172-18-111-xxx:~# systemctl enable glusterd
 ```
