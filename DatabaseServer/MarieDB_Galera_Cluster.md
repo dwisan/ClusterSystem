@@ -23,11 +23,18 @@ When prompted:
     Reload privilege tables now? [Y/n]: Y
 
 ```
->Configuring the Nodes
+>Configuring MariaDB Database Server
+- [x] On 172.18.111.221:Galera01 
 ```
+Galera01# nano /etc/mysql/mariadb.conf.d/50-server.cnf
+
 [mysqld]
-binlog_format=ROW
-default-storage-engine=innodb
+#bind-address=127.0.0.1
+
+[galera]
+
+binlog_format=row
+default_storage_engine=InnoDB
 innodb_autoinc_lock_mode=2
 bind-address=0.0.0.0
 
@@ -36,14 +43,14 @@ wsrep_on=ON
 wsrep_provider=/usr/lib/galera/libgalera_smm.so
 
 # Galera Cluster Configuration
-wsrep_cluster_name="test_cluster"
-wsrep_cluster_address="gcomm://first_ip,second_ip,third_ip"
+wsrep_cluster_name="MariaDB_Cluster"
+wsrep_cluster_address="gcomm://172.18.111.221,172.18.111.222,172.18.111.223"
 
 # Galera Synchronization Configuration
 wsrep_sst_method=rsync
 
 # Galera Node Configuration
-wsrep_node_address="this_node_ip"
-wsrep_node_name="this_node_name"
+wsrep_node_address="172.18.111.221"
+wsrep_node_name="Galera01"
 
 ```
