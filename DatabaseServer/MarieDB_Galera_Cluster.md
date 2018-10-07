@@ -4,10 +4,11 @@
 - [x] MariaDB Galera Cluster {03} : 172.18.111.223
 > Installing MariaDB Database Server On Ubuntu 18.04
 ```
-apt update -y
-apt-get install mariadb-server mariadb-client rsync
-systemctl enable mariadb.service
-sudo mysql_secure_installation
+Galera{01,02,03}# apt update -y
+Galera{01,02,03}# apt upgrade -y
+Galera{01,02,03}# apt-get install mariadb-server mariadb-client rsync
+Galera{01,02,03}# systemctl enable mariadb.service
+Galera{01,02,03}# mysql_secure_installation
 ```
 >Configuring the Nodes
 ```
