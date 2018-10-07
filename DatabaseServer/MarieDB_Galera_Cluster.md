@@ -56,7 +56,7 @@ wsrep_node_name="Galera01"
 ```
 - [x] On 172.18.111.222:Galera02 
 ```
-Galera01# nano /etc/mysql/mariadb.conf.d/50-server.cnf
+Galera02# nano /etc/mysql/mariadb.conf.d/50-server.cnf
 
 [mysqld]
 #bind-address=127.0.0.1
@@ -86,7 +86,7 @@ wsrep_node_name="Galera02"
 ```
 - [x] On 172.18.111.223:Galera03 
 ```
-Galera01# nano /etc/mysql/mariadb.conf.d/50-server.cnf
+Galera03# nano /etc/mysql/mariadb.conf.d/50-server.cnf
 
 [mysqld]
 #bind-address=127.0.0.1
@@ -130,7 +130,19 @@ Galera02# systemctl stop mariadb
 Galera02# systemctl start mariadb
 Galera02# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
 
++--------------------+-------+
+| Variable_name      | Value |
++--------------------+-------+
+| wsrep_cluster_size | 2     |
++--------------------+-------+
+
 Galera03# systemctl stop mariadb
 Galera03# systemctl start mariadb
 Galera03# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
+
++--------------------+-------+
+| Variable_name      | Value |
++--------------------+-------+
+| wsrep_cluster_size | 3     |
++--------------------+-------+
 ```
