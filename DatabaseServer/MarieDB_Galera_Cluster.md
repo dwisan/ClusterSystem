@@ -7,9 +7,21 @@
 ```
 Galera{01,02,03}# apt update -y
 Galera{01,02,03}# apt upgrade -y
-Galera{01,02,03}# apt-get install mariadb-server mariadb-client rsync
+Galera{01,02,03}# apt-get install mariadb-server mariadb-client rsync -y
 Galera{01,02,03}# systemctl enable mariadb.service
 Galera{01,02,03}# mysql_secure_installation
+
+When prompted:
+
+    Enter current password for root (enter for none):  Enter
+    Set root password? [Y/n]: Y
+    New password: {Enter Password}
+    Re-enter new password: {Repeat password}
+    Remove anonymous users? [Y/n]: Y
+    Disallow root login remotely? [Y/n]: Y
+    Remove test database and access to it? [Y/n]: Y
+    Reload privilege tables now? [Y/n]: Y
+
 ```
 >Configuring the Nodes
 ```
