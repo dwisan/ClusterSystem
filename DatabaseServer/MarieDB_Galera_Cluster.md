@@ -1,3 +1,8 @@
+> MariaDB Galera Cluster - Known Limitations
+```
+https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
+
+```
 > Infrastructure Setting 
 - [x] Ubuntu 18.04 LTS
 - [x] MariaDB Galera Cluster {01} : 172.18.111.221 (Galera01)
