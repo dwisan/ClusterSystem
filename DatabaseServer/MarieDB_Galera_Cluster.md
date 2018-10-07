@@ -1,9 +1,12 @@
-> Installation
+> Infrastructure Setting
+[x] MariaDB Galera Cluster {01} : 172.18.111.221
+[x] MariaDB Galera Cluster {02} : 172.18.111.222
+[x] MariaDB Galera Cluster {03} : 172.18.111.223
+> Installing MariaDB Database Server On Ubuntu 18.04
 ```
-apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
-add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://ftp.utexas.edu/mariadb/repo/10.1/ubuntu xenial main
 apt update -y
-apt-get install mariadb-server rsync
+apt-get install mariadb-server mariadb-client rsync
+systemctl enable mariadb.service
 sudo mysql_secure_installation
 ```
 >Configuring the Nodes
