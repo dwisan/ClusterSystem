@@ -1,7 +1,7 @@
 > Infrastructure Setting
-[x] MariaDB Galera Cluster {01} : 172.18.111.221
-[x] MariaDB Galera Cluster {02} : 172.18.111.222
-[x] MariaDB Galera Cluster {03} : 172.18.111.223
+- [x] MariaDB Galera Cluster {01} : 172.18.111.221
+- [x] MariaDB Galera Cluster {02} : 172.18.111.222
+- [x] MariaDB Galera Cluster {03} : 172.18.111.223
 > Installing MariaDB Database Server On Ubuntu 18.04
 ```
 apt update -y
