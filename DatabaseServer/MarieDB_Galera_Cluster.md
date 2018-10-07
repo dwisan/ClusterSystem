@@ -146,3 +146,13 @@ Galera03# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
 | wsrep_cluster_size | 3     |
 +--------------------+-------+
 ```
+>Start Order after all down
+```
+find safe_to_bootstrap =1 in /var/lib/mysql/grastate.dat in all node
+and first start that node
+
+# cat /var/lib/mysql/grastate.dat
+safe_to_bootstrap =1
+# galera_new_cluster
+
+```
