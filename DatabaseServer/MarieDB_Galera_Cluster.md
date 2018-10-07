@@ -3,6 +3,7 @@
 - [x] MariaDB Galera Cluster {01} : 172.18.111.221 (Galera01)
 - [x] MariaDB Galera Cluster {02} : 172.18.111.222 (Galera02)
 - [x] MariaDB Galera Cluster {03} : 172.18.111.223 (Galera03)
+- [x] Storage Engine : innoDB Only to Replicated
 > Installing MariaDB Database Server On all nodes
 ```
 Galera{01,02,03}# apt update -y
