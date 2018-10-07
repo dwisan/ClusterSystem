@@ -53,6 +53,16 @@ wsrep_sst_method=rsync
 wsrep_node_address="172.18.111.221"
 wsrep_node_name="Galera01"
 
-Galera01# galera_new_cluster
 ```
+> Start and Checking
+```
+Galera01# galera_new_cluster
+Galera01# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
 
++--------------------+-------+
+| Variable_name      | Value |
++--------------------+-------+
+| wsrep_cluster_size | 1     |
++--------------------+-------+
+
+```
