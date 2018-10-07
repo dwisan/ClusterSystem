@@ -54,8 +54,69 @@ wsrep_node_address="172.18.111.221"
 wsrep_node_name="Galera01"
 
 ```
+- [x] On 172.18.111.222:Galera02 
+```
+Galera01# nano /etc/mysql/mariadb.conf.d/50-server.cnf
+
+[mysqld]
+#bind-address=127.0.0.1
+
+[galera]
+
+binlog_format=row
+default_storage_engine=InnoDB
+innodb_autoinc_lock_mode=2
+bind-address=0.0.0.0
+
+# Galera Provider Configuration
+wsrep_on=ON
+wsrep_provider=/usr/lib/galera/libgalera_smm.so
+
+# Galera Cluster Configuration
+wsrep_cluster_name="MariaDB_Cluster"
+wsrep_cluster_address="gcomm://172.18.111.221,172.18.111.222,172.18.111.223"
+
+# Galera Synchronization Configuration
+wsrep_sst_method=rsync
+
+# Galera Node Configuration
+wsrep_node_address="172.18.111.222"
+wsrep_node_name="Galera02"
+
+```
+- [x] On 172.18.111.223:Galera03 
+```
+Galera01# nano /etc/mysql/mariadb.conf.d/50-server.cnf
+
+[mysqld]
+#bind-address=127.0.0.1
+
+[galera]
+
+binlog_format=row
+default_storage_engine=InnoDB
+innodb_autoinc_lock_mode=2
+bind-address=0.0.0.0
+
+# Galera Provider Configuration
+wsrep_on=ON
+wsrep_provider=/usr/lib/galera/libgalera_smm.so
+
+# Galera Cluster Configuration
+wsrep_cluster_name="MariaDB_Cluster"
+wsrep_cluster_address="gcomm://172.18.111.221,172.18.111.222,172.18.111.223"
+
+# Galera Synchronization Configuration
+wsrep_sst_method=rsync
+
+# Galera Node Configuration
+wsrep_node_address="172.18.111.223"
+wsrep_node_name="Galera03"
+
+```
 > Start and Checking
 ```
+Galera01# systemctl stop mariadb
 Galera01# galera_new_cluster
 Galera01# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
 
@@ -65,4 +126,11 @@ Galera01# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
 | wsrep_cluster_size | 1     |
 +--------------------+-------+
 
+Galera02# systemctl stop mariadb
+Galera02# systemctl start mariadb
+Galera02# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
+
+Galera03# systemctl stop mariadb
+Galera03# systemctl start mariadb
+Galera03# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
 ```
