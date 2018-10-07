@@ -53,4 +53,6 @@ wsrep_sst_method=rsync
 wsrep_node_address="172.18.111.221"
 wsrep_node_name="Galera01"
 
+Galera01# galera_new_cluster
 ```
+
