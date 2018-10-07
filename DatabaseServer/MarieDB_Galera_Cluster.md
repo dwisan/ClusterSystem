@@ -162,3 +162,14 @@ safe_to_bootstrap =1
 # galera_new_cluster
 
 ```
+> Performance Testing
+
+```
+# mysql -uroot -p
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password';
+MariaDB [(none)]> create database sbtest;
+
+# apt install sysbench
+>> test io write and checking data synchornized between all nodes 
+# sysbench /usr/share/sysbench/oltp_read_only.lua --db-driver=mysql --threads=1 --mysql-host=172.18.111.221 --mysql-user=root --mysql-password=password --mysql-port=3306 --mysql_storage_engine=innodb --tables=1 --table-size=10000000 prepare
+```
