@@ -5,9 +5,9 @@ https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
 ```
 > Infrastructure Setting 
 - [x] Ubuntu 18.04 LTS
-- [x] MariaDB Galera Cluster {01} : 172.18.111.221 (Galera01)
-- [x] MariaDB Galera Cluster {02} : 172.18.111.222 (Galera02)
-- [x] MariaDB Galera Cluster {03} : 172.18.111.223 (Galera03)
+- [x] MariaDB Galera Cluster {01} : 172.18.111.61 (mrdb-cls01)
+- [x] MariaDB Galera Cluster {02} : 172.18.111.62 (mrdb-cls02)
+- [x] MariaDB Galera Cluster {03} : 172.18.111.63 (mrdb-cls03)
 - [x] Storage Engine : innoDB Only to Replicated
 > Installing MariaDB Database Server On all nodes
 ```
