@@ -20,6 +20,10 @@ https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
   # sysbench --num-threads=2 --test=cpu --cpu-max-prime=200000 run
   result: 
   
+  Memory Benchmark
+  # sysbench --test=memory --threads=2 run
+  result:
+  
   File IO Benchmark
   # sysbench --test=fileio --file-total-size=20G prepare
   # sysbench --test=fileio --file-total-size=20G --file-test-mode=rndrw --init-rng=on --max-time=300 --max-requests=0 run
