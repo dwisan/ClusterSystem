@@ -26,7 +26,7 @@ https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
   
   File IO Benchmark
   # sysbench --test=fileio --file-total-size=20G prepare
-  # sysbench --test=fileio --file-total-size=20G --file-test-mode=rndrw --init-rng=on --max-time=300 --max-requests=0 run
+  # sysbench --test=fileio --file-total-size=20G --file-test-mode=rndrw --time=300 --max-requests=0 run
   result:
   
   # sysbench --test=fileio --file-total-size=20G cleanup
