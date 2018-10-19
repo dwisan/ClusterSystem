@@ -13,6 +13,20 @@ https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
 - [x] CPU : Intel(R) Core(TM)2 Duo CPU     E4500  @ 2.20GHz
 - [x] RAM : 2 x 1G DIMM DDR2 Synchronous 667 MHz
 - [x] OS  : Ubuntu 18.04 LTS 64bit
+- [x] Performance Testing:
+```
+  [x] mrdb-cls01
+  CPU Benchmark
+  # sysbench --num-threads=2 --test=cpu --cpu-max-prime=200000 run
+  result: 
+  
+  File IO Benchmark
+  # sysbench --test=fileio --file-total-size=20G prepare
+  # sysbench --test=fileio --file-total-size=20G --file-test-mode=rndrw --init-rng=on --max-time=300 --max-requests=0 run
+  result:
+  
+  # sysbench --test=fileio --file-total-size=20G cleanup
+```
 > Installing MariaDB Database Server On all nodes
 ```
 Galera{01,02,03}# apt update -y
