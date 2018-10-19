@@ -4,11 +4,14 @@ https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
 
 ```
 > Infrastructure Setting 
-- [x] Ubuntu 18.04 LTS
 - [x] MariaDB Galera Cluster {01} : 172.18.111.61 (mrdb-cls01)
 - [x] MariaDB Galera Cluster {02} : 172.18.111.62 (mrdb-cls02)
 - [x] MariaDB Galera Cluster {03} : 172.18.111.63 (mrdb-cls03)
 - [x] Storage Engine : innoDB Only to Replicated
+> Node Specifications
+- [x] CPU : Intel(R) Core(TM)2 Duo CPU     E4500  @ 2.20GHz
+- [x] RAM : 2 x 1G DIMM DDR2 Synchronous 667 MHz
+- [x] OS  : Ubuntu 18.04 LTS 64bit
 > Installing MariaDB Database Server On all nodes
 ```
 Galera{01,02,03}# apt update -y
