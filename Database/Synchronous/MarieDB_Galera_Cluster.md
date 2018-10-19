@@ -9,6 +9,7 @@ https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
 - [x] MariaDB Galera Cluster {03} : 172.18.111.63 (mrdb-cls03)
 - [x] Storage Engine : innoDB Only to Replicated
 > Node Specifications
+- [x] Motherboard : P5L-MX/IPAT
 - [x] CPU : Intel(R) Core(TM)2 Duo CPU     E4500  @ 2.20GHz
 - [x] RAM : 2 x 1G DIMM DDR2 Synchronous 667 MHz
 - [x] OS  : Ubuntu 18.04 LTS 64bit
