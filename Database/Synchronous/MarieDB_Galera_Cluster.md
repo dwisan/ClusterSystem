@@ -264,3 +264,8 @@ Read-Write:
                    queries: 156.87 per sec.
 ```
 > Tunning and improvement
+```
+# * InnoDB
+innodb_flush_log_at_trx_commit=0
+sync_binlog=1
+```
