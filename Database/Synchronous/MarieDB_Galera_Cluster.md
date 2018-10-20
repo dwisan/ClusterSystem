@@ -15,11 +15,13 @@ https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
 - [x] Motherboard : P5L-MX/IPAT
 - [x] CPU : Intel(R) Core(TM)2 Duo CPU     E4500  @ 2.20GHz
 - [x] RAM : 2 x 1G DIMM DDR2 Synchronous 667 MHz
+- [x] Hdd : ATA Disk 80GB 5400rpm 
 - [x] OS  : Ubuntu 18.04 LTS 64bit
 - [x] FS  : Brtfs
 - [x] Performance Testing:
 ```
   CPU Benchmark
+  # sync; echo 3 > /proc/sys/vm/drop_caches 
   # sysbench --num-threads=2 --test=cpu --cpu-max-prime=200000 run
   result: 
       mrdb-cls01 : total time 10.0224s
@@ -28,6 +30,7 @@ https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
   
   Memory Benchmark
   - [x] Write Testing
+  # sync; echo 3 > /proc/sys/vm/drop_caches
   # sysbench --test=memory --memory-block-size=1k --memory-oper=write --threads=2 run
   result:
       mrdb-cls01 : 3480.97 MiB/sec
@@ -35,6 +38,7 @@ https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
       mrdb-cls03 : 3485.08 MiB/sec
   
   - [x] Read Testing    
+  # sync; echo 3 > /proc/sys/vm/drop_caches
   # sysbench --test=memory --memory-block-size=1k --memory-oper=read --threads=2 run
   result:
       mrdb-cls01 : 4635.13 MiB/sec
@@ -42,21 +46,23 @@ https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
       mrdb-cls03 : 4469.18 MiB/sec
       
   File IO Benchmark
-  # sysbench --test=fileio --file-total-size=20G --file-num=10 prepare
-  # sysbench --test=fileio --file-total-size=20G --file-num=10 --file-test-mode=rndrw --time=300 --max-requests=0 run
-  result:
-      mrdb-cls01 : Write:   Read:
-      mrdb-cls02 : Write:   Read:
-      mrdb-cls03 : Write:   Read:
+  # sysbench --test=fileio --file-total-size=20G --file-num=10 --threads=2 prepare
+  # sync; echo 3 > /proc/sys/vm/drop_caches
+  # sysbench --test=fileio --file-total-size=20G --file-num=10 --file-test-mode=rndrw --time=300 --max-requests=0 --threads=2 run
+  result: random r/w test
+      mrdb-cls01 : Write: 0.56 MiB/sec  Read: 0.85 MiB/sec
+      mrdb-cls02 : Write: 0.56 MiB/sec  Read: 0.84 MiB/sec
+      mrdb-cls03 : Write: 0.56 MiB/sec  Read: 0.84 MiB/sec
+  
   # sysbench --test=fileio --file-total-size=20G cleanup
 ```
 > Installing MariaDB Database Server On all nodes
 ```
-Galera{01,02,03}# apt update -y
-Galera{01,02,03}# apt upgrade -y
-Galera{01,02,03}# apt-get install mariadb-server mariadb-client rsync -y
-Galera{01,02,03}# systemctl enable mariadb.service
-Galera{01,02,03}# mysql_secure_installation
+mrdb-cls{01,02,03}# apt update -y
+mrdb-cls{01,02,03}# apt upgrade -y
+mrdb-cls{01,02,03}# apt-get install mariadb-server mariadb-client rsync -y
+mrdb-cls{01,02,03}# systemctl enable mariadb.service
+mrdb-cls{01,02,03}# mysql_secure_installation
 
 When prompted:
 
@@ -71,9 +77,9 @@ When prompted:
 
 ```
 >Configuring MariaDB Database Server
-- [x] On 172.18.111.221:Galera01 
+- [x] On 172.18.111.61 (mrdb-cls01)
 ```
-Galera01# nano /etc/mysql/mariadb.conf.d/50-server.cnf
+mrdb-cls01# nano /etc/mysql/mariadb.conf.d/50-server.cnf
 
 [mysqld]
 #bind-address=127.0.0.1
@@ -91,19 +97,19 @@ wsrep_provider=/usr/lib/galera/libgalera_smm.so
 
 # Galera Cluster Configuration
 wsrep_cluster_name="MariaDB_Cluster"
-wsrep_cluster_address="gcomm://172.18.111.221,172.18.111.222,172.18.111.223"
+wsrep_cluster_address="gcomm://172.18.111.61,172.18.111.62,172.18.111.63"
 
 # Galera Synchronization Configuration
 wsrep_sst_method=rsync
 
 # Galera Node Configuration
-wsrep_node_address="172.18.111.221"
-wsrep_node_name="Galera01"
+wsrep_node_address="172.18.111.61"
+wsrep_node_name="mrdb-cls01"
 
 ```
-- [x] On 172.18.111.222:Galera02 
+- [x] On 172.18.111.62 (mrdb-cls02)
 ```
-Galera02# nano /etc/mysql/mariadb.conf.d/50-server.cnf
+mrdb-cls02# nano /etc/mysql/mariadb.conf.d/50-server.cnf
 
 [mysqld]
 #bind-address=127.0.0.1
@@ -121,19 +127,19 @@ wsrep_provider=/usr/lib/galera/libgalera_smm.so
 
 # Galera Cluster Configuration
 wsrep_cluster_name="MariaDB_Cluster"
-wsrep_cluster_address="gcomm://172.18.111.221,172.18.111.222,172.18.111.223"
+wsrep_cluster_address="gcomm://172.18.111.61,172.18.111.62,172.18.111.63"
 
 # Galera Synchronization Configuration
 wsrep_sst_method=rsync
 
 # Galera Node Configuration
-wsrep_node_address="172.18.111.222"
-wsrep_node_name="Galera02"
+wsrep_node_address="172.18.111.62"
+wsrep_node_name="mrdb-cls02"
 
 ```
-- [x] On 172.18.111.223:Galera03 
+- [x] On 172.18.111.63 (mrdb-cls03)
 ```
-Galera03# nano /etc/mysql/mariadb.conf.d/50-server.cnf
+mrdb-cls03# nano /etc/mysql/mariadb.conf.d/50-server.cnf
 
 [mysqld]
 #bind-address=127.0.0.1
@@ -151,14 +157,14 @@ wsrep_provider=/usr/lib/galera/libgalera_smm.so
 
 # Galera Cluster Configuration
 wsrep_cluster_name="MariaDB_Cluster"
-wsrep_cluster_address="gcomm://172.18.111.221,172.18.111.222,172.18.111.223"
+wsrep_cluster_address="gcomm://172.18.111.61,172.18.111.62,172.18.111.63"
 
 # Galera Synchronization Configuration
 wsrep_sst_method=rsync
 
 # Galera Node Configuration
-wsrep_node_address="172.18.111.223"
-wsrep_node_name="Galera03"
+wsrep_node_address="172.18.111.63"
+wsrep_node_name="mrdb-cls03"
 
 ```
 > Start and Checking
