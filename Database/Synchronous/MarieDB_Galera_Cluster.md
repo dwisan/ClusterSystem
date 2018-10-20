@@ -265,7 +265,16 @@ Read-Write:
 ```
 > Tunning and improvement
 ```
+skip-name-resolve=1
+query_cache_size = 0
+tmp_table_size= 64M
+max_heap_table_size= 64M
+
 # * InnoDB
 innodb_flush_log_at_trx_commit=0
 sync_binlog=1
+innodb_log_file_size=32M
+innodb_buffer_pool_size=256M
+innodb_buffer_pool_instances=1
+
 ```
