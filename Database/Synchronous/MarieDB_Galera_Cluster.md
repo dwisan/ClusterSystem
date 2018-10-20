@@ -224,7 +224,7 @@ MariaDB [(none)]> create database sbtest;
 
 # apt install sysbench
 >> test io write and checking data synchornized between all nodes 
-# sysbench /usr/share/sysbench/oltp_read_only.lua --db-driver=mysql --threads=1 --mysql-host=172.18.111.221 --mysql-user=root --mysql-password=password --mysql-port=3306 --mysql_storage_engine=innodb --tables=1 --table-size=10000000 prepare
+# sysbench /usr/share/sysbench/oltp_read_only.lua --db-driver=mysql --threads=1 --mysql-host=172.18.111.221 --mysql-user=root --mysql-password=password --mysql-port=3306 --mysql_storage_engine=innodb --tables=1 --table-size=1000000 prepare
 # sysbench /usr/share/sysbench/oltp_read_only.lua --db-driver=mysql --threads=1 --events=0 --time=300 --mysql-host=172.18.111.221 --mysql-user=root --mysql-password=pass --mysql-port=3306 --mysql_storage_engine=innodb --tables=1 --table-size=10000000 --range_selects=off --db-ps-mode=disable --report-interval=1 run
 ```
 
