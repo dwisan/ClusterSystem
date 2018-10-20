@@ -216,15 +216,51 @@ safe_to_bootstrap =1
 -[Method-02] starting with lastest shutdown node 
 ```
 > Performance Testing
-
 ```
+- [x] Preparing 
+# apt install sysbench
 # mysql -uroot -p
 MariaDB [(none)]> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password';
 MariaDB [(none)]> create database sbtest;
 
-# apt install sysbench
->> test io write and checking data synchornized between all nodes 
-# sysbench /usr/share/sysbench/oltp_read_only.lua --db-driver=mysql --threads=1 --mysql-host=172.18.111.221 --mysql-user=root --mysql-password=password --mysql-port=3306 --mysql_storage_engine=innodb --tables=1 --table-size=1000000 prepare
-# sysbench /usr/share/sysbench/oltp_read_only.lua --db-driver=mysql --threads=1 --events=0 --time=300 --mysql-host=172.18.111.221 --mysql-user=root --mysql-password=pass --mysql-port=3306 --mysql_storage_engine=innodb --tables=1 --table-size=10000000 --range_selects=off --db-ps-mode=disable --report-interval=1 run
+# sysbench /usr/share/sysbench/oltp_read_only.lua --db-driver=mysql --threads=2 --mysql-host={host} --mysql-user={user} --mysql-password={password}--mysql-port=3306 --mysql_storage_engine=innodb --tables=1 --table-size=1000000 prepare
+
+- [x] Testing Read/Write
+
+Read Only:
+# sync; echo 3 > /proc/sys/vm/drop_caches && swapoff -a && swapon -a
+# sysbench /usr/share/sysbench/oltp_read_only.lua --db-driver=mysql --threads=2 --events=0 --time=300 --mysql-host={host} --mysql-user={user} --mysql-password={password} --mysql-port=3306 --mysql_storage_engine=innodb --tables=1 --table-size=10000000 --report-interval=1 run
+
+  result:
+      mrdb-cls01 : transactions: 524.94 per sec. 
+                   queries: 8399.04 per sec.
+      mrdb-cls02 : transactions: 527.09 per sec.
+                   queries: 8433.47 per sec.
+      mrdb-cls03 : transactions: 539.30 per sec. 
+                   queries: 8628.73 per sec.
+
+write Only:
+# sync; echo 3 > /proc/sys/vm/drop_caches && swapoff -a && swapon -a
+# sysbench /usr/share/sysbench/oltp_write_only.lua --db-driver=mysql --threads=2 --events=0 --time=300 --mysql-host={host} --mysql-user={user} --mysql-password={password} --mysql-port=3306 --mysql_storage_engine=innodb --tables=1 --table-size=10000000 --report-interval=1 run
+
+  result:
+      mrdb-cls01 : transactions: 7.60 per sec.
+                   queries: 45.61 per sec.
+      mrdb-cls02 : transactions: 8.07 per sec.
+                   queries: 48.43 per sec.
+      mrdb-cls03 : transactions: 7.41 per sec.
+                   queries: 44.44 per sec.
+
+Read-Write:
+# sync; echo 3 > /proc/sys/vm/drop_caches && swapoff -a && swapon -a
+# sysbench /usr/share/sysbench/oltp_read_write.lua --db-driver=mysql --threads=2 --events=0 --time=300 --mysql-host={host} --mysql-user={user} --mysql-password={password} --mysql-port=3306 --mysql_storage_engine=innodb --tables=1 --table-size=10000000 --report-interval=1 run
+
+  result:
+      mrdb-cls01 : transactions: 7.55 per sec.
+                   queries: 150.95 per sec.
+      mrdb-cls02 : transactions: 7.79 per sec.
+                   queries: 155.82 per sec.
+      mrdb-cls03 : transactions: 7.84 per sec.
+                   queries: 156.87 per sec.
 ```
 
