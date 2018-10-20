@@ -13,22 +13,38 @@ https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
 - [x] CPU : Intel(R) Core(TM)2 Duo CPU     E4500  @ 2.20GHz
 - [x] RAM : 2 x 1G DIMM DDR2 Synchronous 667 MHz
 - [x] OS  : Ubuntu 18.04 LTS 64bit
+- [x] FS  : Brtfs
 - [x] Performance Testing:
 ```
-  [x] mrdb-cls01
   CPU Benchmark
   # sysbench --num-threads=2 --test=cpu --cpu-max-prime=200000 run
   result: 
+      mrdb-cls01 : total time 10.0224s
+      mrdb-cls02 : total time 10.0139s
+      mrdb-cls03 : total time 10.0138s
   
   Memory Benchmark
-  # sysbench --test=memory --threads=2 run
+  - [x] Write Testing
+  # sysbench --test=memory --memory-block-size=1k --memory-oper=write --threads=2 run
   result:
+      mrdb-cls01 : 3480.97 MiB/sec
+      mrdb-cls02 : 3471.33 MiB/sec
+      mrdb-cls03 : 3485.08 MiB/sec
   
+  - [x] Read Testing    
+  # sysbench --test=memory --memory-block-size=1k --memory-oper=read --threads=2 run
+  result:
+      mrdb-cls01 : 4635.13 MiB/sec
+      mrdb-cls02 : 4687.52 MiB/sec
+      mrdb-cls03 : 4469.18 MiB/sec
+      
   File IO Benchmark
-  # sysbench --test=fileio --file-total-size=20G prepare
-  # sysbench --test=fileio --file-total-size=20G --file-test-mode=rndrw --time=300 --max-requests=0 run
+  # sysbench --test=fileio --file-total-size=20G --file-num=10 prepare
+  # sysbench --test=fileio --file-total-size=20G --file-num=10 --file-test-mode=rndrw --time=300 --max-requests=0 run
   result:
-  
+      mrdb-cls01 : Write:   Read:
+      mrdb-cls02 : Write:   Read:
+      mrdb-cls03 : Write:   Read:
   # sysbench --test=fileio --file-total-size=20G cleanup
 ```
 > Installing MariaDB Database Server On all nodes
