@@ -1,5 +1,8 @@
 > MariaDB Galera Cluster - Known Limitations
 ```
+- [x] Storage Engine : innoDB Only to Replicated
+
+ref.
 https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
 
 ```
@@ -7,7 +10,7 @@ https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
 - [x] MariaDB Galera Cluster {01} : 172.18.111.61 (mrdb-cls01)
 - [x] MariaDB Galera Cluster {02} : 172.18.111.62 (mrdb-cls02)
 - [x] MariaDB Galera Cluster {03} : 172.18.111.63 (mrdb-cls03)
-- [x] Storage Engine : innoDB Only to Replicated
+
 > Node Specifications
 - [x] Motherboard : P5L-MX/IPAT
 - [x] CPU : Intel(R) Core(TM)2 Duo CPU     E4500  @ 2.20GHz
