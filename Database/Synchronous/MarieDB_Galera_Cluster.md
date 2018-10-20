@@ -169,9 +169,10 @@ wsrep_node_name="mrdb-cls03"
 ```
 > Start and Checking
 ```
-Galera01# systemctl stop mariadb
-Galera01# galera_new_cluster
-Galera01# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
+- [x] Starting on mrdb-cls01
+mrdb-cls01# systemctl stop mariadb
+mrdb-cls01# galera_new_cluster
+mrdb-cls01# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
 
 +--------------------+-------+
 | Variable_name      | Value |
@@ -179,9 +180,10 @@ Galera01# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
 | wsrep_cluster_size | 1     |
 +--------------------+-------+
 
-Galera02# systemctl stop mariadb
-Galera02# systemctl start mariadb
-Galera02# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
+- [x] Starting on mrdb-cls02
+mrdb-cls02# systemctl stop mariadb
+mrdb-cls02# systemctl start mariadb
+mrdb-cls02# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
 
 +--------------------+-------+
 | Variable_name      | Value |
@@ -189,9 +191,10 @@ Galera02# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
 | wsrep_cluster_size | 2     |
 +--------------------+-------+
 
-Galera03# systemctl stop mariadb
-Galera03# systemctl start mariadb
-Galera03# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
+- [x] Starting on mrdb-cls03
+mrdb-cls03# systemctl stop mariadb
+mrdb-cls03# systemctl start mariadb
+mrdb-cls03# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
 
 +--------------------+-------+
 | Variable_name      | Value |
