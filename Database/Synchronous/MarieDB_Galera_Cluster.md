@@ -21,7 +21,7 @@ https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
 - [x] Performance Testing:
 ```
   CPU Benchmark
-  # sync; echo 3 > /proc/sys/vm/drop_caches 
+  # sync; echo 3 > /proc/sys/vm/drop_caches && swapoff -a && swapon -a
   # sysbench --num-threads=2 --test=cpu --cpu-max-prime=200000 run
   result: 
       mrdb-cls01 : total time 10.0224s
@@ -30,7 +30,7 @@ https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
   
   Memory Benchmark
   - [x] Write Testing
-  # sync; echo 3 > /proc/sys/vm/drop_caches
+  # sync; echo 3 > /proc/sys/vm/drop_caches && swapoff -a && swapon -a
   # sysbench --test=memory --memory-block-size=1k --memory-oper=write --threads=2 run
   result:
       mrdb-cls01 : 3480.97 MiB/sec
@@ -38,7 +38,7 @@ https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
       mrdb-cls03 : 3485.08 MiB/sec
   
   - [x] Read Testing    
-  # sync; echo 3 > /proc/sys/vm/drop_caches
+  # sync; echo 3 > /proc/sys/vm/drop_caches && swapoff -a && swapon -a
   # sysbench --test=memory --memory-block-size=1k --memory-oper=read --threads=2 run
   result:
       mrdb-cls01 : 4635.13 MiB/sec
@@ -47,7 +47,7 @@ https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
       
   File IO Benchmark
   # sysbench --test=fileio --file-total-size=20G --file-num=10 --threads=2 prepare
-  # sync; echo 3 > /proc/sys/vm/drop_caches
+  # sync; echo 3 > /proc/sys/vm/drop_caches && swapoff -a && swapon -a
   # sysbench --test=fileio --file-total-size=20G --file-num=10 --file-test-mode=rndrw --time=300 --max-requests=0 --threads=2 run
   result: random r/w test
       mrdb-cls01 : Write: 0.56 MiB/sec  Read: 0.85 MiB/sec
@@ -202,7 +202,7 @@ mrdb-cls03# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
 | wsrep_cluster_size | 3     |
 +--------------------+-------+
 ```
->Starting Order after alls down
+>Starting Order after all nodes down
 ```
 -[Method-01] 
 
