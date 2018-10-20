@@ -204,13 +204,16 @@ mrdb-cls03# mysql -uroot -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_cluster_size'"
 ```
 >Starting Order after alls down
 ```
+-[Method-01] 
+
 find "safe_to_bootstrap =1" in /var/lib/mysql/grastate.dat on all node
-and first start that node
+and starting first that node
 
 # cat /var/lib/mysql/grastate.dat
 safe_to_bootstrap =1
 # galera_new_cluster
 
+-[Method-02] starting with lastest shutdown node 
 ```
 > Performance Testing
 
