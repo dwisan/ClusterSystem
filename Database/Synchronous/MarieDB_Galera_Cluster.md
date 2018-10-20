@@ -265,17 +265,25 @@ Read-Write:
 ```
 > Tunning and improvement
 ```
+max_connections = 1000
 skip-name-resolve=1
 query_cache_size = 0
-tmp_table_size= 64M
-max_heap_table_size= 64M
 
-# * InnoDB
-innodb_flush_log_at_trx_commit=0
-sync_binlog=1
-innodb_log_file_size=32M
-innodb_buffer_pool_size=256M
-innodb_buffer_pool_instances=1
+# files
+innodb_log_file_size=1024M
+
+# Monitoring
+performance_schema=0
+
+# Buffer
+innodb_buffer_pool_size=1G
+innodb_buffer_pool_instances=2
+innodb_log_buffer_size=128M
+innodb_change_buffering=all
+innodb_change_buffer_max_size=25
+
+innodb_flush_log_at_trx_commit=1
+skip-innodb_doublewrite
 
 ```
 > MySQL Options for OLTP RO and Point SELECT tests:
