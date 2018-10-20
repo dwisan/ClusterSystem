@@ -278,3 +278,113 @@ innodb_buffer_pool_size=256M
 innodb_buffer_pool_instances=1
 
 ```
+> MySQL Options for OLTP RO and Point SELECT tests:
+```
+# general
+table_open_cache = 8000
+table_open_cache_instances=16
+back_log=1500
+query_cache_type=0
+max_connections=4000
+ 
+# files
+innodb_file_per_table
+innodb_log_file_size=1024M
+innodb_log_files_in_group=3
+innodb_open_files=4000
+ 
+# Monitoring
+innodb_monitor_enable = '%'
+performance_schema=OFF #cpu-bound, matters for performance
+ 
+#Percona Server specific
+userstat=0
+thread-statistics=0
+ 
+# buffers
+innodb_buffer_pool_size=128000M
+innodb_buffer_pool_instances=128 #to avoid wait on InnoDB Buffer Pool mutex
+innodb_log_buffer_size=64M
+ 
+# InnoDB-specific
+innodb_checksums=1 #Default is CRC32 in 5.7, very fast
+innodb_use_native_aio=1
+innodb_doublewrite= 1 #https://www.percona.com/blog/2016/05/09/percona-server-5-7-parallel-doublewrite/
+innodb_stats_persistent = 1
+innodb_support_xa=0 #(We are read-only, but this option is deprecated)
+innodb_spin_wait_delay=6 #(Processor and OS-dependent)
+innodb_thread_concurrency=0
+join_buffer_size=32K
+innodb_flush_log_at_trx_commit=2
+sort_buffer_size=32K
+innodb_flush_method=O_DIRECT_NO_FSYNC
+innodb_max_dirty_pages_pct=90
+innodb_max_dirty_pages_pct_lwm=10
+innodb_lru_scan_depth=4000
+innodb_page_cleaners=4
+ 
+# perf special
+innodb_adaptive_flushing = 1
+innodb_flush_neighbors = 0
+innodb_read_io_threads = 4
+innodb_write_io_threads = 4
+innodb_io_capacity=2000
+innodb_io_capacity_max=4000
+innodb_purge_threads=4
+innodb_max_purge_lag_delay=30000000
+innodb_max_purge_lag=0
+innodb_adaptive_hash_index=0 (depends on workload, always check)
+```
+> MySQL Options for OLTP RW:
+```
+#Open files
+table_open_cache = 8000
+table_open_cache_instances = 16
+query_cache_type = 0
+join_buffer_size=32k
+sort_buffer_size=32k
+max_connections=16000
+back_log=5000
+innodb_open_files=4000
+ 
+#Monitoring
+performance-schema=0
+ 
+#Percona Server specific
+userstat=0
+thread-statistics=0
+ 
+#InnoDB General
+innodb_buffer_pool_load_at_startup=1
+innodb_buffer_pool_dump_at_shutdown=1
+innodb_numa_interleave=1
+innodb_file_per_table=1
+innodb_file_format=barracuda
+innodb_flush_method=O_DIRECT_NO_FSYNC
+innodb_doublewrite=1
+innodb_support_xa=1
+innodb_checksums=1
+ 
+#Concurrency
+innodb_thread_concurrency=144
+innodb_page_cleaners=8
+innodb_purge_threads=4
+innodb_spin_wait_delay=12 Good value for RO is 6, for RW and RC is 192
+innodb_log_file_size=8G
+innodb_log_files_in_group=16
+innodb_buffer_pool_size=128G
+innodb_buffer_pool_instances=128 #to avoid wait on InnoDB Buffer Pool mutex
+innodb_io_capacity=18000
+innodb_io_capacity_max=36000
+innodb_flush_log_at_timeout=0
+innodb_flush_log_at_trx_commit=2
+innodb_flush_sync=1
+innodb_adaptive_flushing=1
+innodb_flush_neighbors = 0
+innodb_max_dirty_pages_pct=90
+innodb_max_dirty_pages_pct_lwm=10
+innodb_lru_scan_depth=4000
+innodb_adaptive_hash_index=0
+innodb_change_buffering=none #can be inserts, workload-specific
+optimizer_switch="index_condition_pushdown=off" #workload-specific
+```
