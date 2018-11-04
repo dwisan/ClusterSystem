@@ -92,14 +92,26 @@ When prompted:
 mrdb-cls01# nano /etc/mysql/mariadb.conf.d/50-server.cnf
 
 [mysqld]
+# -- Ensure that mysqld is not bound to 127.0.0.1
 #bind-address=127.0.0.1
+bind-address=0.0.0.0
 
 [galera]
 
+# --- Ensure that the binary log format is set to use row-level replication, as opposed to statement-level replication.
+# --- Do not change this value, as it affects performance and consistency. The binary log can only use row-level replication
 binlog_format=row
+
+# --- Ensure that the default storage engine is InnoDB
+# --- Galera Cluster will not work with MyISAM or similar nontransactional storage engines
 default_storage_engine=InnoDB
+
+# --- Ensure that the InnoDB locking mode for generating auto-increment values is set to interleaved lock mode.
+# --- Do not change this value. Other modes may cause INSERT statements on tables with AUTO_INCREMENT columns to fail.
 innodb_autoinc_lock_mode=2
-bind-address=0.0.0.0
+
+# --- Ensure that the InnoDB log buffer is written to file once per second, rather than on each commit, to improve performance.
+innodb_flush_log_at_trx_commit=0
 
 # Galera Provider Configuration
 wsrep_on=ON
@@ -123,13 +135,14 @@ mrdb-cls02# nano /etc/mysql/mariadb.conf.d/50-server.cnf
 
 [mysqld]
 #bind-address=127.0.0.1
+bind-address=0.0.0.0
 
 [galera]
 
 binlog_format=row
 default_storage_engine=InnoDB
 innodb_autoinc_lock_mode=2
-bind-address=0.0.0.0
+innodb_flush_log_at_trx_commit=0
 
 # Galera Provider Configuration
 wsrep_on=ON
@@ -153,13 +166,14 @@ mrdb-cls03# nano /etc/mysql/mariadb.conf.d/50-server.cnf
 
 [mysqld]
 #bind-address=127.0.0.1
+bind-address=0.0.0.0
 
 [galera]
 
 binlog_format=row
 default_storage_engine=InnoDB
 innodb_autoinc_lock_mode=2
-bind-address=0.0.0.0
+innodb_flush_log_at_trx_commit=0
 
 # Galera Provider Configuration
 wsrep_on=ON
