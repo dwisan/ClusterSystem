@@ -56,6 +56,16 @@ https://mariadb.com/kb/en/library/mariadb-galera-cluster-known-limitations/
   
   # sysbench --test=fileio --file-total-size=20G cleanup
 ```
+> Preparing the Server
+```
+[x] Disabling SELinux for mysqld
+    # semanage permissive -a mysqld_t
+[x] Firewall Configuration
+    # iptables --append INPUT --protocol tcp \
+      --source xxx.xxx.xxx.111 --jump ACCEPT
+[x] Disabling AppArmor
+    # ln -s /etc/apparmor.d/usr /etc/apparmor.d/disable/.sbin.mysqld
+```
 > Installing MariaDB Database Server On all nodes
 ```
 mrdb-cls{01,02,03}# apt update -y
