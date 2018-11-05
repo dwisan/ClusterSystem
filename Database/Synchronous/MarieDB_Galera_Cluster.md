@@ -423,8 +423,15 @@ optimizer_switch="index_condition_pushdown=off" #workload-specific
 > Situation Problem with 2 nodes
 ```
 - [x] Shutdown through init or systemd
-     --- don't worried 
+     --- don't worried after node become to online, it will be sync it'selft
 - [x] crashes or suffers a loss of network connectivity
-     --- log into the database client and run the following command:
-     mysql> SET GLOBAL wsrep_provider_options='pc.bootstrap=YES';
+     [firt solution]
+      --- log into the database client and run the following command:
+      mysql> SET GLOBAL wsrep_provider_options='pc.bootstrap=YES';
+     
+     [second solution ]
+      --- log into the database client and run the following command:
+      mysql> SET GLOBAL wsrep_provider_options='pc.ignore_sb=TRUE';
+      
+      * Warning: dangerous in a multi-master setup
 ```
