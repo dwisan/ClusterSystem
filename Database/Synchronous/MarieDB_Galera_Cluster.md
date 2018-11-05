@@ -420,3 +420,11 @@ innodb_adaptive_hash_index=0
 innodb_change_buffering=none #can be inserts, workload-specific
 optimizer_switch="index_condition_pushdown=off" #workload-specific
 ```
+> Situation Problem with 2 nodes
+```
+- [x] Shutdown through init or systemd
+     --- don't worried 
+- [x] crashes or suffers a loss of network connectivity
+     --- log into the database client and run the following command:
+     mysql> SET GLOBAL wsrep_provider_options='pc.bootstrap=YES';
+```
