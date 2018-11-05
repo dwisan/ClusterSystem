@@ -435,3 +435,19 @@ optimizer_switch="index_condition_pushdown=off" #workload-specific
       
       * Warning: dangerous in a multi-master setup
 ```
+> Adding new node to Galera Cluster
+```
+(1) edit all nodes:
+wsrep_cluster_address="gcomm://172.18.111.61,172.18.111.62,172.18.111.63,NEW_NODE"
+
+(2) stop and restart all nodes
+   * attended : new node may be can't not start because service timeout (default 90s), big db use huge time to syncing
+   # nano /lib/systemd/system/mariadb.service
+     added:
+     
+     [Service]
+     # set Starting Timetout to infinity
+     TimeoutStartSec = 0 
+     
+   # systemctl daemon-reload
+```
